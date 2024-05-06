@@ -1,5 +1,7 @@
 package usuarios;
 
+import java.util.List;
+
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
@@ -39,7 +41,8 @@ public class AdministradorGaleria extends Empleado{
             }
             else{
                 Comprador comprador = this.galeria.getControladorUsuarios().obtenerComprador(idComprador);
-                Propietario propietario=this.galeria.getControladorUsuarios().crearPropietario(comprador.getLogin(),comprador.getPassword(),comprador.getNombre(),comprador.getTelefono());
+                pieza.setPrecioFijo(compra.getValorPagado());
+                Propietario propietario=new Propietario(comprador.getLogin(),comprador.getPassword(),comprador.getNombre(),comprador.getTelefono(), idComprador);
                 galeria.getControladorUsuarios().agregarPropietario(propietario);
                 propietario.agregarPieza(pieza);
             }
@@ -94,5 +97,31 @@ public class AdministradorGaleria extends Empleado{
         this.galeria.getInventario().desbloquearPieza(titulo);
     }
     
+    public void historiaComprador(String id){
+        Comprador comprador = this.galeria.getControladorUsuarios().obtenerComprador(id);
+        Propietario propietario = this.galeria.getControladorUsuarios().obtenerPropietario(id);
+        int valorColección=0;
+
+        if (comprador != null && propietario != null){
+           List<Compra> compras=comprador.getmisCompras();
+           List<Pieza> piezas=propietario.getMisPiezasActuales();
+
+        System.out.println("Las piezas compradas por el comprador con id: "+id);
+        for (Compra compra : compras) {
+            String titulo=compra.getPieza().getTitulo();
+            System.out.println("Fehca de compra: "+compra.getFecha()+"| Pieza Comprada: "+titulo );
+        
+        }
+        System.out.println("Las piezas de las que es dueño el comprador con id: "+id);
+        for (Pieza pieza : piezas) {
+            valorColección+=pieza.getPrecioFijo();
+            String titulo=pieza.getTitulo();
+            System.out.println(titulo);
+        
+        }
+        System.out.println("El valor total de la colección del comprador con id: "+id+" teniendo en cuenta lo pagado es: "+valorColección);
+
+        }
+   }
 
 }

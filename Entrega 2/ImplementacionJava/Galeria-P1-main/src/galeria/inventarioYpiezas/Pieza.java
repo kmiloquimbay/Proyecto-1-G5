@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class Pieza {
     private String titulo;
-    private List<Autor> autores;
+    private String autor;
     private int anioCreacion;
     private String lugarCreacion;
     private String fechaDevolucion;
@@ -16,7 +16,6 @@ public abstract class Pieza {
 
     public Pieza(String titulo, int anioCreacion, String lugarCreacion, String fechaDevolucion, boolean disponibleVentaValorFijo, boolean bloqueada) {
         this.titulo = titulo;
-        this.autores = new LinkedList<Autor>( );
         this.anioCreacion = anioCreacion;
         this.lugarCreacion = lugarCreacion;
         this.fechaDevolucion = fechaDevolucion;
@@ -33,12 +32,12 @@ public abstract class Pieza {
         this.titulo = titulo;
     }
 
-    public List<Autor> getAutores() {
-        return autores;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setAutores(List<Autor> autores) {
-        this.autores = autores;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public int getAnioCreacion() {
@@ -81,11 +80,10 @@ public abstract class Pieza {
         this.bloqueada = bloqueada;
     }
 
-    public void agregarAutor(Autor autor) {
-        autores.add(autor);
-    }
-
     public int getPrecioFijo() {
         return precioFijo;
+    }
+    public void setPrecioFijo(int precio) {
+        this.precioFijo=precio;
     }
 }

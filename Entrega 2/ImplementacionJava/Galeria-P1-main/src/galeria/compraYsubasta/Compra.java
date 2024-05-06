@@ -1,5 +1,6 @@
 package galeria.compraYsubasta;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import galeria.inventarioYpiezas.Pieza;
 
 public class Compra {
@@ -7,12 +8,18 @@ public class Compra {
     private int valorPagado;
     private String tipoPago;
     private Pieza pieza;
+    private String fecha;
+    private String idComprador;
 
     public Compra(String id, int valorPagado, String tipoPago, Pieza pieza) {
+        Date fechaActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaString = formatoFecha.format(fechaActual);
         this.id = id;
         this.valorPagado = valorPagado;
         this.tipoPago = tipoPago;
         this.pieza = pieza;
+        fecha=fechaString;
     }
 
     public String getId() {
@@ -31,6 +38,7 @@ public class Compra {
         return tipoPago;
     }
 
+
     public void setTipoPago(String tipoPago) {
         this.tipoPago = tipoPago;
     }
@@ -38,7 +46,16 @@ public class Compra {
     public Pieza getPieza() {
         return pieza;
     }
+    public String getIdComprador() {
+        return idComprador;
+    }
+    public void setIdComprador(String id) {
+        idComprador=id;
+    }
 
+    public String getFecha() {
+        return fecha;
+    }
     public void setPieza(Pieza pieza) {
         this.pieza = pieza;
     }
@@ -51,5 +68,6 @@ public class Compra {
         
         
     }
+    
 
 }

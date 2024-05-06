@@ -1,11 +1,14 @@
 package galeria;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import galeria.compraYsubasta.Compra;
 import galeria.compraYsubasta.Subasta;
 import galeria.inventarioYpiezas.Inventario;
+import galeria.inventarioYpiezas.Pieza;
 import usuarios.AdministradorGaleria;
 import usuarios.ControladorUsuarios;
 
@@ -76,4 +79,63 @@ public class Galeria {
     }
 
 
+    public void verHistorialArtista (String nombreArtista){
+        List<Compra> listacompras= (List<Compra>) compras.values();
+        List<Pieza> listacomprasAutor= new LinkedList<Pieza>();
+
+        System.out.println("Las piezas realizadas por el artista con nombre: "+nombreArtista);
+        for (Compra compra : listacompras) {
+            Pieza pieza=compra.getPieza();
+            String autor=pieza.getAutor();
+
+            if (nombreArtista==autor){
+                listacomprasAutor.add(pieza);
+                String titulo= pieza.getTitulo();
+                int anio=pieza.getAnioCreacion();
+                String fechaCompra=compra.getFecha();
+                int valorPagado=compra.getValorPagado();
+                System.out.println("Titulo pieza: "+titulo+" | Anio de creación: "+anio+" | Fecha de Compra: "+fechaCompra+" | valorPagado: "+valorPagado);
+
+            }
+              
+        }
+
+        if (listacomprasAutor.size()==0){
+            System.out.println("No hay piezas con ese autor en la galeria");
+        }
+
+    }
+
+    public void verHistorialPieza (String tituloPieza){
+        Pieza pieza=inventario.buscarPieza(tituloPieza);
+        List<Compra> listacompras= (List<Compra>) compras.values();
+        if (pieza!=null){
+            System.out.println("La historia de la pieza con título \""+pieza.getTitulo()+"\" es:");
+            System.out.println("Información básica de la pieza: ");
+            System.out.println("Título: "+pieza.getTitulo()+" | Autor: "+pieza.getAutor()+" | Anio creación: "+pieza.getAnioCreacion()+" | Lugar creación: "+pieza.getLugarCreacion());
+            
+            
+            System.out.println("Información de compras y propietarios: ");
+            for (Compra compra : listacompras) {
+                Pieza piezaCompra=compra.getPieza();
+                String tituloCompra=piezaCompra.getTitulo();
+                if(tituloPieza==tituloCompra){
+                    String nombreComprador= controladorUsuarios.obtenerComprador(compra.getIdComprador()).getNombre();
+                    String fechaCompra=compra.getFecha();
+                    int valorPagado=compra.getValorPagado();
+                    System.out.println("Nombre propietario: "+nombreComprador+" | Fecha de Compra: "+fechaCompra+" | valorPagado: "+valorPagado);
+
+                }
+                
+            }
+
+        }
+        
+        else{
+            System.out.println("No ha una pieza en el inventario con ese nombre");
+        }
+
+    }
+
 }
+
