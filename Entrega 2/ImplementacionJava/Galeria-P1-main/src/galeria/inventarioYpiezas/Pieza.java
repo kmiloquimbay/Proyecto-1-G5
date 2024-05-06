@@ -1,7 +1,5 @@
 package galeria.inventarioYpiezas;
 
-import java.util.LinkedList;
-import java.util.List;
 
 public abstract class Pieza {
     private String titulo;
