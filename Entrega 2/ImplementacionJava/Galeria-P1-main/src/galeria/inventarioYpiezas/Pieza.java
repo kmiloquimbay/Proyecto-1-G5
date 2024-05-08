@@ -1,6 +1,5 @@
 package galeria.inventarioYpiezas;
 
-import java.util.List;
 
 public abstract class Pieza {
     private String titulo;
@@ -13,14 +12,15 @@ public abstract class Pieza {
     private int precioFijo;
     public abstract String getTipoPieza();
 
-    public Pieza(String titulo, int anioCreacion, String lugarCreacion, String fechaDevolucion, boolean disponibleVentaValorFijo, boolean bloqueada) {
+    public Pieza(String titulo, String autor, int anioCreacion, String lugarCreacion, String fechaDevolucion, boolean disponibleVentaValorFijo, boolean bloqueada, int precioFijo) {
         this.titulo = titulo;
+        this.autor = autor;
         this.anioCreacion = anioCreacion;
         this.lugarCreacion = lugarCreacion;
         this.fechaDevolucion = fechaDevolucion;
         this.disponibleVentaValorFijo = disponibleVentaValorFijo;
         this.bloqueada = bloqueada;
-        this.precioFijo = 0;
+        this.precioFijo = precioFijo;
     }
 
     public String getTitulo() {
@@ -84,9 +84,5 @@ public abstract class Pieza {
     }
     public void setPrecioFijo(int precio) {
         this.precioFijo=precio;
-    }
-
-    public List<Autor> getAutores() {
-        return null;
     }
 }

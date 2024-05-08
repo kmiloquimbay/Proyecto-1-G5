@@ -66,12 +66,7 @@ public class PersistenciaInventario {
         piezaJson.put("disponibleVentaValorFijo", pieza.isDisponibleVentaValorFijo());
         piezaJson.put("bloqueada", pieza.isBloqueada());
         piezaJson.put("precioFijo", pieza.getPrecioFijo());
-        JSONArray autores = new JSONArray();
-        for (Autor autor : pieza.getAutores()) {
-            JSONObject autorJson = guardarAutor(autor);
-            autores.put(autorJson);
-        }
-        piezaJson.put("autores", autores);
+        piezaJson.put("autor", pieza.getAutor());
         piezaJson.put("tipoPieza", pieza.getTipoPieza());
 
         if (pieza.getTipoPieza().equals("Pintura")) {
@@ -140,6 +135,9 @@ public class PersistenciaInventario {
     }
 
     public static Pieza cargarPieza(JSONObject piezaJson){
+
+        Pieza rta = null;
+
         String titulo = piezaJson.getString("titulo");
         int anioCreacion = piezaJson.getInt("anioCreacion");
         String lugarCreacion = piezaJson.getString("lugarCreacion");
@@ -147,13 +145,7 @@ public class PersistenciaInventario {
         boolean disponibleVentaValorFijo = piezaJson.getBoolean("disponibleVentaValorFijo");
         boolean bloqueada = piezaJson.getBoolean("bloqueada");
         int precioFijo = piezaJson.getInt("precioFijo");
-        JSONArray autoresJson = piezaJson.getJSONArray("autores");
-        List<Autor> autores = new ArrayList<>();
-        Pieza rta = null;
-        for (Object autorJson : autoresJson) {
-            Autor autor = cargarAutor((JSONObject) autorJson);
-            autores.add(autor);
-        }
+        String autor = piezaJson.getString("autor");
         String tipoPieza = piezaJson.getString("tipoPieza");
 
         if (tipoPieza.equals("Pintura")) {

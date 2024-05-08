@@ -4,8 +4,8 @@ public class Video extends Pieza{
     private String duracion;
     private String tamanio;
 
-    public Video(String titulo, int anioCreacion, String lugarCreacion, String fechaDevolucion, boolean disponibleVentaValorFijo, boolean bloqueada, String duracion, String tamanio) {
-        super(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada);
+    public Video(String titulo, String autor, int anioCreacion, String lugarCreacion, String fechaDevolucion, boolean disponibleVentaValorFijo, boolean bloqueada, int precioFijo, String duracion, String tamanio) {
+        super(titulo, autor, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo);
         this.duracion = duracion;
         this.tamanio = tamanio;
     }
