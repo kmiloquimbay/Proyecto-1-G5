@@ -84,5 +84,14 @@ public class Inventario {
         }
     }
 
+    public Pieza buscarPiezaEnDisponibles(String titulo){
+        for (Pieza pieza : piezasDisponibleVenta) {
+            if(pieza.getTitulo().equals(titulo)){
+                return pieza;
+            }
+        }
+        return null;
+    }
+
     
 }

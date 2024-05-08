@@ -1,14 +1,15 @@
 package consola;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsolaPrincipal {
 
-	public ConsolaPrincipal() {
+	public ConsolaPrincipal() throws IOException {
 		menu();
 	}
 	
-	private void menu() {
+	private void menu() throws IOException {
         Scanner sc = new Scanner(System.in);
         String username;
         String password;
@@ -45,7 +46,7 @@ public class ConsolaPrincipal {
         sc.close();
     }
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		new ConsolaPrincipal();
 	}
 }
