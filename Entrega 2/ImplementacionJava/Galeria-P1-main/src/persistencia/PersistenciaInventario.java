@@ -9,10 +9,8 @@ import java.nio.file.Files;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import galeria.inventarioYpiezas.*;
-import galeria.inventarioYpiezas.Autor;
 
-import java.util.ArrayList;
-import java.util.List;
+
 public class PersistenciaInventario {
     
     public static void guardarInventario(Inventario inventario) throws FileNotFoundException {
@@ -152,15 +150,15 @@ public class PersistenciaInventario {
             int alto = piezaJson.getInt("alto");
             int ancho = piezaJson.getInt("ancho");
             String tecnica = piezaJson.getString("tecnica");
-            rta = new Pintura(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, alto, ancho, tecnica);
+            rta = new Pintura(titulo, autor, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, ancho, alto, tecnica);
         } else if (tipoPieza.equals("Fotografia")) {
             String resolucion = piezaJson.getString("resolucion");
             String tamanio = piezaJson.getString("tamanio");
-            rta = new Fotografia(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, resolucion, tamanio);
+            rta = new Fotografia(titulo, autor, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, precioFijo, bloqueada, resolucion, tamanio);
         } else if (tipoPieza.equals("Video")) {
             String duracion = piezaJson.getString("duracion");
             String tamanio = piezaJson.getString("tamanio");
-            rta = new Video(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, duracion, tamanio);
+            rta = new Video(titulo, autor, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, duracion, tamanio);
         } else if (tipoPieza.equals("Escultura")) {
             int alto = piezaJson.getInt("alto");
             int ancho = piezaJson.getInt("ancho");
@@ -168,7 +166,7 @@ public class PersistenciaInventario {
             int peso = piezaJson.getInt("peso");
             int profundidad = piezaJson.getInt("profundidad");
             boolean necesitaElectricidad = piezaJson.getBoolean("necesitaElectricidad");
-            rta = new Escultura(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, alto, ancho, profundidad, peso, material, necesitaElectricidad);
+            rta = new Escultura(titulo, autor, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, alto, ancho, profundidad, peso, material, necesitaElectricidad);
         }
         return rta;
     }
