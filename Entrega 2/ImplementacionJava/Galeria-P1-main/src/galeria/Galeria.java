@@ -137,5 +137,9 @@ public class Galeria {
 
     }
 
+    public Compra encontrarCompra(String id) {
+        return compras.get(id);
+    }
+
 }
 

@@ -1,6 +1,7 @@
 package persistencia;
 
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import galeria.Galeria;
 import galeria.inventarioYpiezas.Inventario;
@@ -8,23 +9,22 @@ import usuarios.ControladorUsuarios;
 
 public class PersistenciaGaleria {
 
-    public static Galeria cargarGaleria() {
+    public static Galeria cargarGaleria() throws IOException {
+
         Inventario inventario = new Inventario();
         PersistenciaInventario.cargarInventario(inventario);
+
         Galeria galeria = new Galeria(inventario, new ControladorUsuarios());
+        PersistenciaSubastasCompras.cargarComprasSubastas(galeria);
+
         PersistenciaUsuarios.cargarUsuarios(galeria);
         
-        Map<String, galeria.compraYsubasta.Subasta> subastas = PersistenciaSubastasCompras.cargarSubastas();
-        galeria.setSubastas(subastas);
-
-        Map<String, galeria.compraYsubasta.Compra> compras = PersistenciaSubastasCompras.cargarCompras();
-        galeria.setCompras(compras);
 
         return galeria;
         
     }
 
-    public static void salvarGaleria(Galeria galeria) {
+    public static void salvarGaleria(Galeria galeria) throws FileNotFoundException {
         // Lógica para salvar la galería
         PersistenciaInventario.guardarInventario(galeria.getInventario());
         PersistenciaUsuarios.guardarUsuarios(galeria);

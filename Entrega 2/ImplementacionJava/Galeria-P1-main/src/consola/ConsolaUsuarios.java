@@ -1,5 +1,6 @@
 package consola;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -422,7 +423,7 @@ public class ConsolaUsuarios {
         }
     }
 
-    public static void salvar() {
+    public static void salvar() throws FileNotFoundException {
         setUp();
         PersistenciaGaleria.salvarGaleria(galeriaConsola);
     }

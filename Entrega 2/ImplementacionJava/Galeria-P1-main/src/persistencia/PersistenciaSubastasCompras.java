@@ -5,106 +5,129 @@ import org.json.JSONObject;
 
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.util.HashMap;
 import java.util.Map;
 
-import galeria.inventarioYpiezas.Pieza;
+import usuarios.Comprador;
+
 import java.io.File;
-
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import galeria.compraYsubasta.Oferta;
+import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
 import galeria.compraYsubasta.Subasta;
 
 public class PersistenciaSubastasCompras {
 
-    public static void guardarComprasSubastas(Map<String, Subasta> subastas, Map<String, Compra> compras) {
+    public static void guardarComprasSubastas(Map<String, Subasta> subastas, Map<String, Compra> compras) throws FileNotFoundException {
         JSONObject obj = new JSONObject();
         JSONArray subastasArray = new JSONArray();
         JSONArray comprasArray = new JSONArray();
 
-        for (Map.Entry<String, Subasta> entry : subastas.entrySet()) {
-            JSONObject subasta = new JSONObject();
-            subasta.put("id", entry.getValue().getId());
-            subasta.put("valorInicial", entry.getValue().valorInicial);
-            subasta.put("valorMinimo", entry.getValue().getValorMinimo());
-            subasta.put("vendida", entry.getValue().esVendida());
-            subasta.put("pieza", PersistenciaInventario.guardarPieza(entry.getValue().getPieza()));
-
-            JSONArray ofertas = new JSONArray();
-            for (int i = 0; i < entry.getValue().getOfertas().size(); i++) {
-                JSONObject jOferta = new JSONObject();
-                Oferta oferta = entry.getValue().getOfertas().get(i);
-
-                jOferta.put("valorOferta", oferta.getValorOferta());
-                jOferta.put("comprador", PersistenciaUsuarios.guardarComprador(oferta.getComprador()));
-
-                ofertas.add(jOferta);
-                
-            }
-
-            subasta.put("ofertas", ofertas);
-            subastasArray.add(subasta);
+        for (Map.Entry<String, Subasta> entrySubasta : subastas.entrySet()) {
+            JSONObject jSubasta = guardarSubasta(entrySubasta.getValue());
+            subastasArray.put(jSubasta);
+        }
         
-            for (Map.Entry<String, Compra> entryCompra : compras.entrySet()) {
-                JSONObject compra = new JSONObject();
-                compra.put("id", entryCompra.getValue().getId());
-                compra.put("valorPagado", entryCompra.getValue().getValorPagado());
-                compra.put("tipoPago", entryCompra.getValue().getTipoPago());
-                compra.put("pieza", PersistenciaInventario.guardarPieza(entryCompra.getValue().getPieza()));
-                comprasArray.add(compra);
-            }
+        for (Map.Entry<String, Compra> entryCompra : compras.entrySet()) {
+            JSONObject compra = guardarCompra(entryCompra.getValue());
+            comprasArray.put(compra);
+        }
 
         obj.put("subastas", subastasArray);
         obj.put("compras", comprasArray);
 
         PrintWriter pw = new PrintWriter("comprasSubastas.json");
-        pw.write(obj.toJSONString());
+        pw.write(obj.toString());
         pw.close();
 
-        }
     }
 
-    public static Map<String, Subasta> cargarSubastas() {
-        Map<String, Subasta> subastas = new HashMap<>();
+    public static JSONObject guardarSubasta(Subasta subasta){
+        JSONObject obj = new JSONObject();
+        obj.put("id", subasta.getId());
+        obj.put("valorInicial", subasta.getValorInicial());
+        obj.put("valorMinimo", subasta.getValorMinimo());
+        obj.put("pieza", subasta.getPieza().getTitulo());
+        obj.put("vendida", subasta.esVendida());
+
+        JSONArray jOfertas = new JSONArray();
+        for (int i = 0; i < subasta.getOfertas().size(); i++) {
+            JSONObject jOferta = new JSONObject();
+            Oferta oferta = subasta.getOfertas().get(i);
+
+            jOferta.put("valorOferta", oferta.getValorOferta());
+            jOferta.put("comprador", oferta.getComprador().getId());
+            jOfertas.put(jOferta);
+        }
+
+        obj.put("ofertas", jOfertas);
+
+        return obj;
+    }
+
+    public static JSONObject guardarOferta(Oferta oferta){
+        JSONObject obj = new JSONObject();
+        obj.put("valorOferta", oferta.getValorOferta());
+        obj.put("compradorId", oferta.getComprador().getId());
+        return obj;
+    }
+
+    public static JSONObject guardarCompra(Compra compra) {
+        JSONObject obj = new JSONObject();
+        obj.put("id", compra.getId());
+        obj.put("valorPagado", compra.getValorPagado());
+        obj.put("tipoPago", compra.getTipoPago());
+        obj.put("pieza", compra.getPieza().getTitulo());
+        return obj;
+    }
+
+    public static void cargarComprasSubastas(Galeria galeria) throws IOException {
+
         String jsonCompleto = new String(Files.readAllBytes(new File("comprasSubastas.json").toPath()));
         JSONObject raiz = new JSONObject(jsonCompleto);
 
         JSONArray subastasArray = raiz.getJSONArray("subastas");
 
-        for (int i = 0; i < subastasArray.size(); i++) {
+        for (int i = 0; i < subastasArray.length(); i++) {
             JSONObject subasta = subastasArray.getJSONObject(i);
-            Subasta sub = new Subasta(subasta.getString("id"), subasta.getInt("valorMinimo"), subasta.getInt("valorInicial"), PersistenciaInventario.cargarPieza(subasta.getJSONObject("pieza")));
-            JSONArray ofertas = subasta.getJSONArray("ofertas");
+            Subasta sub = cargarSubasta(subasta, galeria);
+            galeria.agregarSubasta(sub);
 
-            for (int j = 0; j < ofertas.size(); j++) {
-                JSONObject oferta = ofertas.getJSONObject(j);
-                sub.agregarOferta(new Oferta(oferta.getInt("valorOferta"), PersistenciaUsuarios.cargarComprador(oferta.getJSONObject("comprador"))));
-            }
 
-            subastas.put(sub.getId(), sub);
         }
-
-
-
-        return subastas;
-    }
-
-    public static Map<String, Compra> cargarCompras() {
-        Map<String, Compra> compras = new HashMap<>();
-        String jsonCompleto = new String(Files.readAllBytes(new File("comprasSubastas.json").toPath()));
-        JSONObject raiz = new JSONObject(jsonCompleto);
 
         JSONArray comprasArray = raiz.getJSONArray("compras");
 
-        for (int i = 0; i < comprasArray.size(); i++) {
-            JSONObject compra = comprasArray.getJSONObject(i);
-            Compra comp = new Compra(compra.getString("id"), compra.getInt("valorPagado"), compra.getString("tipoPago"), PersistenciaInventario.cargarPieza(compra.getJSONObject("pieza")));
-            compras.put(comp.getId(), comp);
+        for (int j = 0; j < comprasArray.length(); j++) {
+            JSONObject jOferta = comprasArray.getJSONObject(j);
+            Compra comp = cargarCompra(jOferta, galeria);
+            galeria.agregarCompra(comp);
+            
+        }
+    }
+
+    public static Subasta cargarSubasta(JSONObject subasta, Galeria galeria) {
+        Subasta sub = new Subasta(subasta.getString("id"), subasta.getInt("valorMinimo"), subasta.getInt("valorInicial"), galeria.getInventario().buscarPieza(subasta.getString("pieza")));
+        sub.setVendida(subasta.getBoolean("vendida"));
+        JSONArray ofertas = subasta.getJSONArray("ofertas");
+
+        for (int j = 0; j < ofertas.length(); j++) {
+            JSONObject jOferta = ofertas.getJSONObject(j);
+            Comprador comprador = new Comprador("", "", jOferta.getString("comprador"), "", 0, null, "");
+            Oferta oferta = new Oferta(jOferta.getInt("valorOferta"), comprador);
+            sub.agregarOferta(oferta);
         }
 
-        return compras;
+        return sub;
     }
+
+    public static Compra cargarCompra(JSONObject compra, Galeria galeria) {
+        Compra comp = new Compra(compra.getString("id"), compra.getInt("valorPagado"), compra.getString("tipoPago"), galeria.getInventario().buscarPieza(compra.getString("pieza")));
+        return comp;
+    }
+
+
 
 }

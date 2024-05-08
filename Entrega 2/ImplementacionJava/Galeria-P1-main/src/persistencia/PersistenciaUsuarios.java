@@ -12,10 +12,11 @@ import usuarios.Usuario;
 import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
 
-import java.util.List;
 import java.util.ArrayList;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import usuarios.ControladorUsuarios;
 
@@ -31,7 +32,7 @@ import org.json.JSONObject;
 
 public class PersistenciaUsuarios {
 
-    public static void guardarUsuarios(Galeria galeria){
+    public static void guardarUsuarios(Galeria galeria) throws FileNotFoundException{
         JSONObject usuariosJSON = new JSONObject();
         JSONArray empleados = new JSONArray();
         JSONArray compradores = new JSONArray();
@@ -48,17 +49,17 @@ public class PersistenciaUsuarios {
         for (Usuario usuario : mapaEmpleados.values()) {
 
             JSONObject empleado = guardarUsuario(usuario);
-            empleados.add(empleado);
+            empleados.put(empleado);
         }
 
         for (Usuario usuario : mapaCompradores.values()) {
             JSONObject comprador = guardarUsuario(usuario);
-            compradores.add(comprador);
+            compradores.put(comprador);
         }
 
         for (Usuario usuario : mapaPropietarios.values()) {
             JSONObject propietario = guardarUsuario(usuario);
-            propietarios.add(propietario);
+            propietarios.put(propietario);
         }
 
         usuariosJSON.put("empleados", empleados);
@@ -67,12 +68,12 @@ public class PersistenciaUsuarios {
 
 
         PrintWriter pw = new PrintWriter("usuarios.json");
-        pw.write(usuariosJSON.toJSONString());
+        pw.write(usuariosJSON.toString());
         pw.close();
 
     }
 
-    public JSONObject guardarAdministrador(AdministradorGaleria administrador){
+    public static JSONObject guardarAdministrador(AdministradorGaleria administrador){
         JSONObject administradorJSON = new JSONObject();
         administradorJSON.put("login", administrador.getLogin());
         administradorJSON.put("password", administrador.getPassword());
@@ -100,10 +101,12 @@ public class PersistenciaUsuarios {
     }
 
 
-    public void guardarEmpleado(Empleado empleado, JSONObject usuarioJSON){
+    public static void guardarEmpleado(Empleado empleado, JSONObject usuarioJSON){
+
 
         usuarioJSON.put("rol", empleado.getRol());
         usuarioJSON.put("id", empleado.getId());
+
 
     }
 
@@ -124,23 +127,10 @@ public class PersistenciaUsuarios {
 
     public static void guardarComprador(Comprador comprador, JSONObject usuarioJSON){
         usuarioJSON.put("limiteCompras", comprador.getLimiteCompras());
-        JSONArray piezasDisponibles = new JSONArray();
         JSONArray misCompras = new JSONArray();
 
-
-        for (Pieza pieza : comprador.getpiezasDisponibles()) {
-            JSONObject piezaJSON = new JSONObject();
-            piezasDisponibles.add(PersistenciaInventario.guardarPieza(pieza));
-        }
-        usuarioJSON.put("piezasDisponibles", piezasDisponibles);
-
         for (Compra compra : comprador.getmisCompras()) {
-            JSONObject compraJSON = new JSONObject();
-            compraJSON.put("id", compra.getId());
-            compraJSON.put("valorPagado", compra.getValorPagado());
-            compraJSON.put("tipoPago", compra.getTipoPago());
-            compraJSON.put(PersistenciaInventario.guardarPieza(compra.getPieza()));
-            misCompras.add(compraJSON);
+            misCompras.put(compra.getId());
         }
         usuarioJSON.put("misCompras", misCompras);
 
@@ -151,18 +141,18 @@ public class PersistenciaUsuarios {
         JSONArray misPiezasPasadas = new JSONArray();
 
         for (Pieza pieza : propietario.getMisPiezasActuales()) {
-            misPiezasActuales.add(PersistenciaInventario.guardarPieza(pieza));
+            misPiezasActuales.put(pieza.getTitulo());
         }
         usuarioJSON.put("misPiezasActuales", misPiezasActuales);
 
         for (Pieza pieza : propietario.getMisPiezasPasadas()) {
-            misPiezasPasadas.add(PersistenciaInventario.guardarPieza(pieza));
+            misPiezasPasadas.put(pieza.getTitulo());
         }
         usuarioJSON.put("misPiezasPasadas", misPiezasPasadas);
     }
 
 
-    public static Galeria cargarUsuarios(Galeria galeria){
+    public static Galeria cargarUsuarios(Galeria galeria) throws IOException{
         String jsonCompleto = new String(Files.readAllBytes(new File("usuarios.json").toPath()));
         JSONObject raiz = new  JSONObject(jsonCompleto);
         ControladorUsuarios controladorUsuarios = new ControladorUsuarios();
@@ -182,16 +172,27 @@ public class PersistenciaUsuarios {
             controladorUsuarios.agregarEmpleado(empleado);
 
         }
-
+        
         for (int i = 0; i < compradores.length(); i++) {
+            String login = compradores.getJSONObject(i).getString("login");
+            String password = compradores.getJSONObject(i).getString("password");
+            String nombre = compradores.getJSONObject(i).getString("nombre");
+            String telefono = compradores.getJSONObject(i).getString("telefono");
+            String id = compradores.getJSONObject(i).getString("id");
+            
             JSONObject jComprador = compradores.getJSONObject(i);
-            Comprador comprador = cargarComprador(jComprador);
+            Comprador comprador = cargarComprador(jComprador, login, password, nombre, telefono, id, galeria);
             controladorUsuarios.agregarComprador(comprador);
         }
-
+        
         for (int i = 0; i < propietarios.length(); i++) {
+            String login = compradores.getJSONObject(i).getString("login");
+            String password = compradores.getJSONObject(i).getString("password");
+            String nombre = compradores.getJSONObject(i).getString("nombre");
+            String telefono = compradores.getJSONObject(i).getString("telefono");
+            String id = compradores.getJSONObject(i).getString("id");
             JSONObject jPropietario = propietarios.getJSONObject(i);
-            Propietario propietario = cargarPropietario(jPropietario);
+            Propietario propietario = cargarPropietario(jPropietario, login, password, nombre, telefono, id, galeria);
             controladorUsuarios.agregarPropietario(propietario);
         }
         
@@ -200,7 +201,7 @@ public class PersistenciaUsuarios {
         return galeria;
     }
 
-    public AdministradorGaleria cargarAdministrador(JSONObject administrador, Galeria galeria){
+    public static AdministradorGaleria cargarAdministrador(JSONObject administrador, Galeria galeria){
         String login = administrador.getString("login");
         String password = administrador.getString("password");
         String rol = administrador.getString("rol");
@@ -210,75 +211,80 @@ public class PersistenciaUsuarios {
         return administradorGaleria;
     }
 
-    public Empleado cargarEmpleado(JSONObject jEmpleado, Galeria galeria){
+    public static Empleado cargarEmpleado(JSONObject jEmpleado, Galeria galeria){
         String login = jEmpleado.getString("login");
         String password = jEmpleado.getString("password");
         String rol = jEmpleado.getString("rol");
         String id = jEmpleado.getString("id");
 
-        if (rol.equals("operador")){
-            return new OperadorSubasta(login, password, rol, galeria, id);
+        Empleado rta = null;
+
+        if (rol.equals("Operador")){
+            rta = new OperadorSubasta(login, password, rol, galeria, id);
         }
-        else if (rol.equals("cajero")){
-            return new Cajero(login, password, rol, galeria, id);
+        else if (rol.equals("Cajero")){
+            rta = new Cajero(login, password, rol, galeria, id);
+        } else if (rol.equals("Administrador")){
+            rta = new AdministradorGaleria(login, password, rol, galeria, id);
         }
+            else {
+                // Handle unknown role
+                throw new IllegalArgumentException("Unknown role: " + rol);
+            }
+        
+
+        return rta;
+
     }
 
-    public Cliente cargarCliente(JSONObject jCliente){
+    public static Cliente cargarCliente(JSONObject jCliente, Galeria galeria){
         String login = jCliente.getString("login");
         String password = jCliente.getString("password");
         String nombre = jCliente.getString("nombre");
         String telefono = jCliente.getString("telefono");
         String id = jCliente.getString("id");
 
+        Cliente cliente = null;
+
         if (jCliente.getString("tipoCliente").equals("comprador")){
-            Comprador cliente = cargarComprador(jCliente, cliente, login, password, nombre, telefono, id);
-            return cliente;
+            cliente = cargarComprador(jCliente, login, password, nombre, telefono, id, galeria);
         }
         else if (jCliente.getString("tipoCliente").equals("propietario")){
-            Propietario cliente = cargarPropietario(jCliente, cliente, login, password, nombre, telefono, id);
-            return cliente;
+            cliente = cargarPropietario(jCliente, login, password, nombre, telefono, id, galeria);
         }
+        return cliente;
     }
 
-    public Comprador cargarComprador(JSONObject jCliente, Comprador comprador, String login, String password, String nombre, String telefono, String id){
+    public static Comprador cargarComprador(JSONObject jCliente, String login, String password, String nombre, String telefono, String id, Galeria galeria){
         int limiteCompras = jCliente.getInt("limiteCompras");
-        JSONArray jPiezasDisponibles = jCliente.getJSONArray("piezasDisponibles");
         JSONArray misCompras = jCliente.getJSONArray("misCompras");
-
-        List<Pieza> piezasDisponibles = new ArrayList<Pieza>();
-        for (int i = 0; i < jPiezasDisponibles.length(); i++) {
-            JSONObject pieza = jPiezasDisponibles.getJSONObject(i);
-            piezasDisponibles.add(PersistenciaInventario.cargarPieza(pieza));
-        }
-
+        ArrayList<Compra> compras = new ArrayList<Compra>();
         for (int i = 0; i < misCompras.length(); i++) {
-            JSONObject compra = misCompras.getJSONObject(i);
-            comprador.agregarCompra(cargarCompra(compra));
+            String idCompra = misCompras.getString(i);
+            Compra compra = galeria.encontrarCompra(idCompra);
+            compras.add(compra);
         }
-
-        comprador = new Comprador(login, password, nombre, telefono, limiteCompras, piezasDisponibles, id);
+        Comprador comprador = new Comprador(login, password, nombre, telefono, limiteCompras, galeria.getInventario().getPiezasDisponibleVenta(), id);
         return comprador;
 
         
     }
 
-    public Propietario cargarPropietario(JSONObject jCliente, Propietario propietario, String login, String password, String nombre, String telefono, String id){
+    public static Propietario cargarPropietario(JSONObject jCliente, String login, String password, String nombre, String telefono, String id, Galeria galeria){
         JSONArray jMisPiezasActuales = jCliente.getJSONArray("misPiezasActuales");
         JSONArray jMisPiezasPasadas = jCliente.getJSONArray("misPiezasPasadas");
 
-        propietario = new Propietario(login, password, nombre, telefono, id);
+        Propietario propietario = new Propietario(login, password, nombre, telefono, id);
 
-        List<Pieza> misPiezasActuales = new ArrayList<Pieza>();
         for (int i = 0; i < jMisPiezasActuales.length(); i++) {
-            JSONObject pieza = jMisPiezasActuales.getJSONObject(i);
-            propietario.agregarPieza(PersistenciaInventario.cargarPieza(pieza));
+
+            String pieza = jMisPiezasActuales.getString(i);
+            propietario.agregarPieza(galeria.getInventario().buscarPieza(pieza));
         }
 
-        List<Pieza> misPiezasPasadas = new ArrayList<Pieza>();
         for (int i = 0; i < jMisPiezasPasadas.length(); i++) {
-            JSONObject pieza = jMisPiezasPasadas.getJSONObject(i);
-            propietario.agregarAPasadas(PersistenciaInventario.cargarPieza(pieza));
+            String pieza = jMisPiezasPasadas.getString(i);
+            propietario.agregarAPasadas(galeria.getInventario().buscarPieza(pieza));
         }
 
         return propietario;

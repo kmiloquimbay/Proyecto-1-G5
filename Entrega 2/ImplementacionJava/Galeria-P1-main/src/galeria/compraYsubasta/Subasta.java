@@ -78,4 +78,15 @@ public class Subasta {
             return "La subasta no se termino dado que no habián ofertas que cumplieran con el valor mínimo";
         }
     }
+    public int getValorInicial() {
+        return valorInicial;
+    }
+
+    public int getValorMinimo() {
+        return valorMinimo;
+    }
+
+    public void setVendida(boolean vendida) {
+        this.vendida = vendida;
+    }
 }

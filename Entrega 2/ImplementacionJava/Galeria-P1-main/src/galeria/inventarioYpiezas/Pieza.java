@@ -1,5 +1,6 @@
 package galeria.inventarioYpiezas;
 
+import java.util.List;
 
 public abstract class Pieza {
     private String titulo;
@@ -83,5 +84,9 @@ public abstract class Pieza {
     }
     public void setPrecioFijo(int precio) {
         this.precioFijo=precio;
+    }
+
+    public List<Autor> getAutores() {
+        return null;
     }
 }

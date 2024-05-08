@@ -3,6 +3,7 @@ import usuarios.AdministradorGaleria;
 import usuarios.Comprador;
 import persistencia.PersistenciaGaleria;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class ConsolaAdministrador {
 	private AdministradorGaleria admin;
 
 
-	public ConsolaAdministrador() {
+	public ConsolaAdministrador() throws IOException {
 		Galeria galeriaConsola = PersistenciaGaleria.cargarGaleria();
 		this.admin = new AdministradorGaleria("fabio24", "1226745", "Admin",galeriaConsola, "562901");
 		menuAdministradorGaleria();
@@ -146,7 +147,7 @@ public class ConsolaAdministrador {
 	
 	
 	
-		public static void main(String[] args) {
+		public static void main(String[] args) throws IOException {
 			new ConsolaAdministrador();
 		}
 }

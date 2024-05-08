@@ -1,46 +1,58 @@
 package persistencia;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import galeria.inventarioYpiezas.*;
+import galeria.inventarioYpiezas.Autor;
 
+import java.util.ArrayList;
 import java.util.List;
 public class PersistenciaInventario {
     
-    public static void guardarInventario(Inventario inventario) {
-
+    public static void guardarInventario(Inventario inventario) throws FileNotFoundException {
+    	
         JSONObject inventarioJson = new JSONObject();
 
         JSONArray piezasEnBodega = new JSONArray();
         JSONArray piezasEnExhibicion = new JSONArray();
         JSONArray piezasPasadas = new JSONArray();
+        JSONArray piezasDisponibleVenta = new JSONArray();
 
         for (Pieza pieza : inventario.getPiezasEnBodega()) {
             JSONObject piezaJson = guardarPieza(pieza);
-            piezasEnBodega.add(piezaJson);
+            piezasEnBodega.put(piezaJson);
         }
 
         for (Pieza pieza : inventario.getPiezasEnExhibicion()) {
             JSONObject piezaJson = guardarPieza(pieza);
-            piezasEnExhibicion.add(piezaJson);
+            piezasEnExhibicion.put(piezaJson);
         }
 
         for (Pieza pieza : inventario.getPiezasPasadas()) {
             JSONObject piezaJson = guardarPieza(pieza);
-            piezasPasadas.add(piezaJson);
+            piezasPasadas.put(piezaJson);
+        }
+
+        for (Pieza pieza: inventario.getPiezasDisponibleVenta()) {
+            JSONObject piezaJson = guardarPieza(pieza);
+            piezasDisponibleVenta.put(piezaJson);
         }
 
         inventarioJson.put("piezasEnBodega", piezasEnBodega);
         inventarioJson.put("piezasEnExhibicion", piezasEnExhibicion);
         inventarioJson.put("piezasPasadas", piezasPasadas);
+        inventarioJson.put("piezasDisponibleVenta", piezasDisponibleVenta);
+        
 
 
         PrintWriter pw = new PrintWriter("inventario.json");
-        pw.write(inventarioJson.toJSONString());
+        pw.write(inventarioJson.toString());
         pw.close();
 
     }
@@ -57,8 +69,9 @@ public class PersistenciaInventario {
         JSONArray autores = new JSONArray();
         for (Autor autor : pieza.getAutores()) {
             JSONObject autorJson = guardarAutor(autor);
-            autores.add(autorJson);
+            autores.put(autorJson);
         }
+        piezaJson.put("autores", autores);
         piezaJson.put("tipoPieza", pieza.getTipoPieza());
 
         if (pieza.getTipoPieza().equals("Pintura")) {
@@ -88,7 +101,7 @@ public class PersistenciaInventario {
         return piezaJson;
     }
 
-    public JSONObject guardarAutor(Autor autor){
+    public static JSONObject guardarAutor(Autor autor){
         JSONObject autorJson = new JSONObject();
         autorJson.put("nombre", autor.getNombre());
         autorJson.put("esAnonimo", autor.isEsAnonimo());
@@ -96,31 +109,37 @@ public class PersistenciaInventario {
         return autorJson;
     }
 
-    public static void cargarInventario(Inventario inventario){
+    public static void cargarInventario(Inventario inventario) throws IOException{
         String jsonCompleto = new String(Files.readAllBytes(new File("inventario.json").toPath()));
         JSONObject inventarioJson = new JSONObject(jsonCompleto);
 
         JSONArray piezasEnBodega = inventarioJson.getJSONArray("piezasEnBodega");
         JSONArray piezasEnExhibicion = inventarioJson.getJSONArray("piezasEnExhibicion");
         JSONArray piezasPasadas = inventarioJson.getJSONArray("piezasPasadas");
+        JSONArray piezasDisponibleVenta = inventarioJson.getJSONArray("piezasDisponibleVenta");
 
-        for (JSONObject piezaJson : piezasEnBodega) {
-            Pieza pieza = cargarPieza(piezaJson);
+        for (Object piezaJson : piezasEnBodega) {
+            Pieza pieza = cargarPieza((JSONObject) piezaJson);
             inventario.guardarEnBodega(pieza);
         }
 
-        for (JSONObject piezaJson : piezasEnExhibicion) {
-            Pieza pieza = cargarPieza(piezaJson);
+        for (Object piezaJson : piezasEnExhibicion) {
+            Pieza pieza = cargarPieza((JSONObject) piezaJson);
             inventario.pasarAExhibicion(pieza);
         }  
 
-        for (JSONObject piezaJson : piezasPasadas) {
-            Pieza pieza = cargarPieza(piezaJson);
+        for (Object piezaJson : piezasPasadas) {
+            Pieza pieza = cargarPieza((JSONObject) piezaJson);
             inventario.pasarAPasadas(pieza);
+        }
+
+        for (Object piezaJson : piezasDisponibleVenta) {
+            Pieza pieza = cargarPieza((JSONObject) piezaJson);
+            inventario.ponerEnDisponibles(pieza);
         }
     }
 
-    public Pieza cargarPieza(JSONObject piezaJson){
+    public static Pieza cargarPieza(JSONObject piezaJson){
         String titulo = piezaJson.getString("titulo");
         int anioCreacion = piezaJson.getInt("anioCreacion");
         String lugarCreacion = piezaJson.getString("lugarCreacion");
@@ -130,8 +149,9 @@ public class PersistenciaInventario {
         int precioFijo = piezaJson.getInt("precioFijo");
         JSONArray autoresJson = piezaJson.getJSONArray("autores");
         List<Autor> autores = new ArrayList<>();
-        for (JSONObject autorJson : autoresJson) {
-            Autor autor = cargarAutor(autorJson);
+        Pieza rta = null;
+        for (Object autorJson : autoresJson) {
+            Autor autor = cargarAutor((JSONObject) autorJson);
             autores.add(autor);
         }
         String tipoPieza = piezaJson.getString("tipoPieza");
@@ -140,15 +160,15 @@ public class PersistenciaInventario {
             int alto = piezaJson.getInt("alto");
             int ancho = piezaJson.getInt("ancho");
             String tecnica = piezaJson.getString("tecnica");
-            return new Pintura(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, alto, ancho, tecnica);
+            rta = new Pintura(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, alto, ancho, tecnica);
         } else if (tipoPieza.equals("Fotografia")) {
             String resolucion = piezaJson.getString("resolucion");
             String tamanio = piezaJson.getString("tamanio");
-            return new Fotografia(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, resolucion, tamanio);
+            rta = new Fotografia(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, resolucion, tamanio);
         } else if (tipoPieza.equals("Video")) {
             String duracion = piezaJson.getString("duracion");
             String tamanio = piezaJson.getString("tamanio");
-            return new Video(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, duracion, tamanio);
+            rta = new Video(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, duracion, tamanio);
         } else if (tipoPieza.equals("Escultura")) {
             int alto = piezaJson.getInt("alto");
             int ancho = piezaJson.getInt("ancho");
@@ -156,8 +176,17 @@ public class PersistenciaInventario {
             int peso = piezaJson.getInt("peso");
             int profundidad = piezaJson.getInt("profundidad");
             boolean necesitaElectricidad = piezaJson.getBoolean("necesitaElectricidad");
-            return new Escultura(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, alto, ancho, profundidad, peso, material, necesitaElectricidad);
+            rta = new Escultura(titulo, anioCreacion, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, alto, ancho, profundidad, peso, material, necesitaElectricidad);
         }
+        return rta;
+    }
+    
+    public static Autor cargarAutor(JSONObject jAutor) {
+    	Autor autor;
+    	String nombre = jAutor.getString("nombre");
+    	Boolean esAnonimo = jAutor.getBoolean("esAnonimo");
+    	autor = new Autor(nombre, esAnonimo);
+    	return autor;
     }
 
 

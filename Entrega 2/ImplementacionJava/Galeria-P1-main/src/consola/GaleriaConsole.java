@@ -1,12 +1,13 @@
 package consola;
 
+import java.io.IOException;
 import java.util.Scanner;
 import persistencia.PersistenciaGaleria;
 import galeria.Galeria;
 
 public class GaleriaConsole {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         int opcionMenuPrincipal;
 
