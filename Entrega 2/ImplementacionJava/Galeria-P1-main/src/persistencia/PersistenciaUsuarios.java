@@ -13,7 +13,6 @@ import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
 
 import java.util.ArrayList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

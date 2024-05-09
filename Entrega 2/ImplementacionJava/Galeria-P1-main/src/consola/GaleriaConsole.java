@@ -1,8 +1,13 @@
 package consola;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import persistencia.PersistenciaGaleria;
+import usuarios.AdministradorGaleria;
+import usuarios.Comprador;
+import usuarios.Empleado;
 import galeria.Galeria;
 
 public class GaleriaConsole {
@@ -10,6 +15,11 @@ public class GaleriaConsole {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         int opcionMenuPrincipal;
+        Galeria galeria = null;
+        Map<String, Comprador> compradores = new HashMap<String, Comprador>();
+        Map<String, Empleado> empleados = new HashMap<String, Empleado>();
+        AdministradorGaleria administrador = null;
+        
 
         // Bienvenida
         System.out.println("Bienvenido a la Galería y Casa de Subastas");
@@ -26,13 +36,16 @@ public class GaleriaConsole {
 
             switch (opcionMenuPrincipal) {
                 case 1:
-                    Galeria galeria = PersistenciaGaleria.cargarGaleria();
+                    galeria = PersistenciaGaleria.cargarGaleria();
+                    compradores = galeria.getControladorUsuarios().getMapaCompradores();
+                    empleados = galeria.getControladorUsuarios().getMapaEmpleados();
                     System.out.println("Se ha cargado la galeria: "+galeria.equals(galeria));
+                    administrador = galeria.getAdministrador();
                 case 2:
                     ConsolaUsuarios.salvar();
                     break;
                 case 3:
-                    ingresarComoUsuario(scanner);
+                    ingresarComoUsuario(scanner, compradores, empleados, administrador, galeria);
                     break;
                 case 0:
                     System.out.println("Gracias por utilizar la Galería y Casa de Subastas. ¡Hasta luego!");
@@ -46,39 +59,35 @@ public class GaleriaConsole {
         scanner.close();
     }
 
-    private static void ingresarComoUsuario(Scanner scanner) {
+    private static void ingresarComoUsuario(Scanner scanner, Map<String, Comprador> compradores, Map<String, Empleado> empleados, AdministradorGaleria administrador, Galeria galeria) throws IOException{
         int opcionIngresarUsuario;
     
         System.out.println("\n--- ¿Cómo que tipo de usuario desea ingresar?---");
         System.out.println("1. Comprador");
-        System.out.println("2. Propietario");
+        System.out.println("2. Empleado");
         System.out.println("3. Administrador de Galería");
-        System.out.println("4. Operador de Subastas");
-        System.out.println("5. Cajero");
         System.out.println("0. Volver al Menú Principal");
         System.out.print("Seleccione cómo desea ingresar: ");
         opcionIngresarUsuario = scanner.nextInt();
     
         switch (opcionIngresarUsuario) {
             case 1:
-                ConsolaUsuarios.menuComprador();
-                // Agrega aquí la lógica para el menú del comprador
+                Comprador comprador = autenticarComprador(scanner, compradores);
+                if (comprador != null) {
+                    ConsolaComprador.main(galeria, comprador);
+                }
                 break;
             case 2:
-                ConsolaUsuarios.menuPropietario();
-                // Agrega aquí la lógica para el menú del propietario
+                Empleado empleado = autenticarEmpleado(scanner, empleados);
+                if (empleado != null) {
+                    ConsolaEmpleado.main(galeria, empleado);
+                }
                 break;
             case 3:
-                ConsolaUsuarios.menuAdministradorGaleria();
-                // Agrega aquí la lógica para el menú del administrador de galería
-                break;
-            case 4:
-                ConsolaUsuarios.menuOperadorSubastas();
-                // Agrega aquí la lógica para el menú del operador de subastas
-                break;
-            case 5:
-                ConsolaUsuarios.menuCajero();
-                // Agrega aquí la lógica para el menú del cajero
+                AdministradorGaleria adminGaleria = autenticarAdministrador(scanner, administrador);
+                if (adminGaleria != null) {
+                    ConsolaAdministrador.main(null);
+                }
                 break;
             case 0:
                 System.out.println("Volviendo al Menú Principal...");
@@ -88,6 +97,65 @@ public class GaleriaConsole {
                 break;
         }
     }
+
+    private static Comprador autenticarComprador(Scanner scanner, Map<String, Comprador> compradores){
+        System.out.print("Ingrese su login: ");
+        String login = scanner.next();
+        System.out.print("Ingrese su contraseña: ");
+        String password = scanner.next();
+        Comprador rta = null;
+        if (compradores.containsKey(login)){
+            Comprador comprador = compradores.get(login);
+            if (comprador.getPassword().equals(password)){
+                rta = comprador;
+            } else {
+                System.out.println("Contraseña incorrecta.");
+            }
+        } else {
+            System.out.println("Usuario no encontrado.");
+        }
+        return rta;
+    }
+
+    private static Empleado autenticarEmpleado(Scanner scanner, Map<String, Empleado> empleados){
+        System.out.print("Ingrese su login: ");
+        String login = scanner.next();
+        System.out.print("Ingrese su contraseña: ");
+        String password = scanner.next();
+        Empleado rta = null;
+        if (empleados.containsKey(login)){
+            Empleado empleado = empleados.get(login);
+            if (empleado.getPassword().equals(password)){
+                rta = empleado;
+            } else {
+                System.out.println("Contraseña incorrecta.");
+            }
+        } else {
+            System.out.println("Usuario no encontrado.");
+        }
+        return rta;
+    }
+
+    private static AdministradorGaleria autenticarAdministrador(Scanner scanner, AdministradorGaleria administrador){
+        System.out.print("Ingrese su login: ");
+        String login = scanner.next();
+        System.out.print("Ingrese su contraseña: ");
+        String password = scanner.next();
+        AdministradorGaleria rta = null;
+        if (administrador.getLogin().equals(login)){
+            if (administrador.getPassword().equals(password)){
+                rta = administrador;
+            } else {
+                System.out.println("Contraseña incorrecta.");
+            }
+        } else {
+            System.out.println("Usuario no encontrado.");
+        }
+        return rta;
+    }
+
+
+
 }
 
 
