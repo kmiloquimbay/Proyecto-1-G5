@@ -10,6 +10,8 @@ public class ControladorUsuarios {
     private  Map<String, Empleado> mapaEmpleados;
     private  Map<String, Comprador> mapaCompradores ;
     private  Map<String, Propietario> mapaPropietarios;
+    private Map<String, Empleado> mapaLoginEmpleados;
+    private Map<String, Comprador> mapaLoginCompradores;
     private Galeria galeria;
     
     public ControladorUsuarios(){
@@ -17,6 +19,9 @@ public class ControladorUsuarios {
         mapaEmpleados = new HashMap<String, Empleado>();
         mapaCompradores = new HashMap<String, Comprador>();
         mapaPropietarios = new HashMap<String, Propietario>();
+
+        mapaLoginEmpleados = new HashMap<String, Empleado>();
+        mapaLoginCompradores = new HashMap<String, Comprador>();
     }
 
     public void setGaleria(Galeria galeria){
@@ -26,6 +31,7 @@ public class ControladorUsuarios {
         String Nuevoid = Usuario.obtenerNuevoID();
         OperadorSubasta operador = new OperadorSubasta(login, password, rol, this.galeria,Nuevoid);
         mapaEmpleados.put(Nuevoid, operador);
+        mapaLoginEmpleados.put(login, operador);
         return operador;
     }
      
@@ -33,6 +39,7 @@ public class ControladorUsuarios {
         String Nuevoid = Usuario.obtenerNuevoID();
         Cajero cajero = new Cajero(login, password, rol, this.galeria, Nuevoid);
         mapaEmpleados.put(Nuevoid, cajero);
+        mapaLoginEmpleados.put(login, cajero);
         return cajero;
     }
 
@@ -40,6 +47,7 @@ public class ControladorUsuarios {
         String Nuevoid = Usuario.obtenerNuevoID();
         AdministradorGaleria administrador = new AdministradorGaleria(login, password, rol, this.galeria, Nuevoid);
         mapaEmpleados.put(Nuevoid, administrador);
+        mapaLoginEmpleados.put(login, administrador);
         return administrador;
     }
 
@@ -47,6 +55,7 @@ public class ControladorUsuarios {
         String Nuevoid = Usuario.obtenerNuevoID();
         Comprador comprador = new Comprador(login, password, nombre, telefono, limiteCompras, this.galeria.getInventario().getPiezasDisponibleVenta(), Nuevoid);
         mapaCompradores.put(Nuevoid, comprador);
+        mapaLoginCompradores.put(login, comprador);
         return comprador;
     }
 
@@ -73,6 +82,7 @@ public class ControladorUsuarios {
     public void agregarComprador (Comprador comprador){
 
         mapaCompradores.put(comprador.getId(), comprador);
+        mapaLoginCompradores.put(comprador.getLogin(), comprador);
     }
     public void agregarPropietario (Propietario propietario){
 
@@ -81,6 +91,7 @@ public class ControladorUsuarios {
     public void agregarEmpleado (Empleado empleado){
 
         mapaEmpleados.put(empleado.getId(), empleado);
+        mapaLoginEmpleados.put(empleado.getLogin(), empleado);
     }
 
     public Map<String, Empleado> getMapaEmpleados(){
@@ -107,5 +118,12 @@ public class ControladorUsuarios {
         this.mapaPropietarios = mapaPropietarios;
     }
 
+    public Map<String, Empleado> getMapaLoginEmpleados(){
+        return mapaLoginEmpleados;
+    }
+
+    public Map<String, Comprador> getMapaLoginCompradores(){
+        return mapaLoginCompradores;
+    }
 
 }

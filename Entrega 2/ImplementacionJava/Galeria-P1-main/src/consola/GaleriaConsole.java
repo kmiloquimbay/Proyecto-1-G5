@@ -37,8 +37,8 @@ public class GaleriaConsole {
             switch (opcionMenuPrincipal) {
                 case 1:
                     galeria = PersistenciaGaleria.cargarGaleria();
-                    compradores = galeria.getControladorUsuarios().getMapaCompradores();
-                    empleados = galeria.getControladorUsuarios().getMapaEmpleados();
+                    compradores = galeria.getControladorUsuarios().getMapaLoginCompradores();
+                    empleados = galeria.getControladorUsuarios().getMapaLoginEmpleados();
                     System.out.println("Se ha cargado la galeria: "+galeria.equals(galeria));
                     administrador = galeria.getAdministrador();
                 case 2:
@@ -61,41 +61,47 @@ public class GaleriaConsole {
 
     private static void ingresarComoUsuario(Scanner scanner, Map<String, Comprador> compradores, Map<String, Empleado> empleados, AdministradorGaleria administrador, Galeria galeria) throws IOException{
         int opcionIngresarUsuario;
-    
-        System.out.println("\n--- ¿Cómo que tipo de usuario desea ingresar?---");
-        System.out.println("1. Comprador");
-        System.out.println("2. Empleado");
-        System.out.println("3. Administrador de Galería");
-        System.out.println("0. Volver al Menú Principal");
-        System.out.print("Seleccione cómo desea ingresar: ");
-        opcionIngresarUsuario = scanner.nextInt();
-    
-        switch (opcionIngresarUsuario) {
-            case 1:
-                Comprador comprador = autenticarComprador(scanner, compradores);
-                if (comprador != null) {
-                    ConsolaComprador.main(galeria, comprador);
-                }
-                break;
-            case 2:
-                Empleado empleado = autenticarEmpleado(scanner, empleados);
-                if (empleado != null) {
-                    ConsolaEmpleado.main(galeria, empleado);
-                }
-                break;
-            case 3:
-                AdministradorGaleria adminGaleria = autenticarAdministrador(scanner, administrador);
-                if (adminGaleria != null) {
-                    ConsolaAdministrador.main(null);
-                }
-                break;
-            case 0:
-                System.out.println("Volviendo al Menú Principal...");
-                break;
-            default:
-                System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
-                break;
-        }
+        
+        do{
+        
+            System.out.println("\n--- ¿Cómo que tipo de usuario desea ingresar?---");
+            System.out.println("1. Comprador");
+            System.out.println("2. Empleado");
+            System.out.println("3. Administrador de Galería");
+            System.out.println("0. Volver al Menú Principal");
+            System.out.print("Seleccione cómo desea ingresar: ");
+            opcionIngresarUsuario = scanner.nextInt();
+        
+            switch (opcionIngresarUsuario) {
+                case 1:
+                    Comprador comprador = autenticarComprador(scanner, compradores);
+                    if (comprador != null) {
+                        ConsolaComprador.main(galeria, comprador);
+                    }
+                    break;
+                case 2:
+                    Empleado empleado = autenticarEmpleado(scanner, empleados);
+                    if (empleado != null) {
+                        ConsolaEmpleado.main(galeria, empleado);
+                    }
+                    break;
+                case 3:
+                    AdministradorGaleria adminGaleria = autenticarAdministrador(scanner, administrador);
+                    if (adminGaleria != null) {
+                        ConsolaAdministrador.main(null);
+                    }
+                    break;
+                case 0:
+                    System.out.println("Volviendo al Menú Principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                    break;
+            }
+
+        } while (opcionIngresarUsuario != 0);
+
+
     }
 
     private static Comprador autenticarComprador(Scanner scanner, Map<String, Comprador> compradores){
