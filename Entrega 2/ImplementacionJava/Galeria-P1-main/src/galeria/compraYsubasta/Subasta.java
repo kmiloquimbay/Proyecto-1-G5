@@ -89,4 +89,13 @@ public class Subasta {
     public void setVendida(boolean vendida) {
         this.vendida = vendida;
     }
+
+    public Oferta encontrarOferta(String id){
+        for (Oferta oferta : ofertas) {
+            if (oferta.getComprador().getId().equals(id)){
+                return oferta;
+            }
+        }
+        return null;
+    }
 }
