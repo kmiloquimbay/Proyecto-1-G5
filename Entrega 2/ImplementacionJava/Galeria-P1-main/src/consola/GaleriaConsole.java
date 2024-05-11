@@ -88,7 +88,7 @@ public class GaleriaConsole {
                 case 3:
                     AdministradorGaleria adminGaleria = autenticarAdministrador(scanner, administrador);
                     if (adminGaleria != null) {
-                        ConsolaAdministrador.main(null);
+                        ConsolaAdministrador.main(galeria, adminGaleria);
                     }
                     break;
                 case 0:

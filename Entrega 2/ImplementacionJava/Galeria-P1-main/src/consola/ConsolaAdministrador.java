@@ -1,26 +1,16 @@
 package consola;
 import usuarios.AdministradorGaleria;
 import usuarios.Comprador;
-import persistencia.PersistenciaGaleria;
-
-import java.io.IOException;
-import java.util.List;
+import usuarios.Propietario;
 import java.util.Scanner;
 
 import galeria.Galeria;
+import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
 
 public class ConsolaAdministrador {
-	private AdministradorGaleria admin;
 
-
-	public ConsolaAdministrador() throws IOException {
-		Galeria galeriaConsola = PersistenciaGaleria.cargarGaleria();
-		this.admin = new AdministradorGaleria("fabio24", "1226745", "Admin",galeriaConsola, "562901");
-		menuAdministradorGaleria();
-	}
-
-	public static void menuAdministradorGaleria() {
+	public static void main(Galeria galeria, AdministradorGaleria admin) {
         Scanner scanner = new Scanner(System.in);
         int opcion;
         
@@ -40,28 +30,29 @@ public class ConsolaAdministrador {
 
             switch (opcion) {
                 case 1:
-                    registrarIngresoPieza();
+                    registrarIngresoPieza(galeria, admin);
                     break;
                 case 2:
-                    confirmarVenta();
+                    confirmarVenta(galeria, admin);
                     break;
                 case 3:
-                    devolucionPieza();
+                    devolucionPieza(galeria, admin);
                     break;
                 case 4:
-                    verificarComprador();
+                    verificarComprador(galeria, admin);
                     break;
+
                 case 5:
-                    aumentarLimite();
+                    aumentarLimite(galeria, admin);
                     break;
                 case 6:
-                    verificarSeriedadOferta();
+                    verificarSeriedadOferta(galeria, admin);
                     break;
                 case 7:
-                    bloquearPieza();
+                    bloquearPieza(galeria, admin);
                     break;
                 case 8:
-                    desbloquearPieza();
+                    desbloquearPieza(galeria, admin);
                     break;
                 case 0:
                     System.out.println("Volviendo al Menú Principal...");
@@ -75,79 +66,170 @@ public class ConsolaAdministrador {
         scanner.close();
     }
 
-    private static void registrarIngresoPieza() {
-        admin.registrarIngresoPieza(pinturaAgregar);
-        System.out.println("Se agrego la pieza con la siguiente info a la bodega de la galeria:");
-        System.out.println("Título: "+pinturaAgregar.getTitulo());
-        System.out.println("Año Creación: "+pinturaAgregar.getAnioCreacion());
-        System.out.println("Lugar Creación: "+pinturaAgregar.getLugarCreacion());
+    private static void registrarIngresoPieza(Galeria galeria, AdministradorGaleria admin) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el ID de la pieza: ");
+        String idPieza = scanner.nextLine();
         
+        Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
+        if (pieza != null){
+            admin.registrarIngresoPieza(pieza);
+            System.out.println("Se registró el ingreso de la pieza con ID: " + idPieza);
+        } 
+        else {
+            System.out.println("No se encontró una pieza con el ID: " + idPieza);
+        }
+        scanner.close();
     }
 
-    private static void confirmarVenta() {
+    private static void confirmarVenta(Galeria galeria, AdministradorGaleria admin) {
         
-        admin.confirmarVenta(compra1,foto1,"547293");
-        System.out.println("Se confirmo la venta de la pieza "+foto1.getTitulo()+" por un precio de "+compra1.getValorPagado());
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el ID de la compra: ");
+        String idCompra = scanner.nextLine();
+
+        System.out.print("Ingrese el ID de la pieza: ");
+        String idPieza = scanner.nextLine();
+
+        System.out.print("Ingrese el ID del comprador: ");
+        String idComprador = scanner.nextLine();
+
+        Compra compra = galeria.encontrarCompra(idCompra);
+        Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
+        Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
+
+        if(compra != null && pieza != null && comprador != null) {
+            admin.confirmarVenta(compra, pieza, idComprador);
+            System.out.println("Venta confirmada");
+        } else {
+            System.out.println("No se pudo confirmar la venta");
+        }
+
+        scanner.close();
     }
 
-    private static void devolucionPieza() {
-        
-        System.out.println("El propietario tenia "+ propietario.getMisPiezasActuales().size()+" piezas.");
-        admin.devolucionPieza(video1,"547902");
-        List<Pieza> piezasActuales=propietario.getMisPiezasActuales();
-        System.out.println("Se elimino la pieza: "+video1.getTitulo()+ " y al propietario le quedaron: "+ piezasActuales.size()+" piezas.");
-        
+    private static void devolucionPieza(Galeria galeria, AdministradorGaleria admin) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el ID de la pieza: ");
+        String idPieza = scanner.nextLine();
+
+        System.out.print("Ingrese el ID del propietario: ");
+        String idPropietario = scanner.nextLine();
+
+        Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
+        Propietario propietario = galeria.getControladorUsuarios().obtenerPropietario(idPropietario);
+
+        if(pieza != null && propietario != null) {
+            admin.devolucionPieza(pieza, idPropietario);
+            System.out.println("Devolución realizada");
+        } else {
+            System.out.println("No se pudo realizar la devolución");
+        }
+
+        scanner.close();
             
         }
     
 
-    private static void verificarComprador() {
+    private static void verificarComprador(Galeria galeria, AdministradorGaleria admin) {
         
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el ID del comprador: ");
+        String idComprador = scanner.nextLine();
+
+        Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
+
+        if(comprador != null) {
+            admin.verificarComprador(idComprador);
+            System.out.println("Se verificó al comprador con ID: " + idComprador);
+        }
+        else {
+            System.out.println("No se encontró un comprador con el ID: " + idComprador);
+        }
         
-        System.out.println("El resultado de la verificación de la existencia del comprador con id 547293 fue: ");
-        System.out.println(admin.verificarComprador("547293"));
-        
+        scanner.close();
     }
 
-    private static void aumentarLimite() {
-       
-        System.out.println("El límite anterior del comprador 547293 es: "+comprador.getLimiteCompras());
-        admin.aumentarLimite("547293", 200000);
-        System.out.println("El nuevo límite del comprador 547293 es: "+comprador.getLimiteCompras());
+    private static void aumentarLimite(Galeria galeria, AdministradorGaleria admin) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el ID del comprador: ");
+        String idComprador = scanner.nextLine();
+
+        System.out.print("Ingrese el monto a aumentar: ");
+        int aumento = scanner.nextInt();
+
+        Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
+        if (comprador != null) {
+            admin.aumentarLimite(idComprador, aumento);
+            System.out.println("El límite del comprador con ID: " + idComprador + " ha sido aumentado en " + Integer.toString(aumento));
+        }
+        else {
+            System.out.println("No se encontró un comprador con el ID: " + idComprador);
+        }
+
+        scanner.close();
+    }
+
+
+
+    private static void verificarSeriedadOferta(Galeria galeria, AdministradorGaleria admin) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el ID del comprador: ");
+        String idComprador = scanner.nextLine();
+
+        System.out.print("Ingrese el valor de la oferta: ");
+        int valorOferta = scanner.nextInt();
         
+        Comprador comprador= galeria.getControladorUsuarios().obtenerComprador("547293");
+
+        if (comprador != null) {
+            System.out.println(admin.verificarSeriedadOferta(idComprador, valorOferta));
+        }
+        else {
+            System.out.println("No se encontró un comprador con el ID: " + idComprador);
+        }
+
+        scanner.close();
     }
 
+    private static void bloquearPieza(Galeria galeria, AdministradorGaleria admin) {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Ingrese el título de la pieza: ");
+        String titulo = scanner.nextLine();
 
-    private static void verificarSeriedadOferta() {
-        
-        Comprador comprador=galeriaConsola.getControladorUsuarios().obtenerComprador("547293");
-        System.out.println("El limite de compras del comprador 547293 es "+comprador.getLimiteCompras());
-        System.out.println("La oferta es de 20000");
-        System.out.println(admin.verificarSeriedadOferta("547293", 20000));
+        Pieza pieza = galeria.getInventario().buscarPieza(titulo);
+        if (pieza != null) {
+            admin.bloquearPieza(titulo);
+            System.out.println("Se bloqueó la pieza con título: " + titulo);
+            System.out.println("Esta bloqueada: " + pieza.isBloqueada());
+        } else {
+            System.out.println("No se encontró una pieza con el título: " + titulo);
+        }
+
+        scanner.close();
     }
 
-    private static void bloquearPieza() {
-        admin.bloquearPieza("La niña y el buitre");
-        System.out.println("Se bloqueo la pieza con el siguiente título:");
-        System.out.println("Título: "+foto1.getTitulo());
-        System.out.println("Esta bloqueada: "+foto1.isBloqueada());
-        
+    private static void desbloquearPieza(Galeria galeria, AdministradorGaleria admin) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el título de la pieza: ");
+        String titulo = scanner.nextLine();
+
+        Pieza pieza = galeria.getInventario().buscarPieza(titulo);
+
+        if (pieza != null) {
+            admin.desbloquearPieza(titulo);
+            System.out.println("Se desbloqueó la pieza con título: " + titulo);
+            System.out.println("Esta bloqueada: " + pieza.isBloqueada());
+        } else {
+            System.out.println("No se encontró una pieza con el título: " + titulo);
+        }
+
+        scanner.close();
     }
 
-    private static void desbloquearPieza() {
-        admin.desbloquearPieza("La Flor");
-        System.out.println("Se desbloqueo la pieza con el siguiente título:");
-        System.out.println("Título: "+pintura1.getTitulo());
-        System.out.println("Esta bloqueada: "+pintura1.isBloqueada());
-    }
-
-	
-	
-	
-	
-	
-		public static void main(String[] args) throws IOException {
-			new ConsolaAdministrador();
-		}
 }

@@ -55,7 +55,8 @@ public class ConsolaEmpleado {
     public static void menuOperadorSubasta(Galeria galeria, OperadorSubasta operadorSubasta) {
         Scanner scanner = new Scanner(System.in);
         int option = 0;
-        while (option != 0) {
+        do {
+        
             System.out.println("Menu Operador de Subasta");
             System.out.println("1. Terminar subasta");
             System.out.println("2. Recibir y registrar oferta");
@@ -80,8 +81,10 @@ public class ConsolaEmpleado {
                 default:
                     System.out.println("Opción inválida");
                     break;
+
             }
         }
+        while (option != 0) ;
         scanner.close();
     }
 
@@ -176,9 +179,7 @@ public class ConsolaEmpleado {
 
         }
         scanner.close();
-    }
-
-    
+    }    
 
 
 
