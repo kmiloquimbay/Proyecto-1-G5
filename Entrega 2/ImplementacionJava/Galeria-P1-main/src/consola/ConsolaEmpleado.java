@@ -26,7 +26,8 @@ public class ConsolaEmpleado {
     public static void menuCajero(Galeria galeria, Cajero cajero) {
         Scanner scanner = new Scanner(System.in);
         int option = 0;
-        while (option != 3) {
+
+        do {
             System.out.println("Menu Cajero");
             System.out.println("1. Registrar pago");
             System.out.println("2. Entregar pieza");
@@ -48,7 +49,7 @@ public class ConsolaEmpleado {
                     System.out.println("Opción inválida");
                     break;
             }
-        }
+        } while (option != 3) ;
         scanner.close();
     }
 
