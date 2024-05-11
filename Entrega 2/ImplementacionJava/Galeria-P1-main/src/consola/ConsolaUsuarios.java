@@ -47,8 +47,8 @@ public class ConsolaUsuarios {
     public static Oferta oferta2= new Oferta(40000, comprador);
     public static Oferta ofertaRecibir= new Oferta(25000, comprador);
     public static Subasta subasta1= new Subasta("6748899",39034,15000,video1);
-    public static Compra compra1= new Compra("567890", 20000, "tarjeta", foto1);
-    public static Compra compra2= new Compra("587650", 70000, "tarjeta", pinturaAgregar);
+    public static Compra compra1= new Compra("567890", 20000, "tarjeta", "La niña y el buitre","547293");
+    public static Compra compra2= new Compra("587650", 70000, "tarjeta", "Mona Lisa","547293");
 
     
     public static void setUp(){
@@ -118,7 +118,7 @@ public class ConsolaUsuarios {
         System.out.println(misCompras.size());
         for (Compra compra : misCompras) {
             
-            System.out.println("Pieza:"+ compra.getPieza().getTitulo()+ " Valor Pagado: "+ compra.getValorPagado()); 
+            System.out.println("Pieza:"+ compra.getTituloPieza()+ " Valor Pagado: "+ compra.getValorPagado()); 
         }
             
     }

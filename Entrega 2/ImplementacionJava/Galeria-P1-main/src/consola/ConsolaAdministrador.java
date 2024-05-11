@@ -22,7 +22,7 @@ public class ConsolaAdministrador {
             System.out.println("4. Verificar comprador");
             System.out.println("5. Aumentar límite de crédito");
             System.out.println("6. Verificar seriedad de oferta");
-            System.out.println("7. Bloquear pieza");
+            System.out.println("7. Bloquear pieza"); 
             System.out.println("8. Desbloquear pieza");
             System.out.println("0. Volver al Menú Principal");
             System.out.print("Seleccione una acción: ");

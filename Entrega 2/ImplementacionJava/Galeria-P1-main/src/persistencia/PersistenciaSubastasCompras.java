@@ -79,7 +79,8 @@ public class PersistenciaSubastasCompras {
         obj.put("id", compra.getId());
         obj.put("valorPagado", compra.getValorPagado());
         obj.put("tipoPago", compra.getTipoPago());
-        obj.put("pieza", compra.getPieza().getTitulo());
+        obj.put("pieza", compra.getTituloPieza());
+        obj.put("idComprador", compra.getIdComprador());
         return obj;
     }
 
@@ -87,12 +88,15 @@ public class PersistenciaSubastasCompras {
 
         String jsonCompleto = new String(Files.readAllBytes(new File("comprasSubastas.json").toPath()));
         JSONObject raiz = new JSONObject(jsonCompleto);
+        Map<String, Compra> compras = galeria.getCompras();
+        Map<String, Subasta> subastas = galeria.getSubastas();
 
         JSONArray subastasArray = raiz.getJSONArray("subastas");
 
         for (int i = 0; i < subastasArray.length(); i++) {
             JSONObject subasta = subastasArray.getJSONObject(i);
             Subasta sub = cargarSubasta(subasta, galeria);
+            subastas.put(subasta.getString("id"), sub);
             galeria.agregarSubasta(sub);
 
 
@@ -103,6 +107,7 @@ public class PersistenciaSubastasCompras {
         for (int j = 0; j < comprasArray.length(); j++) {
             JSONObject jOferta = comprasArray.getJSONObject(j);
             Compra comp = cargarCompra(jOferta, galeria);
+            compras.put(jOferta.getString("id"), comp);
             galeria.agregarCompra(comp);
             
         }
@@ -124,7 +129,7 @@ public class PersistenciaSubastasCompras {
     }
 
     public static Compra cargarCompra(JSONObject compra, Galeria galeria) {
-        Compra comp = new Compra(compra.getString("id"), compra.getInt("valorPagado"), compra.getString("tipoPago"), galeria.getInventario().buscarPieza(compra.getString("pieza")));
+        Compra comp = new Compra(compra.getString("id"), compra.getInt("valorPagado"), compra.getString("tipoPago"), compra.getString("pieza"),compra.getString("idComprador"));
         return comp;
     }
 

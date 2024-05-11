@@ -106,21 +106,25 @@ public class AdministradorGaleria extends Empleado{
            List<Compra> compras=comprador.getmisCompras();
            List<Pieza> piezas=propietario.getMisPiezasActuales();
 
-        System.out.println("Las piezas compradas por el comprador con id: "+id);
-        for (Compra compra : compras) {
-            String titulo=compra.getPieza().getTitulo();
-            System.out.println("Fehca de compra: "+compra.getFecha()+"| Pieza Comprada: "+titulo );
-        
-        }
-        System.out.println("Las piezas de las que es dueño el comprador con id: "+id);
-        for (Pieza pieza : piezas) {
-            valorColección+=pieza.getPrecioFijo();
-            String titulo=pieza.getTitulo();
-            System.out.println(titulo);
-        
-        }
-        System.out.println("El valor total de la colección del comprador con id: "+id+" teniendo en cuenta lo pagado es: "+valorColección);
+            System.out.println("Las piezas compradas por el comprador con id: "+id);
+            for (Compra compra : compras) {
+                String titulo=compra.getTituloPieza();
+                System.out.println("Fehca de compra: "+compra.getFecha()+"| Pieza Comprada: "+titulo );
+            
+            }
+            System.out.println("Las piezas de las que es dueño el comprador con id: "+id);
+            for (Pieza pieza : piezas) {
+                valorColección+=pieza.getPrecioFijo();
+                String titulo=pieza.getTitulo();
+                System.out.println(titulo);
+            
+            }
+            System.out.println("El valor total de la colección del comprador con id: "+id+" teniendo en cuenta lo pagado es: "+valorColección);
 
+        }
+
+        else{
+            System.out.println("No existe comprador con el id: "+id); 
         }
    }
 

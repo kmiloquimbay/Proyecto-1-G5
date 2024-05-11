@@ -7,18 +7,19 @@ public class Compra {
     private String id;
     private int valorPagado;
     private String tipoPago;
-    private Pieza pieza;
+    private String tituloPieza;
     private String fecha;
     private String idComprador;
 
-    public Compra(String id, int valorPagado, String tipoPago, Pieza pieza) {
+    public Compra(String id, int valorPagado, String tipoPago, String pieza,String idComprador) {
         Date fechaActual = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         String fechaString = formatoFecha.format(fechaActual);
         this.id = id;
         this.valorPagado = valorPagado;
         this.tipoPago = tipoPago;
-        this.pieza = pieza;
+        this.tituloPieza = pieza;
+        this.idComprador=idComprador;
         fecha=fechaString;
     }
 
@@ -37,15 +38,15 @@ public class Compra {
     public String getTipoPago() {
         return tipoPago;
     }
+    public String getTituloPieza() {
+        return tituloPieza;
+    }
 
 
     public void setTipoPago(String tipoPago) {
         this.tipoPago = tipoPago;
     }
 
-    public Pieza getPieza() {
-        return pieza;
-    }
     public String getIdComprador() {
         return idComprador;
     }
@@ -56,10 +57,6 @@ public class Compra {
     public String getFecha() {
         return fecha;
     }
-    public void setPieza(Pieza pieza) {
-        this.pieza = pieza;
-    }
-
     public boolean verificarVentaValorFijo(Pieza pieza, int valorPagado){
         if( valorPagado >= pieza.getPrecioFijo() && pieza.isDisponibleVentaValorFijo() && !pieza.isBloqueada()){
             return true;
