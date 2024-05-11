@@ -81,25 +81,33 @@ public class Galeria {
 
 
     public void verHistorialArtista (String nombreArtista){
-        List<Compra> listacompras= (List<Compra>) compras.values();
+        Collection<Compra> listacompras= compras.values();
         List<Pieza> listacomprasAutor= new LinkedList<Pieza>();
 
         System.out.println("Las piezas realizadas por el artista con nombre: "+nombreArtista);
         for (Compra compra : listacompras) {
             Pieza pieza=inventario.buscarPieza(compra.getTituloPieza());
-            String autor=pieza.getAutor();
+            
+            if (pieza!=null){
+            String nombreAutor=pieza.getAutor();
 
-            if (nombreArtista==autor){
+            if (nombreArtista.equals(nombreAutor)){
                 listacomprasAutor.add(pieza);
                 String titulo= pieza.getTitulo();
                 int anio=pieza.getAnioCreacion();
                 String fechaCompra=compra.getFecha();
                 int valorPagado=compra.getValorPagado();
                 System.out.println("Titulo pieza: "+titulo+" | Anio de creación: "+anio+" | Fecha de Compra: "+fechaCompra+" | valorPagado: "+valorPagado);
+ } }
+        for (Pieza piezaB: inventario.getPiezasEnBodega()){
+            if (nombreArtista.equals(piezaB.getAutor()) && !(listacomprasAutor.contains(piezaB))){
+                listacomprasAutor.add(pieza);
+                String tituloB= piezaB.getTitulo();
+                int anioB=piezaB.getAnioCreacion(); 
+                System.out.println("Titulo pieza: "+tituloB+" | Anio de creación: "+anioB+" | Esta Pieza no tiene historial de ventas");
 
-            }
-              
-        }
+ } }
+}
 
         if (listacomprasAutor.size()==0){
             System.out.println("No hay piezas con ese autor en la galeria");
@@ -121,7 +129,6 @@ public class Galeria {
             for (Compra compra : listacompras) {
                 
                 String tituloCompra=compra.getTituloPieza();
-                System.out.println(tituloCompra);
                 if(tituloPieza.equals(tituloCompra)){
                     numero+=1;
                     String nombreComprador= controladorUsuarios.obtenerComprador(compra.getIdComprador()).getNombre();
