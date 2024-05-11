@@ -20,6 +20,7 @@ public class GaleriaConsole {
         Map<String, Empleado> empleados = new HashMap<String, Empleado>();
         AdministradorGaleria administrador = null;
         
+        
 
         // Bienvenida
         System.out.println("Bienvenido a la Galería y Casa de Subastas");
@@ -105,6 +106,7 @@ public class GaleriaConsole {
     }
 
     private static Comprador autenticarComprador(Scanner scanner, Map<String, Comprador> compradores){
+        
         System.out.print("Ingrese su login: ");
         String login = scanner.next();
         System.out.print("Ingrese su contraseña: ");
