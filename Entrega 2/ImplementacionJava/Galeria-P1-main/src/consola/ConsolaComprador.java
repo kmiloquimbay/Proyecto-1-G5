@@ -1,8 +1,10 @@
 package consola;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 import galeria.Galeria;
+import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
 import usuarios.Comprador;
 
@@ -23,7 +25,14 @@ public class ConsolaComprador {
             System.out.println("6. Salir");
             System.out.print("Ingrese una opción: ");
             opcion = scanner.nextInt();
-            
+            Collection<Compra> compras=galeria.getCompras().values();
+            System.out.println(compras.size());
+            for (Compra compra : compras) {
+                System.out.println("1");
+                System.out.println(compra.getTituloPieza());
+            }
+
+
             switch (opcion) {
                 case 1:
                     verCatalogo(galeria);

@@ -121,7 +121,8 @@ public class Galeria {
             for (Compra compra : listacompras) {
                 
                 String tituloCompra=compra.getTituloPieza();
-                if(tituloPieza==tituloCompra){
+                System.out.println(tituloCompra);
+                if(tituloPieza.equals(tituloCompra)){
                     numero+=1;
                     String nombreComprador= controladorUsuarios.obtenerComprador(compra.getIdComprador()).getNombre();
                     String fechaCompra=compra.getFecha();
@@ -129,11 +130,10 @@ public class Galeria {
                     System.out.println("Nombre propietario: "+nombreComprador+" | Fecha de Compra: "+fechaCompra+" | valorPagado: "+valorPagado);
 
                 }
-                
-            }
-            if (numero==0){
-                System.out.println("Esta pieza no tiene ventas registradas en esta galería");
-            }
+                }
+        if (numero==0){
+            System.out.println("Esta pieza no tiene ventas registradas en esta galería");
+        }
 
         }
         

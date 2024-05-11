@@ -80,6 +80,7 @@ public class PersistenciaSubastasCompras {
         obj.put("valorPagado", compra.getValorPagado());
         obj.put("tipoPago", compra.getTipoPago());
         obj.put("pieza", compra.getTituloPieza());
+        obj.put("idComprador", compra.getIdComprador());
         return obj;
     }
 
