@@ -1,5 +1,6 @@
 package galeria;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,7 +86,7 @@ public class Galeria {
 
         System.out.println("Las piezas realizadas por el artista con nombre: "+nombreArtista);
         for (Compra compra : listacompras) {
-            Pieza pieza=compra.getPieza();
+            Pieza pieza=inventario.buscarPieza(compra.getTituloPieza());
             String autor=pieza.getAutor();
 
             if (nombreArtista==autor){
@@ -107,8 +108,9 @@ public class Galeria {
     }
 
     public void verHistorialPieza (String tituloPieza){
+        int numero=0;
         Pieza pieza=inventario.buscarPieza(tituloPieza);
-        List<Compra> listacompras= (List<Compra>) compras.values();
+        Collection<Compra> listacompras= compras.values();
         if (pieza!=null){
             System.out.println("La historia de la pieza con título \""+pieza.getTitulo()+"\" es:");
             System.out.println("Información básica de la pieza: ");
@@ -117,9 +119,10 @@ public class Galeria {
             
             System.out.println("Información de compras y propietarios: ");
             for (Compra compra : listacompras) {
-                Pieza piezaCompra=compra.getPieza();
-                String tituloCompra=piezaCompra.getTitulo();
+                
+                String tituloCompra=compra.getTituloPieza();
                 if(tituloPieza==tituloCompra){
+                    numero+=1;
                     String nombreComprador= controladorUsuarios.obtenerComprador(compra.getIdComprador()).getNombre();
                     String fechaCompra=compra.getFecha();
                     int valorPagado=compra.getValorPagado();
@@ -127,6 +130,9 @@ public class Galeria {
 
                 }
                 
+            }
+            if (numero==0){
+                System.out.println("Esta pieza no tiene ventas registradas en esta galería");
             }
 
         }

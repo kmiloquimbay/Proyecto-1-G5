@@ -68,7 +68,7 @@ public class Subasta {
             
         }
         if (ofertaMax.getValorOferta()>valorMinimo){
-            Compra compra= new Compra(id, ofertaMax.getValorOferta(), id,pieza );
+            Compra compra= new Compra(id, ofertaMax.getValorOferta(), id,pieza.getTitulo(),ofertaMax.getComprador().getId() );
             vendida=true;
             ofertaMax.getComprador().agregarCompra(compra);
              return "Se termino la subasta con id:"+id;

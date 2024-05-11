@@ -37,7 +37,7 @@ public class Comprador extends Cliente {
     public String realizarCompraFija(Pieza pieza){
         // Realiza una compra fija
         if (pieza.isDisponibleVentaValorFijo() && !pieza.isBloqueada() && this.limiteCompras >= pieza.getPrecioFijo()){
-            Compra compra = new Compra(Usuario.obtenerNuevoID(), pieza.getPrecioFijo(), "Efectivo", pieza);
+            Compra compra = new Compra(Usuario.obtenerNuevoID(), pieza.getPrecioFijo(), "Efectivo", pieza.getTitulo(),getId());
             this.misCompras.add(compra);
             return "Compra realizada";
         }

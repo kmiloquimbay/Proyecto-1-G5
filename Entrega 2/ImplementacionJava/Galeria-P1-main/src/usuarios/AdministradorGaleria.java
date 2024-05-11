@@ -108,7 +108,7 @@ public class AdministradorGaleria extends Empleado{
 
             System.out.println("Las piezas compradas por el comprador con id: "+id);
             for (Compra compra : compras) {
-                String titulo=compra.getPieza().getTitulo();
+                String titulo=compra.getTituloPieza();
                 System.out.println("Fehca de compra: "+compra.getFecha()+"| Pieza Comprada: "+titulo );
             
             }
