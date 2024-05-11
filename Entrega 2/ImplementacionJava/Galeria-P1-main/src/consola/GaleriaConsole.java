@@ -9,6 +9,7 @@ import usuarios.AdministradorGaleria;
 import usuarios.Comprador;
 import usuarios.Empleado;
 import galeria.Galeria;
+import galeria.inventarioYpiezas.Pieza;
 
 public class GaleriaConsole {
 
@@ -42,6 +43,9 @@ public class GaleriaConsole {
                     empleados = galeria.getControladorUsuarios().getMapaLoginEmpleados();
                     System.out.println("Se ha cargado la galeria: "+galeria.equals(galeria));
                     administrador = galeria.getAdministrador();
+                    for(Pieza pieza: galeria.getInventario().getPiezasEnBodega()){
+                        System.out.println(pieza.getTitulo());
+                    }
                 case 2:
                     ConsolaUsuarios.salvar();
                     break;

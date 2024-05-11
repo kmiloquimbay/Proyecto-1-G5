@@ -35,6 +35,7 @@ public class ConsolaUsuarios {
     public static ControladorUsuarios controlador= new ControladorUsuarios();
     public static Galeria galeriaConsola = new Galeria(inventario1,controlador);
     public static Pintura pinturaAgregar=new Pintura("Mona Lisa", "Leonardo da Vinci", 1506, "Italia","20-10-2024", true, false, 1000, 77, 53, "Oleo");
+    
     //Usuarios
     public static Comprador comprador= new Comprador("LuisP", "12345", "Luis","3456289290", 1000000,galeriaConsola.getInventario().getPiezasDisponibleVenta(), "547293");
     public static Propietario propietario= new Propietario("santiH", "63248", "Santiago", "456783672","547902");

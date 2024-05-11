@@ -51,12 +51,12 @@ public class Inventario {
     }
 
     public Pieza buscarPieza(String titulo){
-        for (Pieza pieza : piezasEnExhibicion) {
+        for (Pieza pieza : piezasEnBodega) {
             if(pieza.getTitulo().equals(titulo)){
                 return pieza;
             }
         }
-        for (Pieza pieza : piezasEnBodega) {
+        for (Pieza pieza : piezasEnExhibicion) {
             if(pieza.getTitulo().equals(titulo)){
                 return pieza;
             }
