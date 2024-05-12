@@ -29,8 +29,8 @@ public class ConsolaUsuarios {
     public static Autor autor1= new Autor("Leonardo da Vinci", false);
     public static Fotografia foto1= new Fotografia("La nina y el buitre","Kevin Carter", 1993, "Sudán","20-03-2024", true, 300,  false, "10", "200");
     public static Fotografia foto2= new Fotografia("La torre de Piza", "Anónimo", 1355, "Italia","20-12-2024", false, 500, false, "26", "300");
-    public static Video video1= new Video("La Vie", "Anónimo", 1983, "Francia","14-11-2024", true, false, 0,  "40", "200");
-    public static Pintura pintura1=new Pintura("La Flor", "Pepito perez", 1964, "Italia","20-12-2025", true, true, 0,  77, 53, "Oleo");
+    public static Video video1= new Video("La Vie", "Edith Piaf", 1983, "Francia","14-11-2024", true, false, 0,  "40", "200");
+    public static Pintura pintura1=new Pintura("La Flor", "Juan Antonio", 1964, "Italia","20-12-2025", true, true, 0,  77, 53, "Oleo");
     public static Inventario inventario1= new Inventario();
     public static ControladorUsuarios controlador= new ControladorUsuarios();
     public static Galeria galeriaConsola = new Galeria(inventario1,controlador);
