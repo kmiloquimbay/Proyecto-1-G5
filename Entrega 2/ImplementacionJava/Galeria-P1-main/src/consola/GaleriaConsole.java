@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import persistencia.PersistenciaGaleria;
 import usuarios.AdministradorGaleria;
 import usuarios.Comprador;
@@ -16,7 +15,7 @@ import galeria.inventarioYpiezas.Pieza;
 public class GaleriaConsole {
 
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
+        
         int opcionMenuPrincipal;
         Galeria galeria = null;
         Map<String, Comprador> compradores = new HashMap<String, Comprador>();
@@ -35,8 +34,7 @@ public class GaleriaConsole {
             System.out.println("2. Salvar Galería");
             System.out.println("3. Ingresar como Usuario");
             System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
-            opcionMenuPrincipal = scanner.nextInt();
+            opcionMenuPrincipal = Integer.parseInt(input("Seleccione una opción: "));
 
             switch (opcionMenuPrincipal) {
                 case 1:
@@ -52,7 +50,7 @@ public class GaleriaConsole {
                     ConsolaUsuarios.salvar();
                     break;
                 case 3:
-                    ingresarComoUsuario(scanner, compradores, empleados, administrador, galeria);
+                    ingresarComoUsuario(compradores, empleados, administrador, galeria);
                     break;
                 case 0:
                     System.out.println("Gracias por utilizar la Galería y Casa de Subastas. ¡Hasta luego!");
@@ -63,10 +61,9 @@ public class GaleriaConsole {
             }
         } while (opcionMenuPrincipal != 0);
 
-        scanner.close();
     }
 
-    private static void ingresarComoUsuario(Scanner scanner, Map<String, Comprador> compradores, Map<String, Empleado> empleados, AdministradorGaleria administrador, Galeria galeria) throws IOException{
+    private static void ingresarComoUsuario(Map<String, Comprador> compradores, Map<String, Empleado> empleados, AdministradorGaleria administrador, Galeria galeria) throws IOException{
         int opcionIngresarUsuario;
         
         do{
@@ -76,24 +73,23 @@ public class GaleriaConsole {
             System.out.println("2. Empleado");
             System.out.println("3. Administrador de Galería");
             System.out.println("0. Volver al Menú Principal");
-            System.out.print("Seleccione cómo desea ingresar: ");
-            opcionIngresarUsuario = scanner.nextInt();
+            opcionIngresarUsuario = Integer.parseInt(input("Seleccione una opción: "));
         
             switch (opcionIngresarUsuario) {
                 case 1:
-                    Comprador comprador = autenticarComprador(scanner, compradores);
+                    Comprador comprador = autenticarComprador(compradores);
                     if (comprador != null) {
                         ConsolaComprador.main(galeria, comprador);
                     }
                     break;
                 case 2:
-                    Empleado empleado = autenticarEmpleado(scanner, empleados);
+                    Empleado empleado = autenticarEmpleado(empleados);
                     if (empleado != null) {
                         ConsolaEmpleado.main(galeria, empleado);
                     }
                     break;
                 case 3:
-                    AdministradorGaleria adminGaleria = autenticarAdministrador(scanner, administrador);
+                    AdministradorGaleria adminGaleria = autenticarAdministrador(administrador);
                     if (adminGaleria != null) {
                         ConsolaAdministrador.main(galeria, adminGaleria);
                     }
@@ -111,12 +107,10 @@ public class GaleriaConsole {
 
     }
 
-    private static Comprador autenticarComprador(Scanner scanner, Map<String, Comprador> compradores){
+    private static Comprador autenticarComprador(Map<String, Comprador> compradores){
         
-        System.out.print("Ingrese su login: ");
-        String login = scanner.next();
-        System.out.print("Ingrese su contraseña: ");
-        String password = scanner.next();
+        String login = input("Ingrese su login: ");
+        String password = input("Ingrese su contraseña: ");
         Comprador rta = null;
         if (compradores.containsKey(login)){
             Comprador comprador = compradores.get(login);
@@ -131,11 +125,9 @@ public class GaleriaConsole {
         return rta;
     }
 
-    private static Empleado autenticarEmpleado(Scanner scanner, Map<String, Empleado> empleados){
-        System.out.print("Ingrese su login: ");
-        String login = scanner.next();
-        System.out.print("Ingrese su contraseña: ");
-        String password = scanner.next();
+    private static Empleado autenticarEmpleado(Map<String, Empleado> empleados){
+        String login = input("Ingrese su login: ");
+        String password = input("Ingrese su contraseña: ");
         Empleado rta = null;
         if (empleados.containsKey(login)){
             Empleado empleado = empleados.get(login);
@@ -150,11 +142,9 @@ public class GaleriaConsole {
         return rta;
     }
 
-    private static AdministradorGaleria autenticarAdministrador(Scanner scanner, AdministradorGaleria administrador){
-        System.out.print("Ingrese su login: ");
-        String login = scanner.next();
-        System.out.print("Ingrese su contraseña: ");
-        String password = scanner.next();
+    private static AdministradorGaleria autenticarAdministrador(AdministradorGaleria administrador){
+        String login = input("Ingrese su login: ");
+        String password = input("Ingrese su contraseña: ");
         AdministradorGaleria rta = null;
         if (administrador.getLogin().equals(login)){
             if (administrador.getPassword().equals(password)){
@@ -172,7 +162,7 @@ public class GaleriaConsole {
     {
         try
         {
-            System.out.print( mensaje + ": " );
+            System.out.print( mensaje);
             BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
             String input = reader.readLine( );
             return input;
