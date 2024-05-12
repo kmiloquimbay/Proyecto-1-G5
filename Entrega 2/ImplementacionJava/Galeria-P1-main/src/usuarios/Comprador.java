@@ -47,7 +47,7 @@ public class Comprador extends Cliente {
     }
     public void verHistorialCompras(){
         for (Compra compra : misCompras) {
-            System.out.println(compra);
+            System.out.println("Título: "+compra.getTituloPieza()+" | Valor pagado: "+compra.getValorPagado());
         }
     }
     
