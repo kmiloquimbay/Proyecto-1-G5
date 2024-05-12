@@ -3,6 +3,7 @@ import java.util.List;
 import galeria.Galeria;
 import galeria.inventarioYpiezas.Pieza;
 import usuarios.Comprador;
+import usuarios.Propietario;
 
 
 public class ConsolaComprador {
@@ -18,6 +19,8 @@ public class ConsolaComprador {
             System.out.println("3. Ver mi historial de compras");
             System.out.println("4. Ver historial de una pieza");
             System.out.println("5. Ver historial de un artista");
+            System.out.println("6. Ver mis piezas actuales");
+            System.out.println("7. Ver mis piezas pasadas");
             System.out.println("0. Salir");
             opcion = Integer.parseInt(GaleriaConsole.input("Seleccione una opción: "));
 
@@ -41,6 +44,12 @@ public class ConsolaComprador {
                     
                 case 5:
                     verHistorialArtista(galeria);
+                    break;
+                case 6:
+                    verMisPiezasActuales(galeria,comprador);
+                    break;
+                case 7:
+                    verMisPiezasPasadas(galeria,comprador);
                     break;
                     
                 case 0:
@@ -90,6 +99,35 @@ public class ConsolaComprador {
         galeria.verHistorialArtista(nombreArtista);
     }
 
-    
+    public static void verMisPiezasActuales(Galeria galeria, Comprador comprador) {
+        Propietario propietario= galeria.getControladorUsuarios().obtenerPropietario(comprador.getId());
+        if (propietario!= null){
+            List<Pieza> piezasActuales=propietario.getMisPiezasActuales();
+            System.out.println("Tus piezas actuales son:");
+            for (Pieza pieza : piezasActuales) {
+                System.out.println(pieza.getTitulo()); 
+        }
+        }
+        else{
+            System.out.println("El comprador no es dueño de ninguna pieza");
+        }
+            
+        }
+
+
+    public static void verMisPiezasPasadas(Galeria galeria, Comprador comprador)  {
+        Propietario propietario= galeria.getControladorUsuarios().obtenerPropietario(comprador.getId());
+        if (propietario!= null){
+            List<Pieza> piezasPasadas=propietario.getMisPiezasPasadas();
+            System.out.println("Tus piezas actuales son:");
+            for (Pieza pieza : piezasPasadas) {
+                System.out.println(pieza.getTitulo()); 
+        }
+        }
+        else{
+            System.out.println("El comprador no es dueño de ninguna pieza");
+        }
+            
+        }
 
 }
