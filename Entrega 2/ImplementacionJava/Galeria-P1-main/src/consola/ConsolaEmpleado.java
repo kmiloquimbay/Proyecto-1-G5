@@ -10,7 +10,6 @@ import usuarios.Comprador;
 import usuarios.Empleado;
 import usuarios.OperadorSubasta;
 
-import java.util.Scanner;
 
 public class ConsolaEmpleado {
     public static void main(Galeria galeria, Empleado empleado) {
@@ -24,7 +23,7 @@ public class ConsolaEmpleado {
     }
 
     public static void menuCajero(Galeria galeria, Cajero cajero) {
-        Scanner scanner = new Scanner(System.in);
+
         int option = 0;
 
         do {
@@ -32,8 +31,7 @@ public class ConsolaEmpleado {
             System.out.println("1. Registrar pago");
             System.out.println("2. Entregar pieza");
             System.out.println("3. Salir");
-            System.out.print("Ingrese una opción: ");
-            option = scanner.nextInt();
+            option = Integer.parseInt(GaleriaConsole.input("Ingrese una opcion: "));
 
             switch (option) {
                 case 1:
@@ -50,11 +48,11 @@ public class ConsolaEmpleado {
                     break;
             }
         } while (option != 3) ;
-        scanner.close();
+        
     }
 
     public static void menuOperadorSubasta(Galeria galeria, OperadorSubasta operadorSubasta) {
-        Scanner scanner = new Scanner(System.in);
+        
         int option = 0;
         do {
         
@@ -63,8 +61,7 @@ public class ConsolaEmpleado {
             System.out.println("2. Recibir y registrar oferta");
             System.out.println("3. Evaluar oferta");
             System.out.println("0. Salir");
-            System.out.print("Ingrese una opción: ");
-            option = scanner.nextInt();
+            option = Integer.parseInt(GaleriaConsole.input("Ingrese una opcion: "));
 
             switch (option) {
                 case 1:
@@ -86,17 +83,14 @@ public class ConsolaEmpleado {
             }
         }
         while (option != 0) ;
-        scanner.close();
+        
     }
 
     public static void registrarPago(Galeria galeria, Cajero cajero){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la compra: ");
-        String idCompra = scanner.nextLine();
-        System.out.print("Ingrese el nombre de la pieza: ");
-        String idPieza = scanner.nextLine();
-        System.out.print("Ingrese el ID del comprador: ");
-        String idComprador = scanner.nextLine();
+        
+        String idCompra = GaleriaConsole.input("Ingrese el ID de la compra: ");
+        String idPieza = GaleriaConsole.input("Ingrese el nombre de la pieza: ");
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
 
         Compra compra = galeria.encontrarCompra(idCompra);
         Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
@@ -109,15 +103,13 @@ public class ConsolaEmpleado {
             System.out.println("Error: Invalid purchase, piece or buyer ID");
         }
 
-        scanner.close();
+        
     } 
 
     public static void entregarPieza(Galeria galeria, Cajero cajero){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el nombre de la pieza: ");
-        String idPieza = scanner.nextLine();
-        System.out.print("Ingrese el ID del comprador: ");
-        String idComprador = scanner.nextLine();
+        
+        String idPieza = GaleriaConsole.input("Ingrese el nombre de la pieza: ");
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
 
         Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
         Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
@@ -129,40 +121,35 @@ public class ConsolaEmpleado {
             System.out.println("Error: Invalid piece or buyer ID");
         }
 
-        scanner.close();
+        
         
     }
 
     public static void terminarSubasta(Galeria galeria, OperadorSubasta operadorSubasta){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la subasta: ");
-        String idSubasta = scanner.nextLine();
+    
+        String idSubasta = GaleriaConsole.input("Ingrese el ID de la subasta: ");
 
         operadorSubasta.terminarSubasta(idSubasta);
-        scanner.close();
+        
     }
 
     public static void recibirRegistrarOferta(Galeria galeria, OperadorSubasta operadorSubasta){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la subasta: ");
-        String idSubasta = scanner.nextLine();
-        System.out.print("Ingrese el ID de la oferta: ");
-        String idOferta = scanner.nextLine();
+    
+        String idSubasta = GaleriaConsole.input("Ingrese el ID de la subasta: ");
+        String idOferta = GaleriaConsole.input("Ingrese el ID de la oferta:");
 
         Subasta subasta = galeria.encontrarSubasta(idSubasta);
         Oferta oferta = subasta.encontrarOferta(idOferta);
         
         operadorSubasta.recibirRegistrarOferta(oferta, idSubasta);
-        scanner.close();
+        
 
     }
 
     public static void evaluarOferta(Galeria galeria, OperadorSubasta operadorSubasta){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la subasta: ");
-        String idSubasta = scanner.nextLine();
-        System.out.print("Ingrese el ID de la oferta: ");
-        String idOferta = scanner.nextLine();
+        
+        String idSubasta = GaleriaConsole.input("Ingrese el ID de la subasta:");
+        String idOferta = GaleriaConsole.input("Ingrese el ID de la oferta:");
 
         Subasta subasta = galeria.encontrarSubasta(idSubasta);
         if (subasta == null) {
@@ -179,7 +166,7 @@ public class ConsolaEmpleado {
             }
 
         }
-        scanner.close();
+        
     }    
 
 
