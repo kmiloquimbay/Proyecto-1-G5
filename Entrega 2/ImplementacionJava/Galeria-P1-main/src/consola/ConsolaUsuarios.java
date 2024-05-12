@@ -37,8 +37,8 @@ public class ConsolaUsuarios {
     public static Pintura pinturaAgregar=new Pintura("Mona Lisa", "Leonardo da Vinci", 1506, "Italia","20-10-2024", true, false, 1000, 77, 53, "Oleo");
     
     //Usuarios
-    public static Comprador comprador= new Comprador("LuisP", "12345", "Luis","3456289290", 1000000,galeriaConsola.getInventario().getPiezasDisponibleVenta(), "547293");
-    public static Propietario propietario= new Propietario("santiH", "63248", "Santiago", "456783672","547902");
+    public static Comprador comprador= new Comprador("LuisP", "12345", "Luis Perez","3456289290", 1000000,galeriaConsola.getInventario().getPiezasDisponibleVenta(), "547293");
+    public static Propietario propietario= new Propietario("LuisP", "12345", "Luis Perez", "3456289290","547293");
     public static AdministradorGaleria admin= new AdministradorGaleria("fabio24", "1226745", "Administrador",galeriaConsola, "562901");
     public static Cajero cajero= new  Cajero("juanito2", "762598", "Cajero",galeriaConsola, "4439035");
     public static OperadorSubasta operador= new OperadorSubasta("andresP", "12235345", "Operador",galeriaConsola, "653907");
@@ -48,8 +48,8 @@ public class ConsolaUsuarios {
     public static Oferta oferta2= new Oferta(40000, comprador);
     public static Oferta ofertaRecibir= new Oferta(25000, comprador);
     public static Subasta subasta1= new Subasta("6748899",39034,15000,video1);
-    public static Compra compra1= new Compra("567890", 20000, "tarjeta", "La niña y el buitre","547293");
-    public static Compra compra2= new Compra("587650", 70000, "tarjeta", "Mona Lisa","547293");
+    public static Compra compra1= new Compra("567890", 20000, "tarjeta", "La Vie","547293");
+    public static Compra compra2= new Compra("587650", 70000, "tarjeta", "La Flor","547293");
 
     
     public static void setUp(){
