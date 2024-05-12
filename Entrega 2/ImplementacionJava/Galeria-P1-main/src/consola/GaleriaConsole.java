@@ -33,7 +33,7 @@ public class GaleriaConsole {
             System.out.println("1. Cargar Galería");
             System.out.println("2. Salvar Galería");
             System.out.println("3. Ingresar como Usuario");
-            System.out.println("0. Salir");
+            System.out.println("0. Salir\n");
             opcionMenuPrincipal = Integer.parseInt(input("Seleccione una opción: "));
 
             switch (opcionMenuPrincipal) {
@@ -72,7 +72,7 @@ public class GaleriaConsole {
             System.out.println("1. Comprador");
             System.out.println("2. Empleado");
             System.out.println("3. Administrador de Galería");
-            System.out.println("0. Volver al Menú Principal");
+            System.out.println("0. Volver al Menú Principal\n");
             opcionIngresarUsuario = Integer.parseInt(input("Seleccione una opción: "));
         
             switch (opcionIngresarUsuario) {

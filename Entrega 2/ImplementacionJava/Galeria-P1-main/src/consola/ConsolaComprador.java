@@ -13,6 +13,7 @@ public class ConsolaComprador {
         int opcion = -1;
         
         while (opcion != 0){
+            System.out.println("\n");
             System.out.println("----- MENÚ DEL COMPRADOR -----");
             System.out.println("1. Ver catálogo de productos");
             System.out.println("2. Realizar una compra");
@@ -21,7 +22,7 @@ public class ConsolaComprador {
             System.out.println("5. Ver historial de un artista");
             System.out.println("6. Ver mis piezas actuales");
             System.out.println("7. Ver mis piezas pasadas");
-            System.out.println("0. Salir");
+            System.out.println("0. Salir\n");
             opcion = Integer.parseInt(GaleriaConsole.input("Seleccione una opción: "));
 
 

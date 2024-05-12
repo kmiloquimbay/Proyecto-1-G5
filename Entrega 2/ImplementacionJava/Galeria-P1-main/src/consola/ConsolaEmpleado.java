@@ -24,13 +24,15 @@ public class ConsolaEmpleado {
 
     public static void menuCajero(Galeria galeria, Cajero cajero) {
 
-        int option = 0;
+        int option = -1;
 
         do {
+            System.out.println("\n");
+            System.out.println("--------------------");
             System.out.println("Menu Cajero");
             System.out.println("1. Registrar pago");
             System.out.println("2. Entregar pieza");
-            System.out.println("3. Salir");
+            System.out.println("0. Salir\n");
             option = Integer.parseInt(GaleriaConsole.input("Ingrese una opcion: "));
 
             switch (option) {
@@ -40,27 +42,27 @@ public class ConsolaEmpleado {
                 case 2:
                     entregarPieza(galeria, cajero);
                     break;
-                case 3:
+                case 0:
                     System.out.println("Saliendo del menú Cajero...");
                     break;
                 default:
                     System.out.println("Opción inválida");
                     break;
             }
-        } while (option != 3) ;
+        } while (option != 0) ;
         
     }
 
     public static void menuOperadorSubasta(Galeria galeria, OperadorSubasta operadorSubasta) {
         
-        int option = 0;
+        int option = -1;
         do {
-        
-            System.out.println("Menu Operador de Subasta");
+            System.out.println("\n");
+            System.out.println("----------  Menú Operador de Subasta ----------");
             System.out.println("1. Terminar subasta");
             System.out.println("2. Recibir y registrar oferta");
             System.out.println("3. Evaluar oferta");
-            System.out.println("0. Salir");
+            System.out.println("0. Salir\n");
             option = Integer.parseInt(GaleriaConsole.input("Ingrese una opcion: "));
 
             switch (option) {

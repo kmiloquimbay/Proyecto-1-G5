@@ -22,8 +22,10 @@ public class ConsolaAdministrador {
             System.out.println("6. Verificar seriedad de oferta");
             System.out.println("7. Bloquear pieza"); 
             System.out.println("8. Desbloquear pieza");
-            System.out.println("0. Volver al Menú Principal");
-            System.out.print("Seleccione una acción: ");
+            System.out.println("9. Ver historia de una pieza");
+            System.out.println("10 Ver historia de un artista");
+            System.out.println("11. Ver historial de compras de un comprador");
+            System.out.println("0. Volver al Menú Principal\n");
             opcion = Integer.parseInt(GaleriaConsole.input("Seleccion una opción: "));
 
             switch (opcion) {
@@ -51,6 +53,15 @@ public class ConsolaAdministrador {
                     break;
                 case 8:
                     desbloquearPieza(galeria, admin);
+                    break;
+                case 9:
+                    verHistoriaPieza(galeria);
+                    break;
+                case 10:
+                    verHistoriaArtista(galeria);
+                    break;
+                case 11:
+                    verHisoriaComprador(galeria, admin);
                     break;
                 case 0:
                     System.out.println("Volviendo al Menú Principal...");
@@ -202,5 +213,41 @@ public class ConsolaAdministrador {
         }
 
     }
+
+    private static void verHistoriaPieza(Galeria galeria) {
+
+        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
+
+        Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
+
+        if (pieza != null) {
+            galeria.verHistorialPieza(idPieza);
+        } else {
+            System.out.println("No se encontró una pieza con el ID: " + idPieza);
+        }
+
+    }
+
+    private static void verHistoriaArtista(Galeria galeria) {
+
+        String nombreArtista = GaleriaConsole.input("Ingrese el nombre del artista: ");
+        
+        galeria.verHistorialArtista(nombreArtista);
+
+    }
+
+    private static void verHisoriaComprador(Galeria galeria, AdministradorGaleria admin) {
+
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
+
+        Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
+
+        if (comprador != null) {
+            admin.historiaComprador(idComprador);
+        } else {
+            System.out.println("No se encontró un comprador con el ID: " + idComprador);
+        }          
+    }
+
 
 }
