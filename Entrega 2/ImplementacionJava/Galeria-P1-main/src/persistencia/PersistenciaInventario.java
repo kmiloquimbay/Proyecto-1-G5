@@ -94,13 +94,6 @@ public class PersistenciaInventario {
         return piezaJson;
     }
 
-    public static JSONObject guardarAutor(Autor autor){
-        JSONObject autorJson = new JSONObject();
-        autorJson.put("nombre", autor.getNombre());
-        autorJson.put("esAnonimo", autor.isEsAnonimo());
-
-        return autorJson;
-    }
 
     public static void cargarInventario(Inventario inventario) throws IOException{
         String jsonCompleto = new String(Files.readAllBytes(new File("inventario.json").toPath()));
@@ -171,13 +164,6 @@ public class PersistenciaInventario {
         return rta;
     }
     
-    public static Autor cargarAutor(JSONObject jAutor) {
-    	Autor autor;
-    	String nombre = jAutor.getString("nombre");
-    	Boolean esAnonimo = jAutor.getBoolean("esAnonimo");
-    	autor = new Autor(nombre, esAnonimo);
-    	return autor;
-    }
 
 
 }
