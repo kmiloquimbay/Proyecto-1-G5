@@ -2,7 +2,6 @@ package consola;
 import usuarios.AdministradorGaleria;
 import usuarios.Comprador;
 import usuarios.Propietario;
-import java.util.Scanner;
 
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
@@ -11,7 +10,6 @@ import galeria.inventarioYpiezas.Pieza;
 public class ConsolaAdministrador {
 
 	public static void main(Galeria galeria, AdministradorGaleria admin) {
-        Scanner scanner = new Scanner(System.in);
         int opcion;
         
         do {
@@ -26,7 +24,7 @@ public class ConsolaAdministrador {
             System.out.println("8. Desbloquear pieza");
             System.out.println("0. Volver al Menú Principal");
             System.out.print("Seleccione una acción: ");
-            opcion = scanner.nextInt();
+            opcion = Integer.parseInt(GaleriaConsole.input("Seleccion una opción: "));
 
             switch (opcion) {
                 case 1:
@@ -63,13 +61,11 @@ public class ConsolaAdministrador {
             }
         } while (opcion != 0);
 
-        scanner.close();
     }
 
     private static void registrarIngresoPieza(Galeria galeria, AdministradorGaleria admin) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la pieza: ");
-        String idPieza = scanner.nextLine();
+
+        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
         
         Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
         if (pieza != null){
@@ -79,20 +75,16 @@ public class ConsolaAdministrador {
         else {
             System.out.println("No se encontró una pieza con el ID: " + idPieza);
         }
-        scanner.close();
     }
 
     private static void confirmarVenta(Galeria galeria, AdministradorGaleria admin) {
         
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la compra: ");
-        String idCompra = scanner.nextLine();
+        String idCompra = GaleriaConsole.input("Ingrese el ID de la compra: ");
 
-        System.out.print("Ingrese el ID de la pieza: ");
-        String idPieza = scanner.nextLine();
 
-        System.out.print("Ingrese el ID del comprador: ");
-        String idComprador = scanner.nextLine();
+        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
+
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
 
         Compra compra = galeria.encontrarCompra(idCompra);
         Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
@@ -105,17 +97,14 @@ public class ConsolaAdministrador {
             System.out.println("No se pudo confirmar la venta");
         }
 
-        scanner.close();
     }
 
     private static void devolucionPieza(Galeria galeria, AdministradorGaleria admin) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID de la pieza: ");
-        String idPieza = scanner.nextLine();
 
-        System.out.print("Ingrese el ID del propietario: ");
-        String idPropietario = scanner.nextLine();
+        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
+
+        String idPropietario = GaleriaConsole.input("Ingrese el ID del propietario: ");
 
         Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
         Propietario propietario = galeria.getControladorUsuarios().obtenerPropietario(idPropietario);
@@ -127,16 +116,13 @@ public class ConsolaAdministrador {
             System.out.println("No se pudo realizar la devolución");
         }
 
-        scanner.close();
             
         }
     
 
     private static void verificarComprador(Galeria galeria, AdministradorGaleria admin) {
         
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID del comprador: ");
-        String idComprador = scanner.nextLine();
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
 
         Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
 
@@ -148,17 +134,13 @@ public class ConsolaAdministrador {
             System.out.println("No se encontró un comprador con el ID: " + idComprador);
         }
         
-        scanner.close();
     }
 
     private static void aumentarLimite(Galeria galeria, AdministradorGaleria admin) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID del comprador: ");
-        String idComprador = scanner.nextLine();
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
 
-        System.out.print("Ingrese el monto a aumentar: ");
-        int aumento = scanner.nextInt();
+        int aumento = Integer.parseInt(GaleriaConsole.input("Ingrese el valor del aumento: "));
 
         Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
         if (comprador != null) {
@@ -169,19 +151,15 @@ public class ConsolaAdministrador {
             System.out.println("No se encontró un comprador con el ID: " + idComprador);
         }
 
-        scanner.close();
     }
 
 
 
     private static void verificarSeriedadOferta(Galeria galeria, AdministradorGaleria admin) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el ID del comprador: ");
-        String idComprador = scanner.nextLine();
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
 
-        System.out.print("Ingrese el valor de la oferta: ");
-        int valorOferta = scanner.nextInt();
+        int valorOferta = Integer.parseInt(GaleriaConsole.input("Ingrese el valor de la oferta: "));
         
         Comprador comprador= galeria.getControladorUsuarios().obtenerComprador("547293");
 
@@ -192,14 +170,11 @@ public class ConsolaAdministrador {
             System.out.println("No se encontró un comprador con el ID: " + idComprador);
         }
 
-        scanner.close();
     }
 
     private static void bloquearPieza(Galeria galeria, AdministradorGaleria admin) {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Ingrese el título de la pieza: ");
-        String titulo = scanner.nextLine();
+        String titulo = GaleriaConsole.input("Ingrese el título de la pieza: ");
 
         Pieza pieza = galeria.getInventario().buscarPieza(titulo);
         if (pieza != null) {
@@ -210,14 +185,11 @@ public class ConsolaAdministrador {
             System.out.println("No se encontró una pieza con el título: " + titulo);
         }
 
-        scanner.close();
     }
 
     private static void desbloquearPieza(Galeria galeria, AdministradorGaleria admin) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el título de la pieza: ");
-        String titulo = scanner.nextLine();
+        String titulo = GaleriaConsole.input("Ingrese el título de la pieza: ");
 
         Pieza pieza = galeria.getInventario().buscarPieza(titulo);
 
@@ -229,7 +201,6 @@ public class ConsolaAdministrador {
             System.out.println("No se encontró una pieza con el título: " + titulo);
         }
 
-        scanner.close();
     }
 
 }
