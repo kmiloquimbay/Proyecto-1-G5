@@ -91,23 +91,27 @@ public class Galeria {
             if (pieza!=null){
             String nombreAutor=pieza.getAutor();
 
-            if (nombreArtista.equals(nombreAutor)){
-                listacomprasAutor.add(pieza);
-                String titulo= pieza.getTitulo();
-                int anio=pieza.getAnioCreacion();
-                String fechaCompra=compra.getFecha();
-                int valorPagado=compra.getValorPagado();
-                System.out.println("Titulo pieza: "+titulo+" | Anio de creación: "+anio+" | Fecha de Compra: "+fechaCompra+" | valorPagado: "+valorPagado);
- } }
+                if (nombreArtista.equals(nombreAutor)){
+                    listacomprasAutor.add(pieza);
+                    String titulo= pieza.getTitulo();
+                    int anio=pieza.getAnioCreacion();
+                    String fechaCompra=compra.getFecha();
+                    int valorPagado=compra.getValorPagado();
+                    System.out.println("Titulo pieza: "+titulo+" | Anio de creación: "+anio+" | Fecha de Compra: "+fechaCompra+" | valorPagado: "+valorPagado);
+                }   
+            }
+        }
+        
+ 
         for (Pieza piezaB: inventario.getPiezasEnBodega()){
-            if (nombreArtista.equals(piezaB.getAutor()) && !(listacomprasAutor.contains(piezaB))){
-                listacomprasAutor.add(pieza);
+            if (nombreArtista.equals(piezaB.getAutor()) && (listacomprasAutor.contains(piezaB)!=true)){
+                listacomprasAutor.add(piezaB);
                 String tituloB= piezaB.getTitulo();
                 int anioB=piezaB.getAnioCreacion(); 
                 System.out.println("Titulo pieza: "+tituloB+" | Anio de creación: "+anioB+" | Esta Pieza no tiene historial de ventas");
+            } 
+        }
 
- } }
-}
 
         if (listacomprasAutor.size()==0){
             System.out.println("No hay piezas con ese autor en la galeria");

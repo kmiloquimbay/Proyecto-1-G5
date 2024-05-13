@@ -70,6 +70,7 @@ public class ConsolaComprador {
 
     public static void verCatalogo(Galeria galeria){
         List<Pieza> piezasDisponibleVenta = galeria.getInventario().getPiezasDisponibleVenta();
+        System.out.println("---CATALOGO---");
         for (Pieza pieza: piezasDisponibleVenta) {
             System.out.println(pieza.getTipoPieza() + " - " + pieza.getTitulo() + " - " + pieza.getPrecioFijo());
         }
@@ -87,6 +88,7 @@ public class ConsolaComprador {
     }
 
     public static void verHistorialCompras(Comprador comprador){
+        System.out.println("\n---COMPRAS---\n");
         comprador.verHistorialCompras();
     }
 

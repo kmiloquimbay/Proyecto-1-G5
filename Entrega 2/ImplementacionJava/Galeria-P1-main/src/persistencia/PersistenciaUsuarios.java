@@ -13,6 +13,8 @@ import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -155,6 +157,7 @@ public class PersistenciaUsuarios {
         String jsonCompleto = new String(Files.readAllBytes(new File("usuarios.json").toPath()));
         JSONObject raiz = new  JSONObject(jsonCompleto);
         ControladorUsuarios controladorUsuarios = new ControladorUsuarios();
+        Collection<Compra> compras=galeria.getCompras().values();
 
         JSONArray empleados = raiz.getJSONArray("empleados");
         JSONArray compradores = raiz.getJSONArray("compradores");
@@ -181,6 +184,12 @@ public class PersistenciaUsuarios {
             
             JSONObject jComprador = compradores.getJSONObject(i);
             Comprador comprador = cargarComprador(jComprador, login, password, nombre, telefono, id, galeria);
+            for (Compra compra : compras) {
+                if (compra.getIdComprador().equals(id)){
+                    comprador.agregarCompra(compra);
+                }
+                
+            }
             controladorUsuarios.agregarComprador(comprador);
         }
         
