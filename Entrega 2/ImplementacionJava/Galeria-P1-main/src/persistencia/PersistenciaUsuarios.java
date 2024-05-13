@@ -11,10 +11,8 @@ import usuarios.Propietario;
 import usuarios.Usuario;
 import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
