@@ -120,7 +120,7 @@ public class ConsolaComprador {
         Propietario propietario= galeria.getControladorUsuarios().obtenerPropietario(comprador.getId());
         if (propietario!= null){
             List<Pieza> piezasPasadas=propietario.getMisPiezasPasadas();
-            System.out.println("Tus piezas actuales son:");
+            System.out.println("Tus piezas pasadas son:");
             for (Pieza pieza : piezasPasadas) {
                 System.out.println(pieza.getTitulo()); 
         }
