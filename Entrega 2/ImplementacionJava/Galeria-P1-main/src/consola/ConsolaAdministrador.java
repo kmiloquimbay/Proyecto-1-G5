@@ -216,14 +216,14 @@ public class ConsolaAdministrador {
 
     private static void verHistoriaPieza(Galeria galeria) {
 
-        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
+        String idPieza = GaleriaConsole.input("Ingrese el titulo de la pieza: ");
 
         Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
 
         if (pieza != null) {
             galeria.verHistorialPieza(idPieza);
         } else {
-            System.out.println("No se encontró una pieza con el ID: " + idPieza);
+            System.out.println("No se encontró una pieza con el titulo: " + idPieza);
         }
 
     }
