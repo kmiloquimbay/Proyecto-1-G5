@@ -105,28 +105,32 @@ public class AdministradorGaleria extends Empleado{
         int valorColección=0;
 
         if (comprador != null && propietario != null){
-            System.out.println("--- EL HISTORIAL DEL COMPRADOR CON ID "+id+" ---");
+           System.out.println("\n--- EL HISTORIAL DEL COMPRADOR CON ID "+id+" ---\n");
+           
            int numC=0;
            int numP=0;
            List<Pieza> piezas=propietario.getMisPiezasActuales();
+           
            System.out.println("Las piezas compradas por el comprador son: ");
             for (Compra compra : listacompras) {
-                if(compra.getIdComprador()==id){
+
+                if(compra.getIdComprador().equals(id)){
                     numC+=1;
                     String titulo=compra.getTituloPieza();
-                    System.out.println("Fehca de compra: "+compra.getFecha()+"| Pieza Comprada: "+titulo );
+                    System.out.println("Fehca de compra: "+compra.getFecha()+" | Pieza Comprada: "+titulo );
                     
                 }
             }
             if(numC==0){
                 System.out.println("El comprador no tiene compras registradas");
             }
-            System.out.println("Las piezas de las que es dueño el comprador son:");
+            
+            System.out.println("\nLas piezas de las que es dueño el comprador son:");
             for (Pieza pieza : piezas) {
                 numP+=1;
                 valorColección+=pieza.getPrecioFijo();
                 String titulo=pieza.getTitulo();
-                System.out.println(titulo);
+                System.out.println("Titulo de la pieza: "+titulo);
             
             }
             if(numP==0){
@@ -134,7 +138,7 @@ public class AdministradorGaleria extends Empleado{
             }
 
 
-            System.out.println("El valor total de la colección del comprador con id "+id+" teniendo en cuenta el valor de lo que posee es: "+valorColección);
+            System.out.println("\nEl valor total de la colección del comprador con id "+id+" teniendo en cuenta el valor de lo que posee es: "+valorColección);
 
         }
 

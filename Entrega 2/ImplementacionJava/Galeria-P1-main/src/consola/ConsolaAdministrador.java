@@ -76,15 +76,15 @@ public class ConsolaAdministrador {
 
     private static void registrarIngresoPieza(Galeria galeria, AdministradorGaleria admin) {
 
-        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
+        String idPieza = GaleriaConsole.input("Ingrese el titulo de la pieza: ");
         
         Pieza pieza = galeria.getInventario().buscarPieza(idPieza);
         if (pieza != null){
             admin.registrarIngresoPieza(pieza);
-            System.out.println("Se registró el ingreso de la pieza con ID: " + idPieza);
+            System.out.println("Se registró el ingreso de la pieza con titulo: " + idPieza);
         } 
         else {
-            System.out.println("No se encontró una pieza con el ID: " + idPieza);
+            System.out.println("No se encontró una pieza con el titulo: " + idPieza);
         }
     }
 
@@ -93,7 +93,7 @@ public class ConsolaAdministrador {
         String idCompra = GaleriaConsole.input("Ingrese el ID de la compra: ");
 
 
-        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
+        String idPieza = GaleriaConsole.input("Ingrese el titulo de la pieza: ");
 
         String idComprador = GaleriaConsole.input("Ingrese el ID del comprador: ");
 
@@ -113,7 +113,7 @@ public class ConsolaAdministrador {
     private static void devolucionPieza(Galeria galeria, AdministradorGaleria admin) {
 
 
-        String idPieza = GaleriaConsole.input("Ingrese el ID de la pieza: ");
+        String idPieza = GaleriaConsole.input("Ingrese el titulo de la pieza: ");
 
         String idPropietario = GaleriaConsole.input("Ingrese el ID del propietario: ");
 
@@ -156,7 +156,8 @@ public class ConsolaAdministrador {
         Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
         if (comprador != null) {
             admin.aumentarLimite(idComprador, aumento);
-            System.out.println("El límite del comprador con ID: " + idComprador + " ha sido aumentado en " + Integer.toString(aumento));
+            System.out.println("El límite del comprador con ID: " + idComprador + " ha sido aumentado en " + Integer.toString(aumento)+", su nuevo credito es: "+comprador.getLimiteCompras());
+            
         }
         else {
             System.out.println("No se encontró un comprador con el ID: " + idComprador);
@@ -172,7 +173,7 @@ public class ConsolaAdministrador {
 
         int valorOferta = Integer.parseInt(GaleriaConsole.input("Ingrese el valor de la oferta: "));
         
-        Comprador comprador= galeria.getControladorUsuarios().obtenerComprador("547293");
+        Comprador comprador= galeria.getControladorUsuarios().obtenerComprador(idComprador);
 
         if (comprador != null) {
             System.out.println(admin.verificarSeriedadOferta(idComprador, valorOferta));

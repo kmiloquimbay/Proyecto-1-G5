@@ -25,14 +25,15 @@ public class ConsolaUsuarios {
     
     //Setup para mostrar el funcionamiento de los reqs
     //Galeria
-    public static Fotografia foto1= new Fotografia("La nina y el buitre","Kevin Carter", 1993, "Sudán","20-03-2024", true, 300,  false, "10", "200");
-    public static Fotografia foto2= new Fotografia("La torre de Piza", "Anónimo", 1355, "Italia","20-12-2024", false, 500, false, "26", "300");
-    public static Video video1= new Video("La Vie", "Edith Piaf", 1983, "Francia","14-11-2024", true, false, 0,  "40", "200");
-    public static Pintura pintura1=new Pintura("La Flor", "Juan Antonio", 1964, "Italia","20-12-2025", true, true, 0,  77, 53, "Oleo");
+    public static Fotografia foto1= new Fotografia("La nina y el buitre","Kevin Carter", 1993, "Sudán","20-03-2024", true, 30000,  false, "10", "200");
+    public static Fotografia foto2= new Fotografia("La torre de Piza", "Anónimo", 1355, "Italia","20-12-2024", true, 50000, false, "26", "300");
+    public static Video video1= new Video("La Vie", "Edith Piaf", 1983, "Francia","14-11-2024", false, false, 20000,  "40", "200");
+    public static Pintura pintura1=new Pintura("La Flor", "Juan Antonio", 1964, "Italia","20-12-2025", false, true, 70000,  77, 53, "Oleo");
+    public static Pintura pintura2=new Pintura("Vida", "Juan Antonio", 1994, "Italia","20-12-2024", true, false, 80000,  77, 53, "Oleo");
     public static Inventario inventario1= new Inventario();
     public static ControladorUsuarios controlador= new ControladorUsuarios();
     public static Galeria galeriaConsola = new Galeria(inventario1,controlador);
-    public static Pintura pinturaAgregar=new Pintura("Mona Lisa", "Leonardo da Vinci", 1506, "Italia","20-10-2024", true, false, 1000, 77, 53, "Oleo");
+    public static Pintura pintura3=new Pintura("Mona Lisa", "Leonardo da Vinci", 1506, "Italia","20-10-2024", true, false, 1000000, 77, 53, "Oleo");
     
     //Usuarios
     public static Comprador comprador= new Comprador("LuisP", "12345", "Luis Perez","3456289290", 1000000,galeriaConsola.getInventario().getPiezasDisponibleVenta(), "547293");
@@ -51,17 +52,24 @@ public class ConsolaUsuarios {
 
     
     public static void setUp(){
+        
         galeriaConsola.getInventario().guardarEnBodega(foto1);
+        galeriaConsola.getInventario().guardarEnBodega(foto2);
         galeriaConsola.getInventario().guardarEnBodega(video1);
         galeriaConsola.getInventario().guardarEnBodega(pintura1);
-        galeriaConsola.getInventario().ponerEnDisponibles(foto1);
-        galeriaConsola.getInventario().ponerEnDisponibles(video1);
-        galeriaConsola.getInventario().ponerEnDisponibles(pintura1);
+        galeriaConsola.getInventario().guardarEnBodega(pintura2);
+        galeriaConsola.getInventario().guardarEnBodega(pintura3);
+        galeriaConsola.getInventario().pasarAExhibicion(pintura3);
+        galeriaConsola.getInventario().ponerEnDisponibles(foto2);
+        galeriaConsola.getInventario().ponerEnDisponibles(pintura3);
+        galeriaConsola.getInventario().ponerEnDisponibles(pintura2);
+        
         galeriaConsola.getControladorUsuarios().agregarComprador(comprador);
         galeriaConsola.getControladorUsuarios().agregarPropietario(propietario);
         galeriaConsola.getControladorUsuarios().agregarEmpleado(admin);
         galeriaConsola.getControladorUsuarios().agregarEmpleado(cajero);
         galeriaConsola.getControladorUsuarios().agregarEmpleado(operador);
+        
         subasta1.agregarOferta(oferta1);
         subasta1.agregarOferta(oferta2);
         galeriaConsola.agregarSubasta(subasta1);
@@ -240,11 +248,11 @@ public class ConsolaUsuarios {
     }
 
     private static void registrarIngresoPieza() {
-        admin.registrarIngresoPieza(pinturaAgregar);
+        admin.registrarIngresoPieza(pintura3);
         System.out.println("Se agrego la pieza con la siguiente info a la bodega de la galeria:");
-        System.out.println("Título: "+pinturaAgregar.getTitulo());
-        System.out.println("Año Creación: "+pinturaAgregar.getAnioCreacion());
-        System.out.println("Lugar Creación: "+pinturaAgregar.getLugarCreacion());
+        System.out.println("Título: "+pintura3.getTitulo());
+        System.out.println("Año Creación: "+pintura3.getAnioCreacion());
+        System.out.println("Lugar Creación: "+pintura3.getLugarCreacion());
         
     }
 
