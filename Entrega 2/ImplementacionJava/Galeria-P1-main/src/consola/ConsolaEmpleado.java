@@ -99,7 +99,8 @@ public class ConsolaEmpleado {
         Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
 
         if (compra != null && pieza != null && comprador != null) {
-            cajero.registrarPago(compra, pieza, idComprador);
+            String rta = cajero.registrarPago(compra, pieza, idComprador);
+            System.out.println(rta);
         }
         else {
             System.out.println("Error: Invalid purchase, piece or buyer ID");
@@ -117,7 +118,8 @@ public class ConsolaEmpleado {
         Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
 
         if (pieza != null && comprador != null) {
-            cajero.entregarPieza(pieza, idComprador);
+            String rtaIdComprador = cajero.entregarPieza(pieza, idComprador);
+            System.out.println("Pieza entregada al comprador con ID: " + rtaIdComprador);
         }
         else {
             System.out.println("Error: Invalid piece or buyer ID");
@@ -131,19 +133,36 @@ public class ConsolaEmpleado {
     
         String idSubasta = GaleriaConsole.input("Ingrese el ID de la subasta: ");
 
-        operadorSubasta.terminarSubasta(idSubasta);
+        String rta = operadorSubasta.terminarSubasta(idSubasta);
+        System.out.println(rta);
         
     }
 
     public static void recibirRegistrarOferta(Galeria galeria, OperadorSubasta operadorSubasta){
     
         String idSubasta = GaleriaConsole.input("Ingrese el ID de la subasta: ");
-        String idOferta = GaleriaConsole.input("Ingrese el ID de la oferta:");
+        String idComprador = GaleriaConsole.input("Ingrese el ID del comprador de la oferta: ");
 
         Subasta subasta = galeria.encontrarSubasta(idSubasta);
-        Oferta oferta = subasta.encontrarOferta(idOferta);
-        
-        operadorSubasta.recibirRegistrarOferta(oferta, idSubasta);
+        Comprador comprador = galeria.getControladorUsuarios().obtenerComprador(idComprador);
+
+        Oferta oferta = null;
+        if (comprador != null){
+            int valorOferta = Integer.parseInt(GaleriaConsole.input("Ingrese el valor de la oferta: "));
+            oferta = new Oferta(valorOferta, comprador);
+        }
+        else {
+            System.out.println("Error: Invalid buyer ID");
+        }
+
+
+        if (subasta != null && oferta != null) {
+            String rta = operadorSubasta.recibirRegistrarOferta(oferta, idSubasta);
+            System.out.println(rta);
+        }
+        else {
+            System.out.println("Error: Invalid auction or offer ID");
+        }
         
 
     }
@@ -163,7 +182,13 @@ public class ConsolaEmpleado {
                 System.out.println("Error: Invalid offer ID");
             }
             else {
-                operadorSubasta.evaluarOferta(oferta, idSubasta);
+                Boolean rta = operadorSubasta.evaluarOferta(oferta, idSubasta);
+                if (rta) {
+                    System.out.println("La oferta supera el valor inicial");
+                }
+                else {
+                    System.out.println("La oferta no supera el valor inicial");
+                }
 
             }
 
