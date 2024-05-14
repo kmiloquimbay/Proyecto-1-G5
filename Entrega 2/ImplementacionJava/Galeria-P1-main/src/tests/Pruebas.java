@@ -1,21 +1,11 @@
 package tests;
-
-import static org.junit.Assert.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
@@ -60,7 +50,7 @@ class Pruebas {
     static Compra compra2= new Compra("587650", 70000, "tarjeta", "La Flor","547293");
 
     
-    void setUp(){
+    static void setUp(){
         galeriaTests.getInventario().guardarEnBodega(foto1);
         galeriaTests.getInventario().guardarEnBodega(video1);
         galeriaTests.getInventario().guardarEnBodega(pintura1);
@@ -86,7 +76,7 @@ class Pruebas {
         galeriaTests.setAdministradorGaleria(admin);
     }
     @BeforeAll
-    void setUpAll(){
+    static void setUpAll(){
         setUp();
     }
     
