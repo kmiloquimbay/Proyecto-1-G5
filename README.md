@@ -24,3 +24,6 @@ Los IDs de las subastas: 6748899.
 Los IDs de las compras: 567890, 587650.
 
 Los IDs de compradores: 547293.
+
+
+Dentro de la carpeta entrega 2 se encuentra los siguientes PDFs: Diseño Final de UML, el diagrama de alto nivel, y el documento de diseño, en el cual al final se encuentran las historias de usuario.
