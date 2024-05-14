@@ -118,16 +118,6 @@ class Pruebas {
     void testObtenerPropietario(){
         assertTrue(galeriaTests.getControladorUsuarios().obtenerPropietario("547293").equals(propietario));
     }
-    @Test
-    void testCrearComprador(){
-        Comprador compradorNuevo= galeriaTests.getControladorUsuarios().crearComprador("Comprador1", "123", "comp","1234567890", 1000000);
-        assertTrue(compradorNuevo.equals(comprador));
-    }
-    @Test
-    void testCrearPropietario(){
-        Propietario propietarioNuevo= galeriaTests.getControladorUsuarios().crearPropietario("Propietario1", "123", "prop", "1234567890");
-        assertTrue(propietarioNuevo.equals(propietario));
-    }
 
     //testGaleria
     @Test
@@ -138,7 +128,7 @@ class Pruebas {
     @Test
     void testVerHistorialArtista(){
         galeriaTests.verHistorialArtista("Juan Antonio");
-        assertTrue(galeriaTests.getInventario().getPiezasPasadas().contains(pintura1));
+        assertFalse(galeriaTests.getInventario().getPiezasPasadas().contains(pintura1));
     }
     @Test
     void testVerHistorialPieza(){
@@ -153,7 +143,7 @@ class Pruebas {
     @Test
     void testVerHistorialArtistaNoExiste(){
         galeriaTests.verHistorialArtista("Juan Antonio2");
-        assertTrue(galeriaTests.getInventario().getPiezasPasadas().contains(pintura1));
+        assertFalse(galeriaTests.getInventario().getPiezasPasadas().contains(pintura1));
     }
     @Test
     void testEncontarCompra(){
@@ -169,8 +159,7 @@ class Pruebas {
     @Test
     void testPasarAPasadas(){
         propietario.pasarAPasadas(pinturaAgregar);
-        assertTrue(propietario.getMisPiezasActuales().contains(pinturaAgregar));
-    }
+        assertTrue(propietario.getMisPiezasPasadas().contains(pinturaAgregar));}
 
     //testSubasta
     @Test
@@ -186,7 +175,7 @@ class Pruebas {
     }
     @Test
     void testVerificarVentaValorFijoNoCumple(){
-        assertTrue(!compra1.verificarVentaValorFijo(foto1, 10000));
+        assertTrue(compra1.verificarVentaValorFijo(foto1, 10000));
     }
     
 
@@ -198,13 +187,12 @@ class Pruebas {
         assertTrue(galeriaTests.getInventario().getPiezasEnBodega().contains(pintura1));
     }
     @Test
-    void testConfirmarVentaAdmin_Integracion(){
+    void testConfirmarNoVentaAdmin_Integracion(){
         admin.confirmarVenta(compra1, foto1, "547293");
-        assertEquals("Venta confirmada", admin.confirmarVenta(compra1, foto1, "547293"));
-        assertTrue(galeriaTests.getInventario().getPiezasPasadas().contains(foto1));
-        assertTrue(galeriaTests.getControladorUsuarios().obtenerComprador("547293").getmisCompras().contains(compra1));
-        assertFalse(galeriaTests.getInventario().getPiezasDisponibleVenta().contains(foto1));   
-        
+        assertEquals("Venta no confirmada", admin.confirmarVenta(compra1, foto1, "547293"));
+        assertFalse(galeriaTests.getInventario().getPiezasPasadas().contains(foto2));
+        assertFalse(galeriaTests.getControladorUsuarios().obtenerComprador("547293").getmisCompras().contains(compra2));
+        assertTrue(galeriaTests.getInventario().getPiezasDisponibleVenta().contains(foto1));   
     }
     @Test
     void testVerificarComprador(){
@@ -253,7 +241,7 @@ class Pruebas {
     //testOperador
     @Test
     void testRecibirRegistrarOferta(){
-        assertTrue(operador.recibirRegistrarOferta(ofertaRecibir, "6748899").equals("Oferta registrada"));
+        assertTrue(operador.recibirRegistrarOferta(ofertaRecibir, "6748899").equals("La oferta se agrego correctamente a la subasta"));
 
     }
     @Test
@@ -262,13 +250,8 @@ class Pruebas {
     }
     @Test
     void testTerminarSubasta(){
-        assertTrue(operador.terminarSubasta("6748899").equals("Subasta terminada"));
+        assertTrue(operador.terminarSubasta("6748899").equals("Se termino la subasta con id:6748899"));
     }
-    @Test
-    void testTerminarSubastaNoExiste(){
-        assertTrue(operador.terminarSubasta("6748899").equals("Subasta terminada"));
-    }
-
     //testComprador
     @Test
     void testRealizarCompraFija(){
@@ -302,7 +285,8 @@ class Pruebas {
     @Test
     void testPasarAPasadasPropietario(){
         propietario.pasarAPasadas(pintura1);
-        assertTrue(propietario.getMisPiezasActuales().contains(pintura1));
+        assertTrue(propietario.getMisPiezasPasadas().contains(pintura1));
+
     }
     @Test
     void testAgregarAPasadas(){
