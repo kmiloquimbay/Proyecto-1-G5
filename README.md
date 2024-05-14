@@ -8,7 +8,9 @@ Para poder acceder necesita un login y password, según los archivos de persiste
 
 Para ingresar como Administrador: Usar el login "fabio24" y el password "1226745".
 
-Para ingresar como empleado: Usar el login "juanito2" y el password "762598" o el login "andresP" y el password "12235345".
+Para ingresar como empleado(cajero): Usar el login "juanito2" y el password "762598".
+
+Para ingresar como empleado(operador): Usar el login "andresP" y el password "12235345".
 
 Para ingresar como comprador: Usar el login "LuisP" y el password "12345".
 
