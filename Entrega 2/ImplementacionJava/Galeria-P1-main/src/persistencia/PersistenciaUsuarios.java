@@ -66,7 +66,7 @@ public class PersistenciaUsuarios {
         usuariosJSON.put("propietarios", propietarios);
 
 
-        PrintWriter pw = new PrintWriter("usuarios.json");
+        PrintWriter pw = new PrintWriter("DocsPersistencia/usuarios.json");
         pw.write(usuariosJSON.toString());
         pw.close();
 
@@ -152,7 +152,7 @@ public class PersistenciaUsuarios {
 
 
     public static Galeria cargarUsuarios(Galeria galeria) throws IOException{
-        String jsonCompleto = new String(Files.readAllBytes(new File("usuarios.json").toPath()));
+        String jsonCompleto = new String(Files.readAllBytes(new File("DocsPersistencia/usuarios.json").toPath()));
         JSONObject raiz = new  JSONObject(jsonCompleto);
         ControladorUsuarios controladorUsuarios = new ControladorUsuarios();
         Collection<Compra> compras=galeria.getCompras().values();

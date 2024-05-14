@@ -38,7 +38,7 @@ public class PersistenciaSubastasCompras {
         obj.put("subastas", subastasArray);
         obj.put("compras", comprasArray);
 
-        PrintWriter pw = new PrintWriter("comprasSubastas.json");
+        PrintWriter pw = new PrintWriter("DocsPersistencia/comprasSubastas.json");
         pw.write(obj.toString());
         pw.close();
 
@@ -86,7 +86,7 @@ public class PersistenciaSubastasCompras {
 
     public static void cargarComprasSubastas(Galeria galeria) throws IOException {
 
-        String jsonCompleto = new String(Files.readAllBytes(new File("comprasSubastas.json").toPath()));
+        String jsonCompleto = new String(Files.readAllBytes(new File("DocsPersistencia/comprasSubastas.json").toPath()));
         JSONObject raiz = new JSONObject(jsonCompleto);
         Map<String, Compra> compras = galeria.getCompras();
         Map<String, Subasta> subastas = galeria.getSubastas();

@@ -49,7 +49,7 @@ public class PersistenciaInventario {
         
 
 
-        PrintWriter pw = new PrintWriter("inventario.json");
+        PrintWriter pw = new PrintWriter("DocsPersistencia/inventario.json");
         pw.write(inventarioJson.toString());
         pw.close();
 
@@ -96,7 +96,7 @@ public class PersistenciaInventario {
 
 
     public static void cargarInventario(Inventario inventario) throws IOException{
-        String jsonCompleto = new String(Files.readAllBytes(new File("inventario.json").toPath()));
+        String jsonCompleto = new String(Files.readAllBytes(new File("DocsPersistencia/inventario.json").toPath()));
         JSONObject inventarioJson = new JSONObject(jsonCompleto);
 
         JSONArray piezasEnBodega = inventarioJson.getJSONArray("piezasEnBodega");
