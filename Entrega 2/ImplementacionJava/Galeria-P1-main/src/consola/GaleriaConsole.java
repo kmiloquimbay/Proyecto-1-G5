@@ -43,6 +43,7 @@ public class GaleriaConsole {
                     empleados = galeria.getControladorUsuarios().getMapaLoginEmpleados();
                     System.out.println("Se ha cargado la galeria: "+galeria.equals(galeria));
                     administrador = galeria.getAdministrador();
+                    System.out.println("\nLas piezas cargadas fueron: ");
                     for(Pieza pieza: galeria.getInventario().getPiezasEnBodega()){
                         System.out.println(pieza.getTitulo());
                     }

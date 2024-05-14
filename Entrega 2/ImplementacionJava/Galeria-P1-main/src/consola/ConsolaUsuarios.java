@@ -26,7 +26,7 @@ public class ConsolaUsuarios {
     //Setup para mostrar el funcionamiento de los reqs
     //Galeria
     public static Fotografia foto1= new Fotografia("La nina y el buitre","Kevin Carter", 1993, "Sudán","20-03-2024", true, 30000,  false, "10", "200");
-    public static Fotografia foto2= new Fotografia("La torre de Piza", "Anónimo", 1355, "Italia","20-12-2024", true, 50000, false, "26", "300");
+    public static Fotografia foto2= new Fotografia("La torre de Piza", "Edith Piaf", 1355, "Italia","20-12-2024", true, 50000, false, "26", "300");
     public static Video video1= new Video("La Vie", "Edith Piaf", 1983, "Francia","14-11-2024", false, false, 20000,  "40", "200");
     public static Pintura pintura1=new Pintura("La Flor", "Juan Antonio", 1964, "Italia","20-12-2025", false, true, 70000,  77, 53, "Oleo");
     public static Pintura pintura2=new Pintura("Vida", "Juan Antonio", 1994, "Italia","20-12-2024", true, false, 80000,  77, 53, "Oleo");
