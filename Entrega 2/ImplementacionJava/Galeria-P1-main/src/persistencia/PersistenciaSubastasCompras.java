@@ -81,6 +81,7 @@ public class PersistenciaSubastasCompras {
         obj.put("tipoPago", compra.getTipoPago());
         obj.put("pieza", compra.getTituloPieza());
         obj.put("idComprador", compra.getIdComprador());
+        obj.put("fecha", compra.getFecha());
         return obj;
     }
 
@@ -129,7 +130,7 @@ public class PersistenciaSubastasCompras {
     }
 
     public static Compra cargarCompra(JSONObject compra, Galeria galeria) {
-        Compra comp = new Compra(compra.getString("id"), compra.getInt("valorPagado"), compra.getString("tipoPago"), compra.getString("pieza"),compra.getString("idComprador"));
+        Compra comp = new Compra(compra.getString("id"), compra.getInt("valorPagado"), compra.getString("tipoPago"), compra.getString("pieza"),compra.getString("idComprador"),compra.getString("fecha"));
         return comp;
     }
 

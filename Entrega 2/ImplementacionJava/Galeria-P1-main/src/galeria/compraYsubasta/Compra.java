@@ -22,6 +22,14 @@ public class Compra {
         this.idComprador=idComprador;
         fecha=fechaString;
     }
+    public Compra(String id, int valorPagado, String tipoPago, String pieza,String idComprador,String fecha) {
+        this.id = id;
+        this.valorPagado = valorPagado;
+        this.tipoPago = tipoPago;
+        this.tituloPieza = pieza;
+        this.idComprador=idComprador;
+        this.fecha=fecha;
+    }
 
     public String getId() {
         return id;

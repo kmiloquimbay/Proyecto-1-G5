@@ -47,8 +47,10 @@ public class ConsolaUsuarios {
     public static Oferta oferta2= new Oferta(40000, comprador);
     public static Oferta ofertaRecibir= new Oferta(25000, comprador);
     public static Subasta subasta1= new Subasta("6748899",39034,15000,video1);
-    public static Compra compra1= new Compra("567890", 20000, "tarjeta", "La Vie","547293");
-    public static Compra compra2= new Compra("587650", 70000, "tarjeta", "La Flor","547293");
+    public static Compra compra1= new Compra("567890", 20000, "tarjeta", "La Vie","547293","09/10/2023");
+    public static Compra compra2= new Compra("587650", 70000, "tarjeta", "La Flor","547293","24/08/2023");
+    public static Compra compra3= new Compra("567790", 100000, "tarjeta", "Vida","547293","15/01/2023");
+    public static Compra compra4= new Compra("587340", 45000, "tarjeta", "La torre de Piza","547293","30/05/2023");
 
     
     public static void setUp(){
@@ -79,8 +81,12 @@ public class ConsolaUsuarios {
         propietario.pasarAPasadas(pintura1);
         galeriaConsola.agregarCompra(compra1);
         galeriaConsola.agregarCompra(compra2);
+        galeriaConsola.agregarCompra(compra3);
+        galeriaConsola.agregarCompra(compra4);
         comprador.agregarCompra(compra1);
         comprador.agregarCompra(compra2);
+        comprador.agregarCompra(compra3);
+        comprador.agregarCompra(compra4);
         galeriaConsola.setAdministradorGaleria(admin);
     }
 
