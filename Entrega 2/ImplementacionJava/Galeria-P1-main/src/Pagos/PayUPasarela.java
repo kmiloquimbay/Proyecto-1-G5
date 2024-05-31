@@ -12,7 +12,7 @@ import usuarios.Comprador;
 public class PayUPasarela implements PasarelaPago
 {
     
-    public static String obtenerNuevoIdTransaccion() {
+    public static String obtenerNuevoIdTransaccionPayU() {
         StringBuilder idGenerado = new StringBuilder();
         Random random = new Random();
 
@@ -21,14 +21,14 @@ public class PayUPasarela implements PasarelaPago
             idGenerado.append(digito);
         }
 
-        return idGenerado.toString();
+        return "TPU"+idGenerado.toString();
     }
 
     @Override
     public boolean procesarPago(String idComprador, String numeroTarjeta, int monto, String pin, Galeria galeria) {
         Comprador comprador=  galeria.getControladorUsuarios().getMapaCompradores().get(idComprador);
         int credito =comprador.getLimiteCompras();
-         if (comprador!= null && credito>= monto){
+         if (comprador!= null && credito>= monto && numeroTarjeta.length()==16 && pin.length()==3){
             return true;
          }
 
@@ -37,7 +37,7 @@ public class PayUPasarela implements PasarelaPago
 
     @Override
     public boolean RealizarTraza(String idComprador, String numeroTarjeta, int monto, String pin, Galeria galeria) {
-        String nT="TPU"+obtenerNuevoIdTransaccion(); 
+        String nT=obtenerNuevoIdTransaccionPayU(); 
         String resultado= "";
         String nombreComprador="";
         boolean bool=procesarPago( idComprador,  numeroTarjeta,  monto,  pin,  galeria);
