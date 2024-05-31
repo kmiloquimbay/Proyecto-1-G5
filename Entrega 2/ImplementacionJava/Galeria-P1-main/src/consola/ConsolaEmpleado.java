@@ -119,7 +119,8 @@ public class ConsolaEmpleado {
         int monto= Integer.parseInt(montoS);
         String nTarjeta= GaleriaConsole.input("Ingrese el numero de la tarjeta de credito: ");
         String pin= GaleriaConsole.input("Ingrese el pin de seguridad (3 numeros al costado de la tarjeta): ");
-        cajero.RealizarPagoTarjeta(pasarela, idComprador, nTarjeta, monto, pin);
+        System.out.println("\n"+cajero.RealizarPagoTarjeta(pasarela, idComprador, nTarjeta, monto, pin));
+        
         
     }
 

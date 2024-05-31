@@ -1,0 +1,1 @@
+Numero de Transacción: TPU273510 | Nombre Comprador: Luis Perez | Tarjeta: 1234567890 | Monto: 2000 | Resultado: Aprobada
