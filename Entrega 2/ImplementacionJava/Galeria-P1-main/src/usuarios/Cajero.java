@@ -1,5 +1,6 @@
 package usuarios;
 
+import Pagos.ProcesadorPagos;
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
@@ -37,6 +38,11 @@ public class Cajero extends Empleado{
         }
         return idComprador;
        
+    }
+    public String RealizarPagoTarjeta (String pasarela, String idComprador, String numeroTarjeta, int monto, String pin){
+        ProcesadorPagos procesador= new ProcesadorPagos();
+        return procesador.procesarPagoTraza(pasarela, idComprador, numeroTarjeta, monto, pin, galeria);
+
     }
     
 }

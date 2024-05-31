@@ -32,6 +32,7 @@ public class ConsolaEmpleado {
             System.out.println("Menu Cajero");
             System.out.println("1. Registrar pago");
             System.out.println("2. Entregar pieza");
+            System.out.println("3. Pago con tarjeta de crédito");
             System.out.println("0. Salir\n");
             option = Integer.parseInt(GaleriaConsole.input("Ingrese una opcion: "));
 
@@ -41,6 +42,9 @@ public class ConsolaEmpleado {
                     break;
                 case 2:
                     entregarPieza(galeria, cajero);
+                    break;
+                case 3:
+                    PagoTC(galeria, cajero);
                     break;
                 case 0:
                     System.out.println("Saliendo del menú Cajero...");
@@ -108,6 +112,16 @@ public class ConsolaEmpleado {
 
         
     } 
+    private static void PagoTC(Galeria galeria, Cajero cajero) {
+        String pasarela = GaleriaConsole.input("Ingrese el nompre de la pasarela (PayUPasarela o PayPalPasarela): ");
+        String idComprador= GaleriaConsole.input("Ingrese el id del comprador que va a realizar el pago: ");
+        String montoS= GaleriaConsole.input("Ingrese el monto del pago: ");
+        int monto= Integer.parseInt(montoS);
+        String nTarjeta= GaleriaConsole.input("Ingrese el numero de la tarjeta de credito: ");
+        String pin= GaleriaConsole.input("Ingrese el pin de seguridad (3 numeros al costado de la tarjeta): ");
+        cajero.RealizarPagoTarjeta(pasarela, idComprador, nTarjeta, monto, pin);
+        
+    }
 
     public static void entregarPieza(Galeria galeria, Cajero cajero){
         
@@ -124,9 +138,6 @@ public class ConsolaEmpleado {
         else {
             System.out.println("Error: Invalid piece or buyer ID");
         }
-
-        
-        
     }
 
     public static void terminarSubasta(Galeria galeria, OperadorSubasta operadorSubasta){

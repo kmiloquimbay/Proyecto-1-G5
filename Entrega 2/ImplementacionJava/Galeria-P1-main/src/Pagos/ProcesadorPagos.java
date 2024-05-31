@@ -11,13 +11,13 @@ public class ProcesadorPagos {
     private List<PasarelaPago> pasarelas;
     String pasarelasFilePath="DocsPagos/Pasarelas.txt";
 
-    public ProcesadorPagos(String configFilePath) {
+    public ProcesadorPagos() {
         pasarelas = new ArrayList<>();
-        cargarPasarelas(configFilePath);
+        cargarPasarelas();
     }
 
-    private void cargarPasarelas(String configFilePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(configFilePath))) {
+    private void cargarPasarelas( ) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(pasarelasFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Class<?> clazz = Class.forName(line);
