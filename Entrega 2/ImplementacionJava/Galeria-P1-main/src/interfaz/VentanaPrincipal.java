@@ -35,7 +35,7 @@ public class VentanaPrincipal extends JFrame {
         
         setTitle("Galeria");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon("Entrega 2/ImplementacionJava/Galeria-P1-main/images/ .png");
+        ImageIcon icon = new ImageIcon("Entrega 2/ImplementacionJava/Galeria-P1-main/images/painting.png");
         setIconImage(icon.getImage());
         setSize(800, 600);
         setLocationRelativeTo(null);
