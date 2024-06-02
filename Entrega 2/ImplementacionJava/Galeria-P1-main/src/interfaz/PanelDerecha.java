@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
+
 public class PanelDerecha extends JPanel{
 
     private VentanaPrincipal principal;
