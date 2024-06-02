@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import org.jfree.chart.ui.ApplicationFrame;
 
 public class PanelBajo extends JPanel implements ActionListener{
     private JButton btnUs;

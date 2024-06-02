@@ -12,7 +12,6 @@ import org.jfree.ui.ApplicationFrame;
 import galeria.compraYsubasta.Compra;
 
 import java.awt.Color;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -16,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import galeria.Galeria;
+import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
 import persistencia.PersistenciaGaleria;
 import galeria.usuarios.Comprador;
@@ -50,7 +53,7 @@ public class VentanaPrincipal extends JFrame {
         pSuperior.setPreferredSize(new Dimension(getWidth(), 80));
         add(pSuperior, BorderLayout.NORTH);
 
-        pDerecha = new PanelDerecha(this);
+        pDerecha = new PanelDerecha();
         add(pDerecha, BorderLayout.EAST);
 
         mostrarObra(0);
@@ -122,6 +125,14 @@ public class VentanaPrincipal extends JFrame {
             if (comprador != null && comprador.getPassword().equals(password)){
                 pDerecha = new PanelComprador(this);
                 add(pDerecha, BorderLayout.EAST);
+                List<Pieza> listaPiezas = new ArrayList<Pieza>();
+                for (Compra compra: comprador.getmisCompras()){
+                    Pieza pieza = galeria.getInventario().buscarPieza(compra.getTituloPieza());
+                    listaPiezas.add(pieza);
+                }
+                pCentral.setListaPiezas(listaPiezas);
+                mostrarObra(0);
+                    
                 revalidate();
                 repaint();
             } else {

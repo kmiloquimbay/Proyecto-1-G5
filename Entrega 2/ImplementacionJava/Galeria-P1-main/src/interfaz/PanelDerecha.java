@@ -9,11 +9,9 @@ import javax.swing.JPanel;
 
 public class PanelDerecha extends JPanel{
 
-    private VentanaPrincipal principal;
     private JLabel lblStart;
 
-    public PanelDerecha(VentanaPrincipal ventanaPrincipal) {
-        principal = ventanaPrincipal;
+    public PanelDerecha() {
         lblStart = new JLabel("Bienvenido a la Galeria");
         lblStart.setPreferredSize(new Dimension(200, 100));
         add(lblStart);
