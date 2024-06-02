@@ -19,6 +19,7 @@ public class Galeria {
     private AdministradorGaleria administradorGaleria;
     private Map<String, Subasta> subastas;
     private Map<String, Compra> compras;
+    
 
     public Galeria(Inventario inventario, ControladorUsuarios controladorUsuarios) {
         this.inventario = inventario;
@@ -155,7 +156,20 @@ public class Galeria {
     }
 
     public Compra encontrarCompra(String id) {
+    	
         return compras.get(id);
+    }
+    
+    public  Map<String, Integer> contarVentasDiarias() {
+    	Collection<Compra> comprass=compras.values();
+        Map<String, Integer> ventasDiarias = new HashMap<>();
+
+        for (Compra compra : comprass) {
+            String fecha=compra.getFecha();
+            ventasDiarias.put(fecha, ventasDiarias.getOrDefault(fecha, 0) + 1);
+        }
+
+        return ventasDiarias;
     }
 
 }
