@@ -13,7 +13,11 @@ public class PanelBajo extends JPanel implements ActionListener{
     private JButton btnSave;
     private JButton btnLogin;
 
+    private VentanaPrincipal principal;
+
     public PanelBajo(VentanaPrincipal ventanaPrincipal) {
+
+        principal = ventanaPrincipal;
 
         setLayout(new GridLayout(1, 3));
 
@@ -40,11 +44,11 @@ public class PanelBajo extends JPanel implements ActionListener{
         
         String comando = e.getActionCommand();
         if(comando.equals("US")){
-            JOptionPane.showMessageDialog(null, "Sobre nosotros: Somos el grupo 5 xd");
+            JOptionPane.showMessageDialog(null, "Somos el grupo 5 para DPOO :)");
         } else if(comando.equals("SAVE")){
-            JOptionPane.showMessageDialog(null, "Guardado");
+            principal.salvarGaleria();
         } else if(comando.equals("LOGIN")){
-            JOptionPane.showMessageDialog(null, "Login");
+            principal.login();
         }
     }
 }

@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import galeria.Galeria;
 import galeria.inventarioYpiezas.Pieza;
 
 
@@ -40,8 +39,6 @@ public class PanelCentral extends JPanel implements ActionListener{
     private JButton btnSiguiente;
     private JButton btnFinal;
 
-    private int piezaActual;
-
     private VentanaPrincipal ventanaPrincipal;
 
     private List<Pieza> listaPiezas = new LinkedList<Pieza>();
@@ -60,7 +57,7 @@ public class PanelCentral extends JPanel implements ActionListener{
         
         panelImagen = new JLabel();
         add(panelImagen, BorderLayout.WEST);
-        ImageIcon image = new ImageIcon("Entrega 2/ImplementacionJava/Galeria-P1-main/images/frame_image.png");
+        ImageIcon image = new ImageIcon("Entrega 2/ImplementacionJava/Galeria-P1-main/images/frame_image.jpg");
         panelImagen.setIcon(image);
         panelImagen.setSize(50, 50);
 

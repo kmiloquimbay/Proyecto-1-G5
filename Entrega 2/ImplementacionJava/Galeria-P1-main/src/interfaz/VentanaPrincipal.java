@@ -2,26 +2,32 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.List;
+import java.awt.GridLayout;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import galeria.Galeria;
 import galeria.inventarioYpiezas.Pieza;
 import persistencia.PersistenciaGaleria;
+import galeria.usuarios.Comprador;
 
 public class VentanaPrincipal extends JFrame {
 
-    private PanelBajo panelOpciones;
     private Galeria galeria;
-
-    private PanelCentral pCentral;
+    
     private PanelSuperior pSuperior;
+    private PanelCentral pCentral;
+    private PanelBajo panelOpciones;
+    private JPanel pDerecha;
 
     public VentanaPrincipal() {
 
@@ -29,7 +35,7 @@ public class VentanaPrincipal extends JFrame {
         
         setTitle("Galeria");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon("Entrega 2/ImplementacionJava/Galeria-P1-main/images/painting.png");
+        ImageIcon icon = new ImageIcon("Entrega 2/ImplementacionJava/Galeria-P1-main/images/ .png");
         setIconImage(icon.getImage());
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -43,6 +49,9 @@ public class VentanaPrincipal extends JFrame {
         pSuperior = new PanelSuperior();
         pSuperior.setPreferredSize(new Dimension(getWidth(), 80));
         add(pSuperior, BorderLayout.NORTH);
+
+        pDerecha = new PanelDerecha(this);
+        add(pDerecha, BorderLayout.EAST);
 
         mostrarObra(0);
         
@@ -64,6 +73,7 @@ public class VentanaPrincipal extends JFrame {
     public void salvarGaleria() {
         try {
             PersistenciaGaleria.salvarGaleria(galeria);
+            JOptionPane.showMessageDialog(this, "Galeria guardada con exito", "Guardado", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error al guardar la galeria", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -84,6 +94,41 @@ public class VentanaPrincipal extends JFrame {
         return galeria;
     }
 
+    public void login() {
+    JPanel panel = new JPanel();
+    panel.setLayout(new GridLayout(4, 2));
 
+    String[] userOptions = {"Comprador", "Empleado", "Administrador"};
+    JComboBox<String> userComboBox = new JComboBox<>(userOptions);
+    JTextField loginField = new JTextField();
+    JPasswordField passwordField = new JPasswordField();
 
+    panel.add(new JLabel("Usuario:"));
+    panel.add(userComboBox);
+    panel.add(new JLabel("Login:"));
+    panel.add(loginField);
+    panel.add(new JLabel("Contraseña:"));
+    panel.add(passwordField);
+
+    int result = JOptionPane.showConfirmDialog(null, panel, "Login", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+    if (result == JOptionPane.OK_OPTION) {
+        String selectedUser = (String) userComboBox.getSelectedItem();
+        String login = loginField.getText();
+        String password = new String(passwordField.getPassword());
+
+        if (selectedUser == "Comprador"){
+            Comprador comprador = galeria.getControladorUsuarios().getMapaLoginCompradores().get(login);
+            if (comprador != null && comprador.getPassword().equals(password)){
+                pDerecha = new PanelComprador(this);
+                add(pDerecha, BorderLayout.EAST);
+                revalidate();
+                repaint();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+       }
+    }
+
+    }
 }
