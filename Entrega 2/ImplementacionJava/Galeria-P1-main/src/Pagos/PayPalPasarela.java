@@ -3,6 +3,8 @@ package Pagos;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import galeria.Galeria;
@@ -39,6 +41,9 @@ public class PayPalPasarela implements PasarelaPago{
         String resultado= "";
         String nombreComprador="";
         boolean bool=procesarPago( idComprador,  numeroTarjeta,  monto,  pin,  galeria);
+        Date fechaActual = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy GGG hh:mm aaa");
+        String fechaString = formatoFecha.format(fechaActual);
 
        
         if (bool){
@@ -53,7 +58,7 @@ public class PayPalPasarela implements PasarelaPago{
             
     
     try (BufferedWriter writer = new BufferedWriter(new FileWriter("DocsPersistencia/DocsPagos/PayPalTraza.txt" , true))) {
-        writer.write("Numero de Transacción: "+nT+" | Nombre Comprador: " + nombreComprador + " | Tarjeta: " + numeroTarjeta + " | Monto: " + monto + " | Resultado: " + resultado + "\n");
+        writer.write("Fecha: "+fechaString+" | Numero de Transacción: "+nT+" | Nombre Comprador: " + nombreComprador + " | Tarjeta: " + numeroTarjeta + " | Monto: " + monto + " | Resultado: " + resultado + "\n");
     } catch (IOException e) {
         e.printStackTrace();
     }

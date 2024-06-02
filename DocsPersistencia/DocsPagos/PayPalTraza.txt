@@ -1,4 +1,5 @@
-Numero de Transacción: TPP518004 | Nombre Comprador: Luis Perez | Tarjeta: 345623452345 | Monto: 50000 | Resultado: Aprobada
-Numero de Transacción: TPP272139 | Nombre Comprador: Luis Perez | Tarjeta: 345623452345 | Monto: 50000 | Resultado: Aprobada
-Numero de Transacción: TPP706589 | Nombre Comprador: Luis Perez | Tarjeta: 543254325432 | Monto: 500000 | Resultado: Aprobada
-Numero de Transacción: TPP866762 | Nombre Comprador: Luis Perez | Tarjeta: 543254325432 | Monto: 500000 | Resultado: Aprobada
+Fecha: 31/05/2024 AD 05:29 PM | Numero de Transacción: TPP518004 | Nombre Comprador: Luis Perez | Tarjeta: 345623452345 | Monto: 50000 | Resultado: Aprobada
+Fecha: 01/06/2024 AD 03:29 PM | Numero de Transacción: TPP272139 | Nombre Comprador: Luis Perez | Tarjeta: 345623452345 | Monto: 50000 | Resultado: Aprobada
+Fecha: 01/06/2024 AD 03:33 PM | Numero de Transacción: TPP706589 | Nombre Comprador: Luis Perez | Tarjeta: 543254325432 | Monto: 500000 | Resultado: Aprobada
+Fecha: 01/06/2024 AD 03:43 PM | Numero de Transacción: TPP866762 | Nombre Comprador: Luis Perez | Tarjeta: 543254325432 | Monto: 500000 | Resultado: Aprobada
+Fecha: 02/06/2024 AD 01:35 PM | Numero de Transacción: TPP854757 | Nombre Comprador: Luis Perez | Tarjeta: 2345654378904567 | Monto: 300000 | Resultado: Aprobada
