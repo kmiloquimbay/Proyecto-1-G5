@@ -2,8 +2,8 @@ package consola;
 import java.util.List;
 import galeria.Galeria;
 import galeria.inventarioYpiezas.Pieza;
-import usuarios.Comprador;
-import usuarios.Propietario;
+import galeria.usuarios.Comprador;
+import galeria.usuarios.Propietario;
 
 
 public class ConsolaComprador {

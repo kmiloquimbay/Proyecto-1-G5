@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Random;
 
 import galeria.Galeria;
-import usuarios.Comprador;
+import galeria.usuarios.Comprador;
 
 public class PayPalPasarela implements PasarelaPago{
 

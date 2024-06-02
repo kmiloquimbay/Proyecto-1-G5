@@ -10,8 +10,8 @@ import galeria.compraYsubasta.Compra;
 import galeria.compraYsubasta.Subasta;
 import galeria.inventarioYpiezas.Inventario;
 import galeria.inventarioYpiezas.Pieza;
-import usuarios.AdministradorGaleria;
-import usuarios.ControladorUsuarios;
+import galeria.usuarios.AdministradorGaleria;
+import galeria.usuarios.ControladorUsuarios;
 
 public class Galeria {
     private Inventario inventario;

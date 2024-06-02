@@ -6,9 +6,6 @@ import org.json.JSONObject;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.Map;
-
-import usuarios.Comprador;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,6 +14,7 @@ import galeria.compraYsubasta.Oferta;
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
 import galeria.compraYsubasta.Subasta;
+import galeria.usuarios.Comprador;
 
 public class PersistenciaSubastasCompras {
 

@@ -5,10 +5,10 @@ import galeria.compraYsubasta.Compra;
 import galeria.compraYsubasta.Oferta;
 import galeria.compraYsubasta.Subasta;
 import galeria.inventarioYpiezas.Pieza;
-import usuarios.Cajero;
-import usuarios.Comprador;
-import usuarios.Empleado;
-import usuarios.OperadorSubasta;
+import galeria.usuarios.Cajero;
+import galeria.usuarios.Comprador;
+import galeria.usuarios.Empleado;
+import galeria.usuarios.OperadorSubasta;
 
 
 public class ConsolaEmpleado {

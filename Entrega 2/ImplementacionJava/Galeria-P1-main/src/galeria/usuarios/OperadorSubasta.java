@@ -1,4 +1,4 @@
-package usuarios;
+package galeria.usuarios;
 
 import galeria.Galeria;
 import galeria.compraYsubasta.Oferta;

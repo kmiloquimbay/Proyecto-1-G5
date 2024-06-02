@@ -1,4 +1,4 @@
-package usuarios;
+package galeria.usuarios;
 
 public class Empleado extends Usuario {
     private String rol;

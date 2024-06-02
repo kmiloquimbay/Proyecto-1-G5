@@ -1,4 +1,4 @@
-package usuarios;
+package galeria.usuarios;
 
 import Pagos.ProcesadorPagos;
 import galeria.Galeria;

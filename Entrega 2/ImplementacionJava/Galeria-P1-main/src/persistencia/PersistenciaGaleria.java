@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import galeria.Galeria;
 import galeria.inventarioYpiezas.Inventario;
-import usuarios.ControladorUsuarios;
+import galeria.usuarios.ControladorUsuarios;
 
 public class PersistenciaGaleria {
 

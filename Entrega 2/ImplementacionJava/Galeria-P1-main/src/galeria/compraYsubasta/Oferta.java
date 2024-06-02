@@ -1,6 +1,6 @@
 package galeria.compraYsubasta;
 
-import usuarios.Comprador;
+import galeria.usuarios.Comprador;
 
 public class Oferta {
     private int valorOferta;

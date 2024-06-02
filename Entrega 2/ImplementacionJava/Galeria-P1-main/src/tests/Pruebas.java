@@ -15,12 +15,12 @@ import galeria.inventarioYpiezas.Fotografia;
 import galeria.inventarioYpiezas.Inventario;
 import galeria.inventarioYpiezas.Pintura;
 import galeria.inventarioYpiezas.Video;
-import usuarios.AdministradorGaleria;
-import usuarios.Cajero;
-import usuarios.Comprador;
-import usuarios.ControladorUsuarios;
-import usuarios.OperadorSubasta;
-import usuarios.Propietario;
+import galeria.usuarios.AdministradorGaleria;
+import galeria.usuarios.Cajero;
+import galeria.usuarios.Comprador;
+import galeria.usuarios.ControladorUsuarios;
+import galeria.usuarios.OperadorSubasta;
+import galeria.usuarios.Propietario;
 
 class Pruebas {
     //Setup para tests de los reqs

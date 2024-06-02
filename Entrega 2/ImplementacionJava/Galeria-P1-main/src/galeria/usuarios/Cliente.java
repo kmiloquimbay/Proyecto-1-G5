@@ -1,4 +1,4 @@
-package usuarios;
+package galeria.usuarios;
 
 
 public class Cliente extends Usuario {

@@ -13,13 +13,13 @@ import galeria.inventarioYpiezas.Inventario;
 import galeria.inventarioYpiezas.Pieza;
 import galeria.inventarioYpiezas.Pintura;
 import galeria.inventarioYpiezas.Video;
+import galeria.usuarios.AdministradorGaleria;
+import galeria.usuarios.Cajero;
+import galeria.usuarios.Comprador;
+import galeria.usuarios.ControladorUsuarios;
+import galeria.usuarios.OperadorSubasta;
+import galeria.usuarios.Propietario;
 import persistencia.PersistenciaGaleria;
-import usuarios.AdministradorGaleria;
-import usuarios.Cajero;
-import usuarios.Comprador;
-import usuarios.ControladorUsuarios;
-import usuarios.OperadorSubasta;
-import usuarios.Propietario;
 
 public class ConsolaUsuarios {
     

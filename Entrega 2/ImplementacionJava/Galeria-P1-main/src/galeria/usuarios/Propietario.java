@@ -1,4 +1,4 @@
-package usuarios;
+package galeria.usuarios;
 
 import java.util.LinkedList;
 import java.util.List;

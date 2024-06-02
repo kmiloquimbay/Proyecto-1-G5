@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import persistencia.PersistenciaGaleria;
-import usuarios.AdministradorGaleria;
-import usuarios.Comprador;
-import usuarios.Empleado;
 import galeria.Galeria;
 import galeria.inventarioYpiezas.Pieza;
+import galeria.usuarios.AdministradorGaleria;
+import galeria.usuarios.Comprador;
+import galeria.usuarios.Empleado;
 
 public class GaleriaConsole {
 

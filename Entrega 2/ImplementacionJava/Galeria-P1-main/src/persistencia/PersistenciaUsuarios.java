@@ -1,24 +1,23 @@
 package persistencia;
 
 import galeria.Galeria;
-import usuarios.AdministradorGaleria;
-import usuarios.Cajero;
-import usuarios.Cliente;
-import usuarios.Empleado;
-import usuarios.OperadorSubasta;
-import usuarios.Comprador;
-import usuarios.Propietario;
-import usuarios.Usuario;
 import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
+import galeria.usuarios.AdministradorGaleria;
+import galeria.usuarios.Cajero;
+import galeria.usuarios.Cliente;
+import galeria.usuarios.Comprador;
+import galeria.usuarios.ControladorUsuarios;
+import galeria.usuarios.Empleado;
+import galeria.usuarios.OperadorSubasta;
+import galeria.usuarios.Propietario;
+import galeria.usuarios.Usuario;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import usuarios.ControladorUsuarios;
-
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.Map;

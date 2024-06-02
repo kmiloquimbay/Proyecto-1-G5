@@ -1,11 +1,10 @@
 package consola;
-import usuarios.AdministradorGaleria;
-import usuarios.Comprador;
-import usuarios.Propietario;
-
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
+import galeria.usuarios.AdministradorGaleria;
+import galeria.usuarios.Comprador;
+import galeria.usuarios.Propietario;
 
 public class ConsolaAdministrador {
 
