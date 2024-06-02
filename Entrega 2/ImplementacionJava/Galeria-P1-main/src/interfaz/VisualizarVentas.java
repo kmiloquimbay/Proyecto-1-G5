@@ -32,9 +32,8 @@ public class VisualizarVentas extends ApplicationFrame {
     private JFreeChart crearGraficoBarras(Map<String, Integer> ventasDiarias) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         for (Map.Entry<String, Integer> entry : ventasDiarias.entrySet()) {
-            String fecha = dateFormat.format(java.sql.Date.valueOf(entry.getKey()));
+            String fecha = entry.getKey();
             dataset.addValue(entry.getValue(), "Ventas", fecha);
         }
 
