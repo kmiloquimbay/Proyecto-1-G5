@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
@@ -44,6 +45,7 @@ public class VentanaPrincipal extends JFrame {
         setIconImage(icon.getImage());
         setSize(800, 600);
         setLocationRelativeTo(null);
+        setBackground(java.awt.Color.decode("#DBCDA4"));
         
         panelOpciones = new PanelBajo(this);
         add(panelOpciones, BorderLayout.SOUTH);
@@ -57,6 +59,7 @@ public class VentanaPrincipal extends JFrame {
 
         pDerecha = new PanelDerecha();
         add(pDerecha, BorderLayout.EAST);
+
 
         mostrarObra(0);
         

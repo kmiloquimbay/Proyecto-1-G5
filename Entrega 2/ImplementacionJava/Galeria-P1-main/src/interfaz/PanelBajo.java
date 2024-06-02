@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 
 public class PanelBajo extends JPanel implements ActionListener{
@@ -15,14 +17,16 @@ public class PanelBajo extends JPanel implements ActionListener{
     private JButton btnSave;
     private JButton btnLogin;
     private JButton btnVentas;
-
+    
     private VentanaPrincipal principal;
-
+    
     public PanelBajo(VentanaPrincipal ventanaPrincipal) {
-
+        
         principal = ventanaPrincipal;
+        UIManager.put("Button.background", Color.decode("#6B4945"));
 
         setLayout(new GridLayout(1, 3));
+        setBackground(Color.decode("#6B4945"));
 
         btnUs = new JButton("Sobre nosotros");
         btnUs.addActionListener(this);
@@ -43,6 +47,14 @@ public class PanelBajo extends JPanel implements ActionListener{
         btnLogin.addActionListener(this);
         btnLogin.setActionCommand("LOGIN");
         add(btnLogin);
+
+        String hexaColor = "#6B4945";
+
+
+        btnUs.setForeground(Color.WHITE);
+        btnVentas.setForeground(Color.WHITE);
+        btnSave.setForeground(Color.WHITE);
+        btnLogin.setForeground(Color.WHITE);
 
 
     }

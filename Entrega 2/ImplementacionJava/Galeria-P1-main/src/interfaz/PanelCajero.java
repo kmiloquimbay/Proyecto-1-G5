@@ -1,18 +1,19 @@
 package interfaz;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class PanelCajero extends JPanel implements ActionListener{
 
     private JButton btnReq1;
     private JButton btnReq2;
     private JButton btnReq3;
-    private JButton btnReq4;
 
     private VentanaPrincipal principal;
 
@@ -20,6 +21,7 @@ public class PanelCajero extends JPanel implements ActionListener{
         principal = ventanaPrincipal;
 
         setLayout(new GridLayout(3, 1));
+        UIManager.put("Button.background", Color.decode("#E89275"));
 
         btnReq1 = new JButton("Registrar pago");
         btnReq1.setActionCommand("REQ1");
