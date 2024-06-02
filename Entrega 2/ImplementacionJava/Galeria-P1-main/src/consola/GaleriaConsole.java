@@ -11,6 +11,7 @@ import galeria.inventarioYpiezas.Pieza;
 import galeria.usuarios.AdministradorGaleria;
 import galeria.usuarios.Comprador;
 import galeria.usuarios.Empleado;
+import interfaz.VisualizarVentas;
 
 public class GaleriaConsole {
 
@@ -73,6 +74,7 @@ public class GaleriaConsole {
             System.out.println("1. Comprador");
             System.out.println("2. Empleado");
             System.out.println("3. Administrador de Galería");
+            System.out.println("4. Ver gráfico compras");
             System.out.println("0. Volver al Menú Principal\n");
             opcionIngresarUsuario = Integer.parseInt(input("Seleccione una opción: "));
         
@@ -94,6 +96,14 @@ public class GaleriaConsole {
                     if (adminGaleria != null) {
                         ConsolaAdministrador.main(galeria, adminGaleria);
                     }
+                    break;
+                case 4:
+                    Map<String,Integer> mapa= galeria.contarVentasDiarias();
+                    VisualizarVentas grafico=new VisualizarVentas("Compras diarias", mapa);
+                    grafico.pack();
+                    grafico.setVisible(true);
+
+                    
                     break;
                 case 0:
                     System.out.println("Volviendo al Menú Principal...");
