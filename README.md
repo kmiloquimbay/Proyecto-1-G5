@@ -1,8 +1,8 @@
-Proyecto 2: Galeria y casa de subastas
+Proyecto 3: Galeria y casa de subastas
 
 Creado por: Lina Muñoz - 202310172 | Daniel Camilo Quimbay Velásquez - 202313861 | Tomás Emilio Velásquez Delgado - 202311016 
 
-Para poder hacer uso del sistema correr la clase GaleriaConsole dentro del paquete consola.
+Para poder hacer uso del sistema correr la interfaz gráfica (clase VentanaPrincipal en el paquete interfaz), y para ver el grafico ventas del año prima el boton ventas.
 
 Para poder acceder necesita un login y password, según los archivos de persistencia que creamos, tenemos que:
 
@@ -23,7 +23,7 @@ Los títulos de las piezas que tenemos son: La Vie, La Flor, Vida, La torre de P
 
 Los IDs de las subastas: 6748899.
 
-Los IDs de las compras: 567890, 587650.
+Los IDs de las compras: 567890, 587650, 567790, 587340, 588140.
 
 Los IDs de compradores: 547293.
 
