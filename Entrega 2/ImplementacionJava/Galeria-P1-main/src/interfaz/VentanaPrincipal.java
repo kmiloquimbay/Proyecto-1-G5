@@ -21,7 +21,9 @@ import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
 import galeria.inventarioYpiezas.Pieza;
 import persistencia.PersistenciaGaleria;
+import galeria.usuarios.AdministradorGaleria;
 import galeria.usuarios.Comprador;
+import galeria.usuarios.Empleado;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -135,11 +137,41 @@ public class VentanaPrincipal extends JFrame {
                     
                 revalidate();
                 repaint();
+            } 
+            
+            else {
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+       } else if (selectedUser == "Empleado"){
+            Empleado empleado = galeria.getControladorUsuarios().getMapaLoginEmpleados().get(login);
+            if (empleado != null && empleado.getPassword().equals(password)){
+                if (empleado.getRol().equals("Operador")){
+                    pDerecha = new PanelOperador(this);
+                    add(pDerecha, BorderLayout.EAST);
+                    revalidate();
+                    repaint();
+                } else if (empleado.getRol().equals("Cajero")){
+                    pDerecha = new PanelCajero(this);
+                    add(pDerecha, BorderLayout.EAST);
+                    revalidate();
+                    repaint();
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+       } else if (selectedUser == "Administrador"){
+            AdministradorGaleria admin = galeria.getAdministrador();
+            if (admin != null && admin.getPassword().equals(password)){
+                pDerecha = new PanelAdministrador(this);
+                add(pDerecha, BorderLayout.EAST);
+                revalidate();
+                repaint();
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
             }
        }
-    }
 
+    }
     }
 }

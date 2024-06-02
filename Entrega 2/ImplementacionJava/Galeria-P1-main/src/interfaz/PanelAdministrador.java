@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,6 +25,8 @@ public class PanelAdministrador extends JPanel implements ActionListener{
 
     public PanelAdministrador(VentanaPrincipal ventanaPrincipal) {
         principal = ventanaPrincipal;
+
+        setLayout(new GridLayout(11, 1));
 
         btnReq1 = new JButton("Registrar ingreso de pieza");
         btnReq1.setActionCommand("REQ1");

@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,11 +12,14 @@ public class PanelCajero extends JPanel implements ActionListener{
     private JButton btnReq1;
     private JButton btnReq2;
     private JButton btnReq3;
+    private JButton btnReq4;
 
     private VentanaPrincipal principal;
 
     public PanelCajero(VentanaPrincipal ventanaPrincipal) {
         principal = ventanaPrincipal;
+
+        setLayout(new GridLayout(3, 1));
 
         btnReq1 = new JButton("Registrar pago");
         btnReq1.setActionCommand("REQ1");
@@ -31,6 +35,7 @@ public class PanelCajero extends JPanel implements ActionListener{
         btnReq3.setActionCommand("REQ3");
         btnReq3.addActionListener(this);
         add(btnReq3);
+
     }
 
     @Override

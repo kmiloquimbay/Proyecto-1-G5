@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,12 +18,14 @@ public class PanelOperador extends JPanel implements ActionListener{
     public PanelOperador(VentanaPrincipal ventanaPrincipal) {
         principal = ventanaPrincipal;
 
+        setLayout(new GridLayout(3, 1));
+
         btnReq1 = new JButton("Terminar Subasta");
         btnReq1.setActionCommand("REQ1");
         btnReq1.addActionListener(this);
         add(btnReq1);
 
-        btnReq2 = new JButton("Recibir y registrar oferta");
+        btnReq2 = new JButton("Recibir/registrar oferta");
         btnReq2.setActionCommand("REQ2");
         btnReq2.addActionListener(this);
         add(btnReq2);
