@@ -37,7 +37,7 @@ public class VisualizarVentas extends ApplicationFrame {
         }
 
         JFreeChart chart = ChartFactory.createBarChart(
-                "Ventas Diarias",
+                "Ventas Diarias 2023",
                 "Fecha",
                 "Número de Ventas",
                 dataset
