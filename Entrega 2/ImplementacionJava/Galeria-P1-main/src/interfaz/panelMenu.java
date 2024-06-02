@@ -52,7 +52,7 @@ public class panelMenu extends JPanel implements ActionListener{
 
         }else if(command.equals("SAVE")){
 
-            JOptionPane.showMessageDialog(this, "Save");
+            pric.salvarGaleria();
 
         }else if(command.equals("LOGIN")){
 
