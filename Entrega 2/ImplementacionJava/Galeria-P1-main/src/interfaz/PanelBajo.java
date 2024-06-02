@@ -17,7 +17,7 @@ public class PanelBajo extends JPanel implements ActionListener{
 
         setLayout(new GridLayout(1, 3));
 
-        btnUs = new JButton("Usuarios");
+        btnUs = new JButton("Sobre nosotros");
         btnUs.addActionListener(this);
         btnUs.setActionCommand("US");
         add(btnUs);
