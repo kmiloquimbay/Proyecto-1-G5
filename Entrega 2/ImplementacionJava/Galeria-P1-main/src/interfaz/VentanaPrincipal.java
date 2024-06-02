@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.BorderLayout;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -11,27 +12,26 @@ import persistencia.PersistenciaGaleria;
 
 public class VentanaPrincipal extends JFrame {
 
-    private panelMenu panelOpciones;
+    private PanelBajo panelOpciones;
     private Galeria galeria;
 
-    private vistaGeneral content;
+    private PanelCentral pCentral;
 
     public VentanaPrincipal() {
 
         
         setTitle("Galeria");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon icon = new ImageIcon("Entrega 2/ImplementacionJava/Galeria-P1-main/images/painting.png");
+        setIconImage(icon.getImage());
         setSize(800, 600);
         setLocationRelativeTo(null);
         
-        panelOpciones = new panelMenu(this);
-        add(panelOpciones, BorderLayout.NORTH);
+        panelOpciones = new PanelBajo(this);
+        add(panelOpciones, BorderLayout.SOUTH);
         
-        content = new vistaGeneral(this);
-        add(content);
-        
-        cargarGaleria(galeria);
-
+        pCentral = new PanelCentral(this);
+        add(pCentral, BorderLayout.CENTER);
         
     }
     
@@ -40,30 +40,4 @@ public class VentanaPrincipal extends JFrame {
         princ.setVisible(true);
     }
 
-    public void cargarGaleria(Galeria galeria) {
-        try {
-            this.galeria = PersistenciaGaleria.cargarGaleria();
-            content.actualizar(this.galeria.getInventario().getPiezasDisponibleVenta());
-            JOptionPane.showMessageDialog(null, "Galería cargada correctamente");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la galería");
-        }
-    }
-
-    public void salvarGaleria() {
-        try {
-            PersistenciaGaleria.salvarGaleria(galeria);
-            JOptionPane.showMessageDialog(null, "Galería salvada correctamente");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al salvar la galería");
-        }
-    }
-
-    public void ingresarComoUsuario() {
-        JOptionPane.showMessageDialog(null, "Ingresar como usuario");
-    }
-
-    public void actualizarVistaGeneral(vistaGeneral content){
-        this.content = content;
-    }
 }
