@@ -3,15 +3,19 @@ package interfaz;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.jfree.chart.ui.ApplicationFrame;
+
 public class PanelBajo extends JPanel implements ActionListener{
     private JButton btnUs;
     private JButton btnSave;
     private JButton btnLogin;
+    private JButton btnVentas;
 
     private VentanaPrincipal principal;
 
@@ -25,6 +29,11 @@ public class PanelBajo extends JPanel implements ActionListener{
         btnUs.addActionListener(this);
         btnUs.setActionCommand("US");
         add(btnUs);
+
+        btnVentas = new JButton("Ventas");
+        btnVentas.addActionListener(this);
+        btnVentas.setActionCommand("VENTAS");
+        add(btnVentas);
 
         btnSave = new JButton("Guardar");
         btnSave.addActionListener(this);
@@ -49,6 +58,11 @@ public class PanelBajo extends JPanel implements ActionListener{
             principal.salvarGaleria();
         } else if(comando.equals("LOGIN")){
             principal.login();
+        } else if(comando.equals("VENTAS")){
+            Map<String, Integer> ventasDiarias = principal.getGaleria().contarVentasDiarias();
+            VisualizarVentas frame = new VisualizarVentas("Ventas Diarias", ventasDiarias);
+            frame.pack();
+            frame.setVisible(true);
         }
     }
 }
