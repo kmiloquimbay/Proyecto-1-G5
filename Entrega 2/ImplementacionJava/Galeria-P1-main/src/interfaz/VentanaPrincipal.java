@@ -166,6 +166,7 @@ public class VentanaPrincipal extends JFrame {
                     repaint();
                 }
 
+                
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
             }
