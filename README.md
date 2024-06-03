@@ -34,5 +34,5 @@ Para poder hacer uso del sistema, correr la interfaz gráfica (clase VentanaPrin
 
   Los IDs de compradores: 547293.
 
--El requerimiento PAGO CON TARJETA DE CREDITO esta diseñado para que solo lo pueda ejecutar el cajero, por lo que para usarlo se debe ingresar como cajero.
+-El requerimiento PAGO CON TARJETA DE CREDITO esta diseñado para que solo lo pueda ejecutar el cajero, por lo que para usarlo se debe ingresar en empleado con el login y el password.
 
