@@ -3,9 +3,9 @@ Proyecto 3: Galeria y casa de subastas
 Creado por: Lina Muñoz - 202310172 | Daniel Camilo Quimbay Velásquez - 202313861 | Tomás Emilio Velásquez Delgado - 202311016 
 
 Dentro de la carpeta DocsPersistencia se encuentran los 3 archivos json para cargar la galeria y la carpeta DocsPagos, donde se encuentra el archivo con las pasarelas disponibles (Pasarelas.txt) y los archivos donde se escribe la traza de los pagos con tarjeta de credito, uno para cada pasarela (PayPalTraza y PayUTraza).
+Dentro de la carpeta PDFS se encuentran los siguientes PDFs: Diseño Final de UML, los diagramas de alto nivel, y el documento de diseño.
 
-Dentro de la carpeta entrega 2 se encuentra la implementacion en java y los siguientes PDFs: Diseño Final de UML, los diagramas de alto nivel, y el documento de diseño.
-
+Dentro de la carpeta entrega 2 se encuentra la implementacion en java.  
 
 USO DE LA APLICACIÓN: 
 Para poder hacer uso del sistema, correr la interfaz gráfica (clase VentanaPrincipal en el paquete interfaz), y para ver el gráfico de ventas por año oprima el boton ventas en la parte inferior (este grafico es de 2023 ya que todas las compras que tenemos en los archivos de persistencia son de este año).
@@ -34,5 +34,5 @@ Para poder hacer uso del sistema, correr la interfaz gráfica (clase VentanaPrin
 
   Los IDs de compradores: 547293.
 
--El requerimiento PAGO CON TARJETA DE CREDITO esta diseñado para que solo lo pueda ejecutar el cajero, por lo que para usarlo se debe ingresar como cajero.
+-El requerimiento PAGO CON TARJETA DE CREDITO esta diseñado para que solo lo pueda ejecutar el cajero, por lo que para usarlo se debe ingresar en empleado con el login y el password.
 
