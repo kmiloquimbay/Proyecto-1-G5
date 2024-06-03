@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,18 +14,13 @@ import javax.swing.UIManager;
 
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
-import galeria.inventarioYpiezas.Escultura;
-import galeria.inventarioYpiezas.Fotografia;
 import galeria.inventarioYpiezas.Pieza;
-import galeria.inventarioYpiezas.Pintura;
-import galeria.inventarioYpiezas.Video;
 import galeria.usuarios.Comprador;
 
 public class PanelAdministrador extends JPanel implements ActionListener{
 
     private VentanaPrincipal principal;
 
-    private JButton btnReq1;
     private JButton btnReq2;
     private JButton btnReq3;
     private JButton btnReq4;
@@ -46,10 +40,6 @@ public class PanelAdministrador extends JPanel implements ActionListener{
         setLayout(new GridLayout(11, 1));
         UIManager.put("Button.background", Color.decode("#E89275"));
 
-        btnReq1 = new JButton("Registrar ingreso de pieza");
-        btnReq1.setActionCommand("REQ1");
-        btnReq1.addActionListener(this);
-        add(btnReq1);
 
         btnReq2 = new JButton("Confirmar venta");
         btnReq2.setActionCommand("REQ2");
@@ -105,209 +95,7 @@ public class PanelAdministrador extends JPanel implements ActionListener{
 
 
     }
-    public void ingresarPiezaInterfaz() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 2));
 
-        JTextField tituloField = new JTextField();
-        JTextField autorField = new JTextField();
-        JTextField anioField = new JTextField();
-        JTextField lugarCreacionField = new JTextField();
-        JTextField fechaDevolucionField = new JTextField();
-        JCheckBox bloqueadaField = new JCheckBox();
-        JCheckBox disponibleVentaValorFijoField = new JCheckBox();
-        JTextField precioFijoField = new JTextField();
-        JTextField estiloField = new JTextField();
-
-
-        panel.add(new JLabel("Titulo:"));
-        panel.add(tituloField);
-        panel.add(new JLabel("Autor:"));
-        panel.add(autorField);
-        panel.add(new JLabel("Anio:"));
-        panel.add(anioField);
-        panel.add(new JLabel("Lugar de creacion:"));
-        panel.add(lugarCreacionField);
-        panel.add(new JLabel("Fecha de devolucion:"));
-        panel.add(fechaDevolucionField);
-        panel.add(new JLabel("Bloqueada:"));
-        panel.add(bloqueadaField);
-        panel.add(new JLabel("Disponible para venta con valor fijo:"));
-        panel.add(disponibleVentaValorFijoField);
-        panel.add(new JLabel("Precio fijo:"));
-        panel.add(precioFijoField);
-        panel.add(new JLabel("Estilo: (Escultura, Fotografia, Pintura, Video)"));
-        panel.add(estiloField);
-
-        String estilo_text = estiloField.getText();
-
-        if (estilo_text.equals("Escultura"))
-        {
-            JTextField altoField = new JTextField();
-            JTextField anchoField = new JTextField();
-            JTextField profundidadField = new JTextField();
-            JTextField pesoField = new JTextField();
-            JTextField materialesConstruccionField = new JTextField();
-            JCheckBox necesitaElectricidadField = new JCheckBox();
-
-            panel.add(new JLabel("Alto:"));
-            panel.add(altoField);
-            panel.add(new JLabel("Ancho:"));
-            panel.add(anchoField);
-            panel.add(new JLabel("Profundidad:"));
-            panel.add(profundidadField);
-            panel.add(new JLabel("Peso:"));
-            panel.add(pesoField);
-            panel.add(new JLabel("Materiales de construccion:"));
-            panel.add(materialesConstruccionField);
-            panel.add(new JLabel("Necesita electricidad:"));
-            panel.add(necesitaElectricidadField);
-
-            int result = JOptionPane.showConfirmDialog(null, panel, "Ingresar pieza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-            if (result == JOptionPane.OK_OPTION) {
-                String titulo = tituloField.getText();
-                String autor = autorField.getText();
-                int anio = Integer.parseInt(anioField.getText());
-                String lugarCreacion = lugarCreacionField.getText();
-                String fechaDevolucion = fechaDevolucionField.getText();
-                boolean bloqueada = bloqueadaField.isSelected();
-                boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
-                int precioFijo = Integer.parseInt(precioFijoField.getText());
-                int alto = Integer.parseInt(altoField.getText());
-                int ancho = Integer.parseInt(anchoField.getText());
-                int profundidad = Integer.parseInt(profundidadField.getText());
-                int peso = Integer.parseInt(pesoField.getText());
-                String materialesConstruccion = materialesConstruccionField.getText();
-                boolean necesitaElectricidad = necesitaElectricidadField.isSelected();
-
-                Escultura escultura = new Escultura(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, alto, ancho, profundidad, peso, materialesConstruccion, necesitaElectricidad);
-                galeria.getAdministrador().registrarIngresoPieza(escultura);
-
-                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-        
-
-        if (estilo_text.equals( "Fotografia"))
-        {
-            JTextField resolucionField = new JTextField();
-            JTextField tamanioField = new JTextField();
-
-            panel.add(new JLabel("Resolucion:"));
-            panel.add(resolucionField);
-            panel.add(new JLabel("Tamaño:"));
-            panel.add(tamanioField);
-
-            int result = JOptionPane.showConfirmDialog(null, panel, "Ingresar pieza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-            if (result == JOptionPane.OK_OPTION) {
-                String titulo = tituloField.getText();
-                String autor = autorField.getText();
-                int anio = Integer.parseInt(anioField.getText());
-                String lugarCreacion = lugarCreacionField.getText();
-                String fechaDevolucion = fechaDevolucionField.getText();
-                boolean bloqueada = bloqueadaField.isSelected();
-                boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
-                int precioFijo = Integer.parseInt(precioFijoField.getText());
-
-
-                
-                String resolucion = resolucionField.getText();
-                String tamanio = tamanioField.getText();
-
-                Fotografia fotografia = new Fotografia(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, precioFijo, bloqueada, resolucion, tamanio);
-                galeria.getAdministrador().registrarIngresoPieza(fotografia);
-
-                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
-
-                
-            }
-            
-
-        }
-
-        if (estiloField.equals( "Pintura"))
-        {
-            JTextField altoField = new JTextField();
-            JTextField anchoField = new JTextField();
-            JTextField tecnicaField = new JTextField();
-
-            panel.add(new JLabel("Alto:"));
-            panel.add(altoField);
-            panel.add(new JLabel("Ancho:"));
-            panel.add(anchoField);
-            panel.add(new JLabel("Tecnica:"));
-            panel.add(tecnicaField);
-
-            int result = JOptionPane.showConfirmDialog(null, panel, "Ingresar pieza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-            if (result == JOptionPane.OK_OPTION) {
-                String titulo = tituloField.getText();
-                String autor = autorField.getText();
-                int anio = Integer.parseInt(anioField.getText());
-                String lugarCreacion = lugarCreacionField.getText();
-                String fechaDevolucion = fechaDevolucionField.getText();
-                boolean bloqueada = bloqueadaField.isSelected();
-                boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
-                int precioFijo = Integer.parseInt(precioFijoField.getText());
-              
-
-                
-                int alto = Integer.parseInt(altoField.getText());
-                int ancho = Integer.parseInt(anchoField.getText());
-                String tecnica = tecnicaField.getText();
-
-                Pintura pintura = new Pintura(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, alto, ancho, tecnica);
-                galeria.getAdministrador().registrarIngresoPieza(pintura);
-
-                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
-
-                
-            }
-
-        }
-
-        if (estiloField.equals( "Video"))
-        {
-            JTextField duracionField = new JTextField();
-            JTextField tamanioField = new JTextField();
-
-            panel.add(new JLabel("Duracion:"));
-            panel.add(duracionField);
-            panel.add(new JLabel("Tamaño:"));
-            panel.add(tamanioField);
-
-            int result = JOptionPane.showConfirmDialog(null, panel, "Ingresar pieza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-            if (result == JOptionPane.OK_OPTION) {
-                String titulo = tituloField.getText();
-                String autor = autorField.getText();
-                int anio = Integer.parseInt(anioField.getText());
-                String lugarCreacion = lugarCreacionField.getText();
-                String fechaDevolucion = fechaDevolucionField.getText();
-                boolean bloqueada = bloqueadaField.isSelected();
-                boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
-                int precioFijo = Integer.parseInt(precioFijoField.getText());
-
-
-              
-                String duracion = duracionField.getText();
-                String tamanio = tamanioField.getText();
-
-                Video video = new Video(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, duracion, tamanio);
-                galeria.getAdministrador().registrarIngresoPieza(video);
-
-                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
-                
-
-            
-            }
-        }
-
-
-
-    }
     public void confirmarVentaInterfaz() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 2));
@@ -557,10 +345,8 @@ public class PanelAdministrador extends JPanel implements ActionListener{
         
         String comando = e.getActionCommand();
 
-        if(comando.equals("REQ1")){
-            // Registrar ingreso de pieza
-            ingresarPiezaInterfaz();
-        }else if(comando.equals("REQ2")){
+
+        if(comando.equals("REQ2")){
             // Confirmar venta
             confirmarVentaInterfaz();
         }else if(comando.equals("REQ3")){
