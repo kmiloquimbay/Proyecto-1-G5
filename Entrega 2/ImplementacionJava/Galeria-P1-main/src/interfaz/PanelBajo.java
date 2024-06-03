@@ -48,7 +48,6 @@ public class PanelBajo extends JPanel implements ActionListener{
         btnLogin.setActionCommand("LOGIN");
         add(btnLogin);
 
-        String hexaColor = "#6B4945";
 
 
         btnUs.setForeground(Color.WHITE);
