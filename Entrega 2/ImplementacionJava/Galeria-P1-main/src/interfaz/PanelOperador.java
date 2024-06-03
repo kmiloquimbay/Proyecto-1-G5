@@ -24,12 +24,13 @@ public class PanelOperador extends JPanel implements ActionListener{
     private JButton btnReq1;
     private JButton btnReq2;
     private JButton btnReq3;
-    private Galeria galeria = principal.getGaleria();
+    private Galeria galeria;
     private OperadorSubasta operadorSubasta;
 
     public PanelOperador(VentanaPrincipal ventanaPrincipal, OperadorSubasta operadorSubasta) {
         principal = ventanaPrincipal;
         this.operadorSubasta = operadorSubasta;
+        galeria = principal.getGaleria();
 
         setLayout(new GridLayout(3, 1));
         UIManager.put("Button.background", Color.decode("#E89275"));
