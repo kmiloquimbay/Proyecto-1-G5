@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,13 +15,18 @@ import javax.swing.UIManager;
 
 import galeria.Galeria;
 import galeria.compraYsubasta.Compra;
+import galeria.inventarioYpiezas.Escultura;
+import galeria.inventarioYpiezas.Fotografia;
 import galeria.inventarioYpiezas.Pieza;
+import galeria.inventarioYpiezas.Pintura;
 import galeria.usuarios.Comprador;
 
 public class PanelAdministrador extends JPanel implements ActionListener{
 
     private VentanaPrincipal principal;
 
+
+    private JButton btnReq1;
     private JButton btnReq2;
     private JButton btnReq3;
     private JButton btnReq4;
@@ -40,6 +46,10 @@ public class PanelAdministrador extends JPanel implements ActionListener{
         setLayout(new GridLayout(11, 1));
         UIManager.put("Button.background", Color.decode("#E89275"));
 
+        btnReq1 = new JButton("Ingresar pieza");
+        btnReq1.setActionCommand("REQ1");
+        btnReq1.addActionListener(this);
+        add(btnReq1);
 
         btnReq2 = new JButton("Confirmar venta");
         btnReq2.setActionCommand("REQ2");
@@ -94,6 +104,120 @@ public class PanelAdministrador extends JPanel implements ActionListener{
         UIManager.put("Button.background", Color.decode("#E89275"));
 
 
+    }
+
+    public void ingresarPiezaInterfaz(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(10,10));
+
+        JTextField tipo = new JTextField();
+        JTextField tituloPiezaField = new JTextField();
+        JTextField autorField = new JTextField();
+        JTextField anioField = new JTextField();
+        JTextField precioField = new JTextField();
+        JTextField lugarField = new JTextField();
+        JTextField fechaDevolucionField = new JTextField();
+        JCheckBox disponibleValorFijoField = new JCheckBox();
+        JCheckBox bloqueadaField = new JCheckBox();
+        JTextField precioFijoField = new JTextField();
+        JTextField altoField = new JTextField();
+        JTextField anchoField = new JTextField();
+        JTextField tecnicaField = new JTextField();
+        JTextField duracionField = new JTextField();
+        JTextField tamanioField = new JTextField();
+        JTextField resolucionField = new JTextField();
+        JTextField profundidadField = new JTextField();
+        JTextField pesoField = new JTextField();
+        JTextField materialesConstruccionField = new JTextField();
+        JTextField necesitaElectricidadField = new JTextField();
+
+        panel.add(new JLabel("Tipo de pieza: (Escultura, Pintura, Fotografia, Video)"));
+        panel.add(tipo);
+        panel.add(new JLabel("Titulo de la pieza:"));
+        panel.add(tituloPiezaField);
+        panel.add(new JLabel("Autor:"));
+        panel.add(autorField);
+        panel.add(new JLabel("Año de creación:"));
+        panel.add(anioField);
+        panel.add(new JLabel("Precio:"));
+        panel.add(precioField);
+        panel.add(new JLabel("Lugar de creación:"));
+        panel.add(lugarField);
+        panel.add(new JLabel("Fecha de devolución:"));
+        panel.add(fechaDevolucionField);
+        panel.add(new JLabel("Disponible para venta:"));
+        panel.add(disponibleValorFijoField);
+        panel.add(new JLabel("Bloqueada:"));
+        panel.add(bloqueadaField);
+        panel.add(new JLabel("Precio fijo:"));
+        panel.add(precioFijoField);
+        panel.add(new JLabel("Alto: (Opcional)"));
+        panel.add(altoField);
+        panel.add(new JLabel("Ancho: (Opcional)"));
+        panel.add(anchoField);
+        panel.add(new JLabel("Técnica: (Opcional)"));
+        panel.add(tecnicaField);
+        panel.add(new JLabel("Duración: (Opcional)"));
+        panel.add(duracionField);
+        panel.add(new JLabel("Tamaño: (Opcional)"));
+        panel.add(tamanioField);
+        panel.add(new JLabel("Resolución: (Opcional)"));
+        panel.add(resolucionField);
+        panel.add(new JLabel("Profundidad: (Opcional)"));
+        panel.add(profundidadField);
+        panel.add(new JLabel("Peso: (Opcional)"));
+        panel.add(pesoField);
+        panel.add(new JLabel("Materiales de construcción: (Opcional)"));
+        panel.add(materialesConstruccionField);
+        panel.add(new JLabel("Necesita electricidad: (Opcional)"));
+        panel.add(necesitaElectricidadField);
+
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Ingresar pieza", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+
+            String tipoPieza = tipo.getText();
+            String tituloPieza = tituloPiezaField.getText();
+            String autor = autorField.getText();
+            int anio = Integer.parseInt(anioField.getText());
+            int precio = Integer.parseInt(precioField.getText());
+            String lugar = lugarField.getText();
+            String fechaDevolucion = fechaDevolucionField.getText();
+            boolean disponibleValorFijo = disponibleValorFijoField.isSelected();
+            boolean bloqueada = bloqueadaField.isSelected();
+            int precioFijo = Integer.parseInt(precioFijoField.getText());
+            int alto = Integer.parseInt(altoField.getText());
+            int ancho = Integer.parseInt(anchoField.getText());
+            String tecnica = tecnicaField.getText();
+            int duracion = Integer.parseInt(duracionField.getText());
+            int tamanio = Integer.parseInt(tamanioField.getText());
+            int resolucion = Integer.parseInt(resolucionField.getText());
+            int profundidad = Integer.parseInt(profundidadField.getText());
+            int peso = Integer.parseInt(pesoField.getText());
+            String materiales = materialesConstruccionField.getText();
+            boolean necesitaElectricidad = Boolean.parseBoolean(necesitaElectricidadField.getText());
+
+            
+
+            //segun el tipo (Escultura, Pintura, Fotografia, Video) se creara un objeto de ese tipo y se le pasan solo los argumentos que corresponden a ese constructor
+
+            if (tipoPieza.equals("Pintura")){
+                Pieza pintura = new Pintura(tituloPieza, autor, anio, lugar, fechaDevolucion, disponibleValorFijo, bloqueada, precioFijo, ancho, alto, tecnica);
+                galeria.getAdministrador().registrarIngresoPieza(pintura);
+            } else if (tipoPieza.equals("Escultura")){
+                Pieza escultura = new Escultura(tituloPieza, autor, anio, lugar, fechaDevolucion, disponibleValorFijo, bloqueada, precioFijo, alto, ancho, profundidad, peso, materiales, necesitaElectricidad);
+                galeria.getAdministrador().registrarIngresoPieza(escultura);
+            } else if (tipoPieza.equals("Fotografia")){
+                Pieza fotografia = new Fotografia(tituloPieza, autor, anio, lugar, fechaDevolucion, disponibleValorFijo, precioFijo, bloqueada, fechaDevolucion, materiales);
+                galeria.getAdministrador().registrarIngresoPieza(fotografia);
+            } else if (tipoPieza.equals("Video")){
+                Pieza video = new Escultura(tituloPieza, autor, anio, lugar, fechaDevolucion, disponibleValorFijo, bloqueada, precioFijo, result, anio, precio, precioFijo, materiales, bloqueada);
+                galeria.getAdministrador().registrarIngresoPieza(video);
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void confirmarVentaInterfaz() {
@@ -345,8 +469,10 @@ public class PanelAdministrador extends JPanel implements ActionListener{
         
         String comando = e.getActionCommand();
 
-
-        if(comando.equals("REQ2")){
+        if (comando.equals("REQ1")){
+            // Ingresar Venta
+            ingresarPiezaInterfaz();
+        }else if(comando.equals("REQ2")){
             // Confirmar venta
             confirmarVentaInterfaz();
         }else if(comando.equals("REQ3")){
