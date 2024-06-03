@@ -106,7 +106,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void login() {
-    JFrame panel = new JFrame();
+    JPanel panel = new JPanel();
     panel.setLayout(new GridLayout(4, 2));
 
     String[] userOptions = {"Comprador", "Empleado", "Administrador"};
