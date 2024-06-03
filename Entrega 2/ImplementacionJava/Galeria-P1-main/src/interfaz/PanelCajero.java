@@ -120,7 +120,7 @@ public class PanelCajero extends JPanel implements ActionListener{
         JTextField montoField = new JTextField();
         JTextField pinField = new JTextField();
 
-        panel.add(new JLabel("Pasarela:"));
+        panel.add(new JLabel("Pasarela: (PayUPasarela, PayPalPasarela)"));
         panel.add(pasarelaField);
         panel.add(new JLabel("ID del comprador:"));
         panel.add(idCompradorField);
@@ -152,13 +152,13 @@ public class PanelCajero extends JPanel implements ActionListener{
         
         String comando = e.getActionCommand();
 
-        if(comando.equals("Registrar Pago")){
+        if(comando.equals("REQ1")){
             // Registrar pago
             registrarPagoInterfaz();
-        }else if(comando.equals("Entregar Pieza")){
+        }else if(comando.equals("REQ2")){
             // Entregar pieza
             entregarPiezaInterfaz();
-        }else if(comando.equals("Pago con Tarjeta de Credito")){
+        }else if(comando.equals("REQ3")){
             // Pago con tarjeta de crédito
             pagoConTarjetaInterfaz();
         }

@@ -1,3 +1,4 @@
 Fecha: 01/06/2024 AD 03:48 PM | Numero de Transacción: TPU273510 | Nombre Comprador: Luis Perez | Tarjeta: 1234567890 | Monto: 2000 | Resultado: Aprobada
 Fecha: 02/06/2024 AD 01:30 PM | Numero de Transacción: TPU170692 | Nombre Comprador: Luis Perez | Tarjeta: 2345654378904567 | Monto: 300000 | Resultado: Aprobada
 Fecha: 02/06/2024 AD 01:48 PM | Numero de Transacción: TPU509735 | Nombre Comprador: Luis Perez | Tarjeta: 1234123434563568 | Monto: 200000 | Resultado: Aprobada
+Fecha: 02/06/2024 AD 10:58 PM | Numero de Transacción: TPU142452 | Nombre Comprador: Luis Perez | Tarjeta: 1234567891098765 | Monto: 1000 | Resultado: Aprobada

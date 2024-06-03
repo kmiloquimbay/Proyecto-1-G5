@@ -106,7 +106,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void login() {
-    JPanel panel = new JPanel();
+    JFrame panel = new JFrame();
     panel.setLayout(new GridLayout(4, 2));
 
     String[] userOptions = {"Comprador", "Empleado", "Administrador"};
@@ -166,7 +166,7 @@ public class VentanaPrincipal extends JFrame {
                     repaint();
                 }
 
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
             }

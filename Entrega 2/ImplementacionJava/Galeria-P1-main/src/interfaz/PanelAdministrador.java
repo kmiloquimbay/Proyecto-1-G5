@@ -105,9 +105,9 @@ public class PanelAdministrador extends JPanel implements ActionListener{
 
 
     }
-     public void ingresarPiezaInterfaz() {
+    public void ingresarPiezaInterfaz() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 2));
+        panel.setLayout(new GridLayout(5, 2));
 
         JTextField tituloField = new JTextField();
         JTextField autorField = new JTextField();
@@ -174,23 +174,20 @@ public class PanelAdministrador extends JPanel implements ActionListener{
                 boolean bloqueada = bloqueadaField.isSelected();
                 boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
                 int precioFijo = Integer.parseInt(precioFijoField.getText());
-                String estilo = estiloField.getText();
+                int alto = Integer.parseInt(altoField.getText());
+                int ancho = Integer.parseInt(anchoField.getText());
+                int profundidad = Integer.parseInt(profundidadField.getText());
+                int peso = Integer.parseInt(pesoField.getText());
+                String materialesConstruccion = materialesConstruccionField.getText();
+                boolean necesitaElectricidad = necesitaElectricidadField.isSelected();
 
-                if (estilo.equals("Escultura")) {
-                    int alto = Integer.parseInt(altoField.getText());
-                    int ancho = Integer.parseInt(anchoField.getText());
-                    int profundidad = Integer.parseInt(profundidadField.getText());
-                    int peso = Integer.parseInt(pesoField.getText());
-                    String materialesConstruccion = materialesConstruccionField.getText();
-                    boolean necesitaElectricidad = necesitaElectricidadField.isSelected();
+                Escultura escultura = new Escultura(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, alto, ancho, profundidad, peso, materialesConstruccion, necesitaElectricidad);
+                galeria.getAdministrador().registrarIngresoPieza(escultura);
 
-                    Escultura escultura = new Escultura(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, alto, ancho, profundidad, peso, materialesConstruccion, necesitaElectricidad);
-                    galeria.getAdministrador().registrarIngresoPieza(escultura);
-
-                    JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
-                }
+                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        }
+        
 
         if (estilo_text.equals( "Fotografia"))
         {
@@ -213,18 +210,18 @@ public class PanelAdministrador extends JPanel implements ActionListener{
                 boolean bloqueada = bloqueadaField.isSelected();
                 boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
                 int precioFijo = Integer.parseInt(precioFijoField.getText());
-                String estilo = estiloField.getText();
 
-                if (estilo.equals("Fotografia")) {
-                    String resolucion = resolucionField.getText();
-                    String tamanio = tamanioField.getText();
 
-                    Fotografia fotografia = new Fotografia(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, precioFijo, bloqueada, resolucion, tamanio);
-                    galeria.getAdministrador().registrarIngresoPieza(fotografia);
+                
+                String resolucion = resolucionField.getText();
+                String tamanio = tamanioField.getText();
 
-                    JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
+                Fotografia fotografia = new Fotografia(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, precioFijo, bloqueada, resolucion, tamanio);
+                galeria.getAdministrador().registrarIngresoPieza(fotografia);
 
-                }
+                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
+
+                
             }
             
 
@@ -254,19 +251,19 @@ public class PanelAdministrador extends JPanel implements ActionListener{
                 boolean bloqueada = bloqueadaField.isSelected();
                 boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
                 int precioFijo = Integer.parseInt(precioFijoField.getText());
-                String estilo = estiloField.getText();
+              
 
-                if (estilo.equals("Pintura")) {
-                    int alto = Integer.parseInt(altoField.getText());
-                    int ancho = Integer.parseInt(anchoField.getText());
-                    String tecnica = tecnicaField.getText();
+                
+                int alto = Integer.parseInt(altoField.getText());
+                int ancho = Integer.parseInt(anchoField.getText());
+                String tecnica = tecnicaField.getText();
 
-                    Pintura pintura = new Pintura(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, alto, ancho, tecnica);
-                    galeria.getAdministrador().registrarIngresoPieza(pintura);
+                Pintura pintura = new Pintura(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, alto, ancho, tecnica);
+                galeria.getAdministrador().registrarIngresoPieza(pintura);
 
-                    JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
 
-                }
+                
             }
 
         }
@@ -292,19 +289,19 @@ public class PanelAdministrador extends JPanel implements ActionListener{
                 boolean bloqueada = bloqueadaField.isSelected();
                 boolean disponibleVentaValorFijo = disponibleVentaValorFijoField.isSelected();
                 int precioFijo = Integer.parseInt(precioFijoField.getText());
-                String estilo = estiloField.getText();
 
-                if (estilo.equals("Video")) {
-                    String duracion = duracionField.getText();
-                    String tamanio = tamanioField.getText();
 
-                    Video video = new Video(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, duracion, tamanio);
-                    galeria.getAdministrador().registrarIngresoPieza(video);
+              
+                String duracion = duracionField.getText();
+                String tamanio = tamanioField.getText();
 
-                    JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
-                    
+                Video video = new Video(titulo, autor, anio, lugarCreacion, fechaDevolucion, disponibleVentaValorFijo, bloqueada, precioFijo, duracion, tamanio);
+                galeria.getAdministrador().registrarIngresoPieza(video);
 
-                }
+                JOptionPane.showMessageDialog(this, "Pieza ingresada con exito", "Ingreso", JOptionPane.INFORMATION_MESSAGE);
+                
+
+            
             }
         }
 
@@ -428,7 +425,7 @@ public class PanelAdministrador extends JPanel implements ActionListener{
 
         JTextField idField = new JTextField();
 
-        panel.add(new JLabel("ID del comprador:"));
+        panel.add(new JLabel("ID del comprador para verificar su seriedad:"));
         panel.add(idField);
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Verificar seriedad de oferta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -562,7 +559,7 @@ public class PanelAdministrador extends JPanel implements ActionListener{
 
         if(comando.equals("REQ1")){
             // Registrar ingreso de pieza
-            ingresarPiezaInterfaz();;
+            ingresarPiezaInterfaz();
         }else if(comando.equals("REQ2")){
             // Confirmar venta
             confirmarVentaInterfaz();
