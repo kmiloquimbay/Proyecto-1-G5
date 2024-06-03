@@ -24,11 +24,13 @@ public class PanelCajero extends JPanel implements ActionListener{
     private JButton btnReq3;
     private Cajero cajero;
     private VentanaPrincipal principal;
-    private Galeria galeria = principal.getGaleria();
+    private Galeria galeria;
 
     public PanelCajero(VentanaPrincipal ventanaPrincipal, Cajero cajero) {
-        principal = ventanaPrincipal;
+        this.principal = ventanaPrincipal;
         this.cajero = cajero;
+        this.galeria = principal.getGaleria();
+
 
         setLayout(new GridLayout(3, 1));
         UIManager.put("Button.background", Color.decode("#E89275"));

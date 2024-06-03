@@ -28,13 +28,15 @@ public class PanelComprador extends JPanel implements ActionListener{
     private JButton req5;
     private JButton req6;
     private JButton req7;
-    private Galeria galeria = principal.getGaleria();
+    private Galeria galeria;
     private Comprador comprador;
 
 
     public PanelComprador(VentanaPrincipal ventanaPrincipal,Comprador comprador) {
 
         this.comprador=comprador;
+        this.principal = ventanaPrincipal;
+        this.galeria = ventanaPrincipal.getGaleria();
 
         setLayout(new GridLayout(7, 1));
         UIManager.put("Button.background", Color.decode("#E89275"));

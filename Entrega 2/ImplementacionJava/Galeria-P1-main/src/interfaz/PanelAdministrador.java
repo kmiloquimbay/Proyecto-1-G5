@@ -37,10 +37,11 @@ public class PanelAdministrador extends JPanel implements ActionListener{
     private JButton btnReq9;
     private JButton btnReq10;
     private JButton btnReq11;
-    private Galeria galeria = principal.getGaleria();
+    private Galeria galeria;
 
     public PanelAdministrador(VentanaPrincipal ventanaPrincipal) {
         principal = ventanaPrincipal;
+        galeria = principal.getGaleria();
 
         setLayout(new GridLayout(11, 1));
         UIManager.put("Button.background", Color.decode("#E89275"));
