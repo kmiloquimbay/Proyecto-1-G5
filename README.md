@@ -8,7 +8,7 @@ Dentro de la carpeta entrega 2 se encuentra la implementacion en java y los sigu
 
 
 USO DE LA APLICACIÓN: 
-Para poder hacer uso del sistema, correr la interfaz gráfica (clase VentanaPrincipal en el paquete interfaz), y para ver el grafico ventas del año oprima el boton ventas.
+Para poder hacer uso del sistema, correr la interfaz gráfica (clase VentanaPrincipal en el paquete interfaz), y para ver el gráfico de ventas por año oprima el boton ventas en la parte inferior (este grafico es de 2023 ya que todas las compras que tenemos en los archivos de persistencia son de este año).
 
 -Para poder acceder necesita un login y password, según los archivos de persistencia que creamos, tenemos que:
 
